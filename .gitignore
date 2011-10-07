@@ -1,0 +1,6 @@
+.bundle
+.rvmrc
+config/database.yml
+log/*.log
+tmp/
+.sass-cache/
