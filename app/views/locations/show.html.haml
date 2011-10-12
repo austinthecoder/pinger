@@ -1,0 +1,25 @@
+%h2
+  = @location.http_method.upcase
+  = @location.url
+
+%p
+  Next ping in
+  - if @location.next_ping_date > Time.now
+    = distance_of_time_in_words(Time.now, @location.next_ping_date) + '.'
+  - else
+    just a moment.
+
+- if (performed_pings = @location.pings.where { performed_at.not_eq(nil) }).present?
+  #pings
+    %table
+      %thead
+        %tr
+          %th Status
+          %th
+      %tbody
+        - performed_pings.each do |p|
+          %tr
+            %td= p.response_status_code
+            %td= distance_of_time_in_words_to_now(p.performed_at) + ' ago'
+- else
+  %p No pings yet

@@ -1,0 +1,11 @@
+= form_for @location do |f|
+  %div= f.label :url, 'URL'
+  %p= f.text_field :url
+
+  %div= f.label :http_method
+  %p= f.select :http_method, %w(GET POST)
+
+  %div= f.label :seconds
+  %p= f.text_field :seconds
+
+  %p= button_tag 'Add'

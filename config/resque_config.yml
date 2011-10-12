@@ -1,0 +1,16 @@
+development:
+  host: 'localhost'
+  port: 6379
+
+test:
+  host: 'localhost'
+  port: 6379
+
+# staging:
+#   host: 'icefish.redistogo.com'
+#   port: 9068
+#   password: '2b977ab8a8c909d68d593b97301b0305'
+#
+# production:
+#   host: 'localhost'
+#   port: 9068
