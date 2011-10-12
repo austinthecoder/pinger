@@ -1,27 +1,27 @@
 require 'resque/tasks'
-require 'resque_scheduler/tasks'
+# require 'resque_scheduler/tasks'
 
 namespace :resque do
   task :setup => :environment do
-    require 'resque'
-    require 'resque_scheduler'
-    require 'resque/scheduler'
+    # require 'resque'
+    # require 'resque_scheduler'
+    # require 'resque/scheduler'
 
-    ENV['QUEUE'] = '*'
+    # ENV['QUEUE'] = '*'
 
     # you probably already have this somewhere
-    Resque.redis = "#{CONFIG[:resque][:host]}:#{CONFIG[:resque][:port]}"
+    # Resque.redis = "#{CONFIG[:resque][:host]}:#{CONFIG[:resque][:port]}"
 
     # The schedule doesn't need to be stored in a YAML, it just needs to
     # be a hash.  YAML is usually the easiest.
-    Resque.schedule = {
-      'schedule_pings' => {
-        'every' => "10s",
-        'class' => Location::PingScheduler,
-        'args' => ['foo', 1],
-        'description' => 'schedules the pings'
-      }
-    }
+    # Resque.schedule = {
+    #   'schedule_pings' => {
+    #     'every' => "10s",
+    #     'class' => Location::PingScheduler,
+    #     'args' => ['foo', 1],
+    #     'description' => 'schedules the pings'
+    #   }
+    # }
 
     # Resque.after_fork do |job|
     #   ActiveRecord::Base.establish_connection
