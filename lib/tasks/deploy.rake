@@ -3,7 +3,7 @@ task :deploy do
   system 'git push pinger-worker master'
   system 'git push pinger-scheduler master'
 
-  system 'heroku ps --app pinger-web'
-  system 'heroku ps --app pinger-worker'
-  system 'heroku ps --app pinger-scheduler'
+  system 'be heroku ps --app pinger-web'
+  system 'be heroku ps --app pinger-worker'
+  system 'be heroku ps --app pinger-scheduler'
 end
