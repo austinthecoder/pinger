@@ -7,6 +7,8 @@ namespace :resque do
     require 'resque_scheduler'
     require 'resque/scheduler'
 
+    ENV['QUEUE'] = '*'
+
     # you probably already have this somewhere
     Resque.redis = "#{CONFIG[:resque][:host]}:#{CONFIG[:resque][:port]}"
 
@@ -21,9 +23,9 @@ namespace :resque do
       }
     }
 
-    Resque.after_fork do |job|
-      ActiveRecord::Base.establish_connection
-    end
+    # Resque.after_fork do |job|
+    #   ActiveRecord::Base.establish_connection
+    # end
 
     # If your schedule already has +queue+ set for each job, you don't
     # need to require your jobs.  This can be an advantage since it's
