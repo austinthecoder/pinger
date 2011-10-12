@@ -15,6 +15,4 @@ end
 
 ResqueSpec.extend(ResqueSpecSchedulerExt)
 
-Before do
-  ResqueSpec.reset!
-end
+Before { ResqueSpec.reset! }

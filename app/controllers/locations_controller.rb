@@ -13,8 +13,4 @@ class LocationsController < ApplicationController
     @location = Location.find(params[:id])
   end
 
-  def schedule_pings
-    head :ok
-  end
-
 end

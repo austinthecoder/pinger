@@ -1,7 +1,7 @@
 class FakeWeb
   class << self
     def call(env)
-      stubbed_request = @stubbed_requests.find do |a|
+      stubbed_request = stubbed_requests.find do |a|
         a[0] =~ /#{Regexp.escape(env['SERVER_NAME'])}/
       end
 
@@ -12,9 +12,12 @@ class FakeWeb
       end
     end
 
-    def stub_request(url, opts = {})
+    def stubbed_requests
       @stubbed_requests ||= []
-      @stubbed_requests << [url, opts]
+    end
+
+    def stub_request(url, opts = {})
+      stubbed_requests << [url, opts]
     end
   end
 end

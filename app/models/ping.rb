@@ -1,6 +1,6 @@
 class Ping < ActiveRecord::Base
 
-  @queue = :pings
+  @queue = :high
 
   belongs_to :location
 

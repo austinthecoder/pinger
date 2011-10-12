@@ -12,7 +12,14 @@ namespace :resque do
 
     # The schedule doesn't need to be stored in a YAML, it just needs to
     # be a hash.  YAML is usually the easiest.
-    Resque.schedule = {}
+    Resque.schedule = {
+      'schedule_pings' => {
+        'every' => "10s",
+        'class' => Location::PingScheduler,
+        'args' => ['foo', 1],
+        'description' => 'schedules the pings'
+      }
+    }
 
     Resque.after_fork do |job|
       ActiveRecord::Base.establish_connection

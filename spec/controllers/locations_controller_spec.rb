@@ -57,12 +57,4 @@ describe LocationsController do
     end
   end
 
-  describe "POST schedule_pings" do
-    it "calls Location.schedule_pings!" do
-      Location.should_receive(:schedule_pings!)
-      post :schedule_pings
-      response.code.should == "200"
-    end
-  end
-
 end

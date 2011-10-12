@@ -1,5 +1,15 @@
 class Location < ActiveRecord::Base
 
+  class PingScheduler
+    @queue = :low
+
+    class << self
+      def perform(*args)
+        Location.schedule_pings!
+      end
+    end
+  end
+
   has_many :pings
 
   validates :seconds, :presence => true

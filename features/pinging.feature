@@ -26,12 +26,12 @@ Feature: Pinging
     Then I should see "Next ping in 8 minutes."
     And I should not see "No pings yet"
     And I should see the pings table:
-      | Status |               |
-      | 200    | 2 minutes ago |
+      | Status |                         |
+      | 200    | 2011-01-01 00:10:00 UTC |
 
     When 6 minutes pass
     And I refresh the page
     Then I should see "Next ping in 2 minutes."
     And I should see the pings table:
-      | Status |               |
-      | 200    | 8 minutes ago |
+      | Status |                         |
+      | 200    | 2011-01-01 00:10:00 UTC |

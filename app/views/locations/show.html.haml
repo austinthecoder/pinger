@@ -4,7 +4,7 @@
 
 %p
   Next ping in
-  - if @location.next_ping_date > Time.now
+  - if @location.next_ping_date && @location.next_ping_date > Time.now
     = distance_of_time_in_words(Time.now, @location.next_ping_date) + '.'
   - else
     just a moment.
@@ -17,9 +17,9 @@
           %th Status
           %th
       %tbody
-        - performed_pings.each do |p|
+        - performed_pings.order { performed_at.desc }.each do |p|
           %tr
             %td= p.response_status_code
-            %td= distance_of_time_in_words_to_now(p.performed_at) + ' ago'
+            %td= p.performed_at.to_s
 - else
   %p No pings yet
