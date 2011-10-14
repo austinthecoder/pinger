@@ -1,0 +1,11 @@
+%table
+  %thead
+    %tr
+      %th Status
+      %th
+  %tbody
+    - pings.each do |ping|
+      - present ping do
+        %tr
+          %td= response_status_code
+          %td= date

@@ -18,9 +18,14 @@ class LocationPresenter < BasePresenter
   end
 
   def pings
-    @pings ||= begin
-      pings = location.pings.where { performed_at.not_eq(nil) }.order { performed_at.desc }
-      pings.map { |p| PingPresenter.new(p, tpl) }
+    @pings ||= location.pings.where { performed_at.not_eq(nil) }.order { performed_at.desc }
+  end
+
+  def render_pings
+    if pings.present?
+      tpl.render 'pings/table', :pings => pings
+    else
+      tpl.content_tag :p, 'No pings yet'
     end
   end
 

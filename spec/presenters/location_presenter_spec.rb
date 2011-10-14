@@ -47,6 +47,26 @@ describe LocationPresenter do
     end
   end
 
+  describe "render_pings" do
+    context "when there are pings" do
+      before do
+        @pings = [mock(Ping)]
+        subject.stub(:pings) { @pings }
+      end
+      it "tells the view to render the pings table" do
+        view.should_receive(:render).with('pings/table', :pings => @pings)
+        subject.render_pings
+      end
+    end
+
+    context "when there are no pings" do
+      before { subject.stub(:pings) }
+      it "returns a no-pings msg" do
+        subject.render_pings.should == "<p>No pings yet</p>"
+      end
+    end
+  end
+
   describe "pings" do
     before do
       Factory(:ping, :performed_at => 1.minute.ago)
@@ -56,7 +76,7 @@ describe LocationPresenter do
       pings = (1..3).map do |i|
         Factory(:ping, :location => location, :performed_at => i.minutes.ago)
       end
-      subject.pings.should == pings.map { |p| PingPresenter.new(p, view) }
+      subject.pings.should == pings
     end
   end
 end

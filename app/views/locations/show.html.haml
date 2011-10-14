@@ -10,17 +10,4 @@
 
   %p= "Next ping in #{next_ping}."
 
-  #pings
-    - if pings.present?
-      %table
-        %thead
-          %tr
-            %th Status
-            %th
-        %tbody
-          - pings.each do |ping_presenter|
-            %tr
-              %td= ping_presenter.response_status_code
-              %td= ping_presenter.date
-    - else
-      %p No pings yet
+  #pings= render_pings

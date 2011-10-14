@@ -7,14 +7,6 @@ class BasePresenter
 
   attr_reader :tpl
 
-  def model
-    @object
-  end
-
-  def ==(other)
-    [model, tpl] == [other.model, other.tpl]
-  end
-
 private
 
   class << self
