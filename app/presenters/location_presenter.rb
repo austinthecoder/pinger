@@ -2,7 +2,7 @@ class LocationPresenter < BasePresenter
 
   presents :location
 
-  delegate :url, :seconds, :to => :location
+  delegate :title, :url, :seconds, :to => :location
 
   def next_ping
     now = Time.now

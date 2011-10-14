@@ -1,9 +1,3 @@
-Given /^I am on the home page$/ do
-  visit root_path
-end
-
-##################################################
-
 When /^I follow "([^"]*)"$/ do |link|
   click_link(link)
 end
@@ -41,9 +35,4 @@ end
 
 Then /^I should not see "([^"]*)"$/ do |text|
   page.should_not have_content(text)
-end
-
-Then /^I should see the pings table:$/ do |expected_table|
-  actual_table = tableish('#pings table tr', 'td,th')
-  diff_tables!(actual_table, expected_table)
 end

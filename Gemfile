@@ -3,7 +3,8 @@ source 'http://rubygems.org'
 gem 'rails', '3.1.1'
 gem 'pg', '0.11.0'
 gem 'haml-rails', '0.3.4'
-# gem 'jquery-rails'
+gem 'jquery-rails', '1.0.16'
+gem 'formalize-rails', '0.0.5'
 gem 'httparty', '0.7.8'
 gem 'decent_exposure', '1.0.1'
 gem 'squeel', '0.9.3'
@@ -14,7 +15,7 @@ gem 'resque-scheduler', '1.9.9'
 # in production environments by default.
 group :assets do
   gem 'sass-rails', '~> 3.1.4'
-  # gem 'coffee-rails', '~> 3.1.1'
+  gem 'coffee-rails', '~> 3.1.1'
   gem 'uglifier', '>= 1.0.3'
 end
 

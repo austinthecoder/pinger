@@ -3,5 +3,21 @@
  * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require_self
- *= require_tree . 
+ *= require formalize
 */
+
+$link_color: #3030ff;
+$bg_color: #fff;
+$font_color: #303030;
+
+@import url(http://fonts.googleapis.com/css?family=Varela+Round|Neuton&v2);
+@import 'reset';
+@import 'elements';
+
+body { padding: 20px 30px; }
+
+table {
+  tr {
+    border-bottom: 1px solid #dfdfdf;
+  }
+}

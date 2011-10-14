@@ -2,22 +2,47 @@ require 'spec_helper'
 
 describe LocationsController do
 
-  before do
-    @params = HashWithIndifferentAccess.new
+  subject { controller }
+
+  before { @params = HashWithIndifferentAccess.new }
+
+  describe "location" do
+    context "when the params contains an id" do
+      before { subject.params[:id] = 95347 }
+
+      context "when a location exists for that id" do
+        before { @location = Factory(:location, :id => 95347) }
+        its(:location) { should == @location }
+      end
+
+      context "when a location doesn't exists for that id" do
+        it { lambda { subject.location }.should raise_error(ActiveRecord::RecordNotFound) }
+      end
+    end
+
+    context "when the params doesn't contain an id" do
+      its(:location) { should be_a(Location) }
+      its(:location) { should be_new_record }
+    end
   end
 
-  describe "GET new" do
-    it "assigns a new location" do
-      get :new
-      assigns(:location).should be_a(Location)
-      assigns(:location).should be_new_record
+  describe "locations" do
+    it "returns the locations, newest first" do
+      Timecop.freeze(Time.now) do
+        locations = [
+          Factory(:location, :id => 3000, :created_at => 2.minutes.ago),
+          Factory(:location, :id => 2000, :created_at => 2.minutes.ago),
+          Factory(:location, :created_at => 3.minutes.ago)
+        ]
+        subject.locations.should == locations
+      end
     end
   end
 
   describe "POST create" do
     before do
       @location = Factory(:location)
-      controller.current_user.stub(:create_location!) { @location }
+      subject.current_user.stub(:create_location!) { @location }
     end
 
     it "tells the current_user to create a location" do
@@ -27,7 +52,7 @@ describe LocationsController do
         :seconds => '10'
       )
 
-      controller.current_user.should_receive(:create_location!).with(@params[:location])
+      subject.current_user.should_receive(:create_location!).with(@params[:location])
 
       post :create, @params
     end

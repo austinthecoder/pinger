@@ -85,6 +85,8 @@ describe Location do
     it { should_not accept_values_for(:http_method, nil, '', 'x') }
     it { should accept_values_for(:http_method, 'get', 'post', 'GET', 'POST') }
 
+    it { should_not accept_values_for(:title, nil, '') }
+    it { should accept_values_for(:title, 'foo') }
   end
 
 end

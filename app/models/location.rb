@@ -16,6 +16,7 @@ class Location < ActiveRecord::Base
   validates :http_method, :format => /(get|post)/i
   validates :url,
     :format => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/ix
+  validates :title, :presence => true
 
   class << self
     def schedule_pings!

@@ -1,4 +1,11 @@
-= form_for @location do |f|
+%p= link_to 'Back', root_path
+
+%h2 Add URL
+
+= form_for location do |f|
+  %div= f.label :title
+  %p= f.text_field :title
+
   %div= f.label :url, 'URL'
   %p= f.text_field :url
 
@@ -8,4 +15,4 @@
   %div= f.label :seconds
   %p= f.text_field :seconds
 
-  %p= button_tag 'Add'
+  %p= button_tag 'Add URL'

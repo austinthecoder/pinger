@@ -1,0 +1,15 @@
+%table
+  %thead
+    %tr
+      %th Title
+      %th URL
+      %th HTTP method
+      %th Seconds
+    %tbody
+      - locations.each do |location|
+        - present location do
+          %tr
+            %td= tpl.link_to title, tpl.location_path(location)
+            %td= url
+            %td= http_method
+            %td= seconds

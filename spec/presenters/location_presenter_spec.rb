@@ -5,12 +5,13 @@ describe LocationPresenter do
 
   let(:location) do
     Factory :location,
+      :title => 'Google',
       :seconds => 10,
       :url => 'http://x.com',
       :http_method => 'get'
   end
 
-  [[:seconds, 10], [:url, 'http://x.com']].each do |method, value|
+  [[:seconds, 10], [:url, 'http://x.com'], [:title, 'Google']].each do |method, value|
     describe "#{method}" do
       it "delegates to the location" do
         subject.send(method).should === value

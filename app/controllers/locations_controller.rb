@@ -3,11 +3,11 @@ class LocationsController < ApplicationController
   respond_to :html
 
   expose :location do
-    Location.find(params[:id]) if params[:id]
+    params[:id] ? Location.find(params[:id]) : Location.new
   end
 
-  def new
-    @location = Location.new
+  expose :locations do
+    Location.order { created_at.desc }.order { id.desc }
   end
 
   def create

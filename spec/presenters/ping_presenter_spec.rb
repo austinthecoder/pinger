@@ -17,7 +17,7 @@ describe PingPresenter do
 
   describe "date" do
     it "returns the performed_at date formatted" do
-      subject.date.should == "Jan 15, 2011 at 12:14 PM UTC"
+      subject.date.should == "Jan 15, 2011 at 12:14:37 PM UTC"
     end
   end
 end
