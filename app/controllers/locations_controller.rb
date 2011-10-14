@@ -1,16 +1,17 @@
 class LocationsController < ApplicationController
 
+  respond_to :html
+
+  expose :location do
+    Location.find(params[:id]) if params[:id]
+  end
+
   def new
     @location = Location.new
   end
 
   def create
-    location = current_user.create_location!(params[:location])
-    redirect_to location_url(location)
-  end
-
-  def show
-    @location = Location.find(params[:id])
+    respond_with current_user.create_location!(params[:location])
   end
 
 end

@@ -22,6 +22,17 @@ When /^I refresh the page$/ do
   visit current_url
 end
 
+When /^I refresh the page after (\d+) minutes$/ do |mins|
+  steps %{
+    When #{mins} minutes pass
+    And I refresh the page
+  }
+end
+
+When /^I select "([^"]*)" from "([^"]*)"$/ do |value, field|
+  select(value, :from => field)
+end
+
 ##################################################
 
 Then /^I should see "([^"]*)"$/ do |text|

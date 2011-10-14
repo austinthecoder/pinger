@@ -1,25 +1,26 @@
-%h2
-  = @location.http_method.upcase
-  = @location.url
+- present location do
+  %p
+    Sending a
+    %strong= http_method
+    request to
+    %strong= url
+    every
+    %strong= seconds
+    seconds.
 
-%p
-  Next ping in
-  - if @location.next_ping_date && @location.next_ping_date > Time.now
-    = distance_of_time_in_words(Time.now, @location.next_ping_date) + '.'
-  - else
-    just a moment.
+  %p= "Next ping in #{next_ping}."
 
-- if (performed_pings = @location.pings.where { performed_at.not_eq(nil) }).present?
   #pings
-    %table
-      %thead
-        %tr
-          %th Status
-          %th
-      %tbody
-        - performed_pings.order { performed_at.desc }.each do |p|
+    - if pings.present?
+      %table
+        %thead
           %tr
-            %td= p.response_status_code
-            %td= p.performed_at.to_s
-- else
-  %p No pings yet
+            %th Status
+            %th
+        %tbody
+          - pings.each do |ping_presenter|
+            %tr
+              %td= ping_presenter.response_status_code
+              %td= ping_presenter.date
+    - else
+      %p No pings yet

@@ -16,11 +16,11 @@ describe LocationsController do
 
   describe "POST create" do
     before do
-      @location = mock(Location, :id => 5)
+      @location = Factory(:location)
       controller.current_user.stub(:create_location!) { @location }
     end
 
-    it "passes the location params to current_user#create_location!" do
+    it "tells the current_user to create a location" do
       @params[:location] = HashWithIndifferentAccess.new(
         :url => 'http://x.com',
         :http_method => 'GET',
@@ -43,6 +43,7 @@ describe LocationsController do
 
     context "when a location exists for the id in the params" do
       it "assigns the location" do
+        pending
         get :show, :id => @location.id.to_s
         assigns(:location).should == @location
       end
@@ -50,6 +51,7 @@ describe LocationsController do
 
     context "when a location doesn't exist for the id in the params" do
       it "raises an error" do
+        pending
         lambda do
           get :show, :id => (@location.id + 1).to_s
         end.should raise_error(ActiveRecord::RecordNotFound)

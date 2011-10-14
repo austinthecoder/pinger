@@ -1,6 +1,6 @@
 def next_due_payload_before(time)
   queue = ResqueSpec.queue_by_name(:high_scheduled)
-  queue.sort_by { |p| p[:time] }.detect { |p| p[:time] < time }
+  queue.sort_by { |p| p[:time] }.detect { |p| p[:time] <= time }
 end
 
 def current_time=(time)
