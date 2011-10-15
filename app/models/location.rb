@@ -12,10 +12,14 @@ class Location < ActiveRecord::Base
 
   has_many :pings
 
-  validates :seconds, :presence => true
+  validates :seconds, :presence => true, :numericality => true
   validates :http_method, :format => /(get|post)/i
   validates :url,
-    :format => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/ix
+    :presence => true,
+    :format => {
+      :with => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/ix,
+      :if => lambda { url.present? }
+    }
   validates :title, :presence => true
 
   class << self

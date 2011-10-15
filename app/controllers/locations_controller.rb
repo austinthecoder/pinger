@@ -3,7 +3,7 @@ class LocationsController < ApplicationController
   respond_to :html
 
   expose :location do
-    params[:id] ? Location.find(params[:id]) : Location.new
+    @location || (params[:id] ? Location.find(params[:id]) : Location.new)
   end
 
   expose :locations do
@@ -12,6 +12,9 @@ class LocationsController < ApplicationController
 
   def create
     respond_with current_user.create_location!(params[:location])
+  rescue ActiveRecord::RecordInvalid => e
+    @location = e.record
+    render :new
   end
 
 end

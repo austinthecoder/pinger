@@ -77,7 +77,7 @@ describe Location do
 
     it { should be_valid }
 
-    it { should_not accept_values_for(:seconds, nil) }
+    it { should_not accept_values_for(:seconds, nil, '', 'a') }
 
     it { should_not accept_values_for(:url, nil, '', 'x.com', 'xyz') }
     it { should accept_values_for(:url, 'http://x.com', 'https://y.net/d') }

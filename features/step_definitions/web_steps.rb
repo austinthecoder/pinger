@@ -27,6 +27,11 @@ When /^I select "([^"]*)" from "([^"]*)"$/ do |value, field|
   select(value, :from => field)
 end
 
+# Single-line step scoper
+When /^(.*) within (.*[^:])$/ do |step, parent|
+  with_scope(parent) { When step }
+end
+
 ##################################################
 
 Then /^I should see "([^"]*)"$/ do |text|

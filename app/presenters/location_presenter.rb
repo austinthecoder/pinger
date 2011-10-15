@@ -29,4 +29,12 @@ class LocationPresenter < BasePresenter
     end
   end
 
+  %w(title url http_method seconds).each do |name|
+    define_method "#{name}_errors" do
+      if (errors = location.errors[name].map(&:capitalize)).present?
+        tpl.render 'shared/form_errors', :errors => errors
+      end
+    end
+  end
+
 end

@@ -80,4 +80,24 @@ describe LocationPresenter do
       subject.pings.should == pings
     end
   end
+
+  %w(title url http_method seconds).each do |name|
+    describe "#{name}_errors" do
+      context "when the location's #{name} has errors" do
+        before do
+          location.errors.add(name, 'is invalid')
+          location.errors.add(name, "can't be blank")
+        end
+        it "renders the form errors" do
+          view.should_receive(:render).with 'shared/form_errors',
+            :errors => ["Is invalid", "Can't be blank"]
+          subject.send("#{name}_errors")
+        end
+      end
+
+      context "when the location's #{name} doesn't have errors" do
+        its("#{name}_errors") { should be_blank }
+      end
+    end
+  end
 end

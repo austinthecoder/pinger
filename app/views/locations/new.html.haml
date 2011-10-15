@@ -3,16 +3,25 @@
 %h2 Add URL
 
 = form_for location do |f|
-  %div= f.label :title
-  %p= f.text_field :title
+  - present location do |lp|
+    .title.input
+      %div= f.label :title
+      %div= f.text_field :title, :max_length => 255, :size => 50
+      = lp.title_errors
 
-  %div= f.label :url, 'URL'
-  %p= f.text_field :url
+    .url.input
+      %div= f.label :url, 'URL'
+      %div= f.text_field :url, :max_length => 255, :size => 80
+      = lp.url_errors
 
-  %div= f.label :http_method, 'HTTP method'
-  %p= f.select :http_method, %w(GET POST)
+    .http_method.input
+      %div= f.label :http_method, 'HTTP method'
+      %div= f.select :http_method, %w(GET POST)
+      = lp.http_method_errors
 
-  %div= f.label :seconds
-  %p= f.text_field :seconds
+    .seconds.input
+      %div= f.label :seconds
+      %div= f.text_field :seconds, :max_length => 255, :size => 20
+      = lp.seconds_errors
 
-  %p= button_tag 'Add URL'
+    %p= button_tag 'Add URL'

@@ -61,6 +61,20 @@ describe LocationsController do
       post :create, @params
       response.should redirect_to(location_url(@location))
     end
+
+    context "when ActiveRecord::RecordInvalid is raised" do
+      before do
+        @location = Location.new
+        subject.current_user.stub(:create_location!) { @location.save! }
+      end
+
+      it "renders the new template" do
+        post :create, @params
+        response.should render_template(:new)
+      end
+
+      its(:location) { pending; should === @location }
+    end
   end
 
   describe "GET show" do
