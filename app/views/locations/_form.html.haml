@@ -1,0 +1,23 @@
+= form_for location do |f|
+  - present location do |lp|
+    .title.input
+      %div= f.label :title
+      %div= f.text_field :title, :max_length => 255, :size => 50
+      = lp.title_errors
+
+    .url.input
+      %div= f.label :url, 'URL'
+      %div= f.text_field :url, :max_length => 255, :size => 80
+      = lp.url_errors
+
+    .http_method.input
+      %div= f.label :http_method, 'HTTP method'
+      %div= f.select :http_method, %w(GET POST)
+      = lp.http_method_errors
+
+    .seconds.input
+      %div= f.label :seconds
+      %div= f.text_field :seconds, :max_length => 255, :size => 20
+      = lp.seconds_errors
+
+    %p= button_tag (location.new_record? ? 'Add' : 'Save') + ' URL'

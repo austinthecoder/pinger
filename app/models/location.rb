@@ -12,7 +12,9 @@ class Location < ActiveRecord::Base
 
   has_many :pings
 
-  validates :seconds, :presence => true, :numericality => true
+  validates :seconds,
+    :presence => true,
+    :numericality => {:if => lambda { seconds.present? }}
   validates :http_method, :format => /(get|post)/i
   validates :url,
     :presence => true,

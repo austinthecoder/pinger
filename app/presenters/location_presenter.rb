@@ -2,7 +2,7 @@ class LocationPresenter < BasePresenter
 
   presents :location
 
-  delegate :title, :url, :seconds, :to => :location
+  delegate :id, :title, :url, :seconds, :to => :location
 
   def next_ping
     now = Time.now
@@ -35,6 +35,14 @@ class LocationPresenter < BasePresenter
         tpl.render 'shared/form_errors', :errors => errors
       end
     end
+  end
+
+  def edit_path
+    tpl.edit_location_path(location)
+  end
+
+  def path
+    tpl.location_path(location)
   end
 
 end

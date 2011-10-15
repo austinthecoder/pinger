@@ -5,11 +5,13 @@
       %th URL
       %th HTTP method
       %th Seconds
+      %th
     %tbody
       - locations.each do |location|
         - present location do
-          %tr
-            %td= tpl.link_to title, tpl.location_path(location)
+          %tr{:id => "url_#{id}"}
+            %td= tpl.link_to title, path
             %td= url
             %td= http_method
             %td= seconds
+            %td= tpl.link_to 'edit', edit_path

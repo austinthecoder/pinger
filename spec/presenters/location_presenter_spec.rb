@@ -5,16 +5,17 @@ describe LocationPresenter do
 
   let(:location) do
     Factory :location,
+      :id => 346785,
       :title => 'Google',
       :seconds => 10,
       :url => 'http://x.com',
       :http_method => 'get'
   end
 
-  [[:seconds, 10], [:url, 'http://x.com'], [:title, 'Google']].each do |method, value|
+  %w(id seconds url title).each do |method|
     describe "#{method}" do
       it "delegates to the location" do
-        subject.send(method).should === value
+        subject.send(method).should === location.send(method)
       end
     end
   end
@@ -99,5 +100,13 @@ describe LocationPresenter do
         its("#{name}_errors") { should be_blank }
       end
     end
+  end
+
+  describe "edit_path" do
+    it { subject.edit_path.should == view.edit_location_path(location) }
+  end
+
+  describe "show_path" do
+    it { subject.path.should == view.location_path(location) }
   end
 end

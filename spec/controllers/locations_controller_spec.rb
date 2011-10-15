@@ -77,24 +77,59 @@ describe LocationsController do
     end
   end
 
-  describe "GET show" do
-    before { @location = Factory(:location) }
+  describe "member actions" do
+    before do
+      @location = Factory(:location)
+      @params[:id] = @location.id.to_s
+    end
 
-    context "when a location exists for the id in the params" do
-      it "assigns the location" do
-        pending
-        get :show, :id => @location.id.to_s
-        assigns(:location).should == @location
+    [[:get, :show], [:put, :update]].each do |http_method, action|
+      describe "#{http_method.upcase} #{action}" do
+        context "when a location doesn't exist for the id in the params" do
+          before { @params[:id] = (@location.id + 1).to_s }
+          it "raises an error" do
+            pending
+            lambda do
+              send(http_method, action, @params)
+            end.should raise_error(ActiveRecord::RecordNotFound)
+          end
+        end
       end
     end
 
-    context "when a location doesn't exist for the id in the params" do
-      it "raises an error" do
-        pending
-        lambda do
-          get :show, :id => (@location.id + 1).to_s
-        end.should raise_error(ActiveRecord::RecordNotFound)
+    describe "GET show" do
+      # see above
+      context "when a location doesn't exist for the id in the params"
+    end
+
+    describe "PUT update" do
+      context "when a location exists for the id in the params" do
+        it "tells the location to update the attributes" do
+          @params[:location] = {:title => 'asdfasdf', :seconds => '22352'}
+          subject.location.should_receive(:update_attributes!).with(@params[:location])
+          put :update, @params
+        end
+
+        it "redirects to the show page" do
+          put :update, @params
+          response.should redirect_to(location_url(@location))
+        end
+
+        context "when ActiveRecord::RecordInvalid is raised" do
+          before do
+            subject.location.stub(:update_attributes!) do
+              raise ActiveRecord::RecordInvalid, @location
+            end
+          end
+          it "renders the edit template" do
+            put :update, @params
+            response.should render_template(:edit)
+          end
+        end
       end
+
+      # see above
+      context "when a location doesn't exist for the id in the params"
     end
   end
 

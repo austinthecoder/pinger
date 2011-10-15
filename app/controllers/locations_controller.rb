@@ -17,4 +17,11 @@ class LocationsController < ApplicationController
     render :new
   end
 
+  def update
+    location.update_attributes!(params[:location])
+    respond_with location
+  rescue ActiveRecord::RecordInvalid
+    render :edit
+  end
+
 end

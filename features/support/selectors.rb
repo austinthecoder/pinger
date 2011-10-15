@@ -14,6 +14,9 @@ module HtmlSelectorsHelpers
     when /the "([^"]*)" field/
       ".#{$1.downcase}.input"
 
+    when 'the row for that URL'
+      "#url_#{Location.last.id}"
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
