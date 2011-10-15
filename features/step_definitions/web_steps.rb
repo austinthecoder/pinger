@@ -32,6 +32,10 @@ When /^(.*) within (.*[^:])$/ do |step, parent|
   with_scope(parent) { When step }
 end
 
+When /^I confirm the removal$/ do
+  click_button 'Yes, remove it'
+end
+
 ##################################################
 
 Then /^I should see "([^"]*)"$/ do |text|

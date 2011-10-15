@@ -64,7 +64,7 @@ describe LocationPresenter do
     context "when there are no pings" do
       before { subject.stub(:pings) }
       it "returns a no-pings msg" do
-        subject.render_pings.should == "<p>No pings yet</p>"
+        subject.render_pings.should == "<p>No pings yet.</p>"
       end
     end
   end
@@ -102,11 +102,7 @@ describe LocationPresenter do
     end
   end
 
-  describe "edit_path" do
-    it { subject.edit_path.should == view.edit_location_path(location) }
-  end
-
-  describe "show_path" do
-    it { subject.path.should == view.location_path(location) }
-  end
+  its(:path) { should == view.location_path(location) }
+  its(:edit_path) { should == view.edit_location_path(location) }
+  its(:delete_path) { should == view.delete_location_path(location) }
 end

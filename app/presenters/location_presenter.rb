@@ -25,7 +25,7 @@ class LocationPresenter < BasePresenter
     if pings.present?
       tpl.render 'pings/table', :pings => pings
     else
-      tpl.content_tag :p, 'No pings yet'
+      tpl.content_tag :p, 'No pings yet.'
     end
   end
 
@@ -43,6 +43,10 @@ class LocationPresenter < BasePresenter
 
   def path
     tpl.location_path(location)
+  end
+
+  def delete_path
+    tpl.delete_location_path(location)
   end
 
 end

@@ -125,3 +125,13 @@ Feature: Pinging
     Then I should see the URLs table:
       | Title   | URL                | HTTP method | Seconds |
       | Changed | http://changed.com | POST        | 2384765 |
+
+
+
+  Scenario: Removing a URL
+    When I create a URL
+    And I go to the home page
+    And I follow "remove" within the row for that URL
+    And I confirm the removal
+    And I go to the home page
+    Then I should see "No URLs added"

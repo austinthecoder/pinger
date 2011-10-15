@@ -14,4 +14,7 @@
             %td= url
             %td= http_method
             %td= seconds
-            %td= tpl.link_to 'edit', edit_path
+            %td
+              = tpl.link_to 'edit', edit_path
+              |
+              = tpl.link_to 'remove', delete_path

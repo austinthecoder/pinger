@@ -1,5 +1,9 @@
 def create_url(args = {})
-  args.reverse_merge!('Title' => 'Page')
+  args.reverse_merge!(
+    'Title' => 'Page',
+    'URL' => 'http://example.com',
+    'Seconds' => 234235
+  )
   steps %{
     When I go to the page where I can add a URL
     And I fill in the following:
@@ -14,6 +18,10 @@ def create_url(args = {})
 end
 
 ##################################################
+
+When /^I create a URL$/ do
+  create_url
+end
 
 When /^I create the URL:$/ do |table|
   create_url(table.rows_hash)

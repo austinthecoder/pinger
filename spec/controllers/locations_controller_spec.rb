@@ -131,6 +131,18 @@ describe LocationsController do
       # see above
       context "when a location doesn't exist for the id in the params"
     end
+
+    describe "DELETE destroy" do
+      it "destroys the location" do
+        delete :destroy, @params
+        lambda { @location.reload }.should raise_error(ActiveRecord::RecordNotFound)
+      end
+
+      it "redirects to the locations url" do
+        delete :destroy, @params
+        response.should redirect_to(locations_url)
+      end
+    end
   end
 
 end

@@ -24,4 +24,9 @@ class LocationsController < ApplicationController
     render :edit
   end
 
+  def destroy
+    location.destroy
+    respond_with location
+  end
+
 end
