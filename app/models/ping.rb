@@ -18,11 +18,11 @@ class Ping < ActiveRecord::Base
     update_attributes!(:performed_at => Time.now)
   end
 
-  def schedule!
-    newest_performed_ping = location.pings.order { performed_at.desc }.first
-    self.perform_at = (newest_performed_ping.try(:performed_at) || Time.now) + location.seconds
-    save!
-    Resque.enqueue_at(perform_at, self.class, id)
+  def schedule!(perform_at)
+    transaction do
+      update_attributes!(:perform_at => perform_at)
+      Resque.enqueue_at(perform_at, self.class, id)
+    end
   end
 
 end

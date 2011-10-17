@@ -37,3 +37,12 @@ Then /^I should see the URLs table:$/ do |expected_table|
   actual_table = tableish('#locations table tr', 'td,th')
   diff_tables!(actual_table, expected_table)
 end
+
+When /^I change the seconds for that URL to (\d+)$/ do |seconds|
+  steps %{
+    When I go to the edit page for that URL
+    And I fill in the following:
+      | Seconds | #{seconds} |
+    And I press "Save URL"
+  }
+end

@@ -29,7 +29,7 @@ class Location < ActiveRecord::Base
       all.each do |l|
         # if there's no scheduled pings, schedule one
         if l.pings.where { performed_at.eq(nil) }.empty?
-          l.pings.new.schedule!
+          l.schedule_ping!
         end
       end
     end
@@ -45,6 +45,15 @@ class Location < ActiveRecord::Base
 
   def http_method=(value)
     self[:http_method] = value ? value.to_s.downcase : nil
+  end
+
+  def schedule_ping!
+    last_ping_at = pings.order { performed_at.desc }.first.try(:performed_at)
+    next_ping_to_schedule.schedule!((last_ping_at || Time.now) + seconds)
+  end
+
+  def next_ping_to_schedule
+    pings.where { performed_at.eq(nil) }.first || pings.new
   end
 
 end

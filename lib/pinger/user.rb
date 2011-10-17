@@ -1,7 +1,7 @@
 class User
 
-  def create_location!(attrs = {})
-    Location.create!(attrs).tap { |l| l.pings.new.schedule! }
+  def save_location(location)
+    location.transaction { location.schedule_ping! if location.save }
   end
 
 end

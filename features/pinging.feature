@@ -39,3 +39,18 @@ Feature: Pinging
       | 200    | Jan  1, 2011 at 12:30:00 AM UTC |
       | 200    | Jan  1, 2011 at 12:20:00 AM UTC |
       | 200    | Jan  1, 2011 at 12:10:00 AM UTC |
+
+
+
+  Scenario: Changing the seconds
+    When I create the URL:
+      | URL     | http://example.com |
+      | Seconds | 600                |
+    And I change the seconds for that URL to 60
+    And I go to the page for that URL
+    Then I should see "Next ping in 1 minute"
+
+    And I refresh the page after 1 minute
+    Then I should see the pings table:
+      | Status |                                 |
+      | 200    | Jan  1, 2011 at 12:01:00 AM UTC |

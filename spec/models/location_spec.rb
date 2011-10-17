@@ -7,16 +7,12 @@ describe Location do
 
     describe "schedule_pings!" do
       it "schedules a ping for all locations that don't have one scheduled" do
-        @with_sched_pings = (1..2).map do
-          Factory(:location).tap { |l| l.pings.new.schedule! }
-        end
-        @without_sched_pings = (1..2).map do
-          Factory(:location)
-        end
+        @with_sched = (1..2).map { Factory(:location).tap(&:schedule_ping!) }
+        @without_sched = (1..2).map { Factory(:location) }
 
         subject.schedule_pings!
 
-        (@with_sched_pings + @without_sched_pings).each do |l|
+        (@with_sched + @without_sched).each do |l|
           l.reload.pings.size.should == 1
         end
       end
@@ -24,7 +20,7 @@ describe Location do
   end
 
   describe "instance methods" do
-    subject { Factory.build(:location) }
+    subject { Factory.build(:location, :seconds => 10.minutes) }
 
     describe "next_ping_date" do
       context "when there's a scheduled ping" do
@@ -67,6 +63,56 @@ describe Location do
         [nil, false].each do |m|
           subject.http_method = m
           subject.http_method.should be_nil
+        end
+      end
+    end
+
+    describe "schedule_ping!" do
+      before do
+        subject.save!
+        Timecop.freeze(Time.now)
+        @next_ping = mock(Ping)
+        subject.stub(:next_ping_to_schedule) { @next_ping }
+        Factory(:ping, :performed_at => 1.minute.ago)
+      end
+      after { Timecop.return }
+
+      context "when pings have been performed" do
+        before do
+          (2..3).map { |i| Factory(:ping, :location => subject, :performed_at => i.minutes.ago) }
+        end
+        it "it schedules the next ping to the newest perform date + it's seconds in the future" do
+          @next_ping.should_receive(:schedule!).with(2.minutes.ago + 10.minutes)
+          subject.schedule_ping!
+        end
+      end
+
+      context "when a ping has never been performed on the locaiton" do
+        it "it schedules the next ping to location's seconds in the future" do
+          @next_ping.should_receive(:schedule!).with(10.minutes.from_now)
+          subject.schedule_ping!
+        end
+      end
+    end
+
+    describe "next_ping_to_schedule" do
+      before do
+        subject.save!
+        Factory(:ping)
+        Factory(:ping, :location => subject, :performed_at => 1.minute.ago)
+      end
+
+      context "when there's a scheduled ping" do
+        before { @ping = Factory(:ping, :location => subject) }
+        its(:next_ping_to_schedule) { should == @ping }
+      end
+
+      context "when there isn't a scheduled ping" do
+        it "should return a new ping for the location" do
+          ping = subject.next_ping_to_schedule
+          ping.should be_a(Ping)
+          ping.should be_new_record
+          ping.location.should == subject
         end
       end
     end

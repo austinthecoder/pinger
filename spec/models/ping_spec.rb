@@ -5,35 +5,17 @@ describe Ping do
   subject { Factory.build(:ping) }
 
   describe "schedule!" do
-    before do
-      @location = subject.location
-      @location.seconds = 3.minutes
+    before { Timecop.freeze(Time.now) }
+    after { Timecop.return }
+
+    it "sets perform_at" do
+      subject.schedule!(4.minutes.from_now)
+      subject.reload.perform_at.should == 4.minutes.from_now
     end
 
-    context "when the location doesn't have any performed pings" do
-      it "sets perform_at equal to the locations seconds into the future" do
-        Timecop.freeze(Time.now) do
-          subject.schedule!
-          subject.reload.perform_at.to_i.should == 3.minutes.from_now.to_i
-        end
-      end
-    end
-
-    context "when the location has performed pings" do
-      before do
-        (1..2).map { |i| @location.pings.create!(:performed_at => i.minutes.ago) }
-      end
-      it "sets perform_at equal to the date the last ping was performed plus the location seconds" do
-        Timecop.freeze(Time.now) do
-          subject.schedule!
-          subject.reload.perform_at.to_i.should == 2.minutes.from_now.to_i
-        end
-      end
-    end
-
-    it "schedules the ping to be performed at the perform_at date" do
-      subject.schedule!
-      Ping.should have_scheduled_at(subject.perform_at, subject.id)
+    it "schedules the ping to be performed" do
+      subject.schedule!(5.minutes.from_now)
+      Ping.should have_scheduled_at(5.minutes.from_now, subject.id)
     end
   end
 
