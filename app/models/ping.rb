@@ -10,6 +10,11 @@ class Ping < ActiveRecord::Base
     def perform(ping_id)
       find(ping_id).perform!
     end
+
+    # TODO: test
+    def first_scheduled
+      where { performed_at.eq(nil) }.first
+    end
   end
 
   def perform!

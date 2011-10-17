@@ -25,18 +25,14 @@ class Location < ActiveRecord::Base
   validates :title, :presence => true
 
   class << self
+    # if there's no scheduled pings, schedule one
     def schedule_pings!
-      all.each do |l|
-        # if there's no scheduled pings, schedule one
-        if l.pings.where { performed_at.eq(nil) }.empty?
-          l.schedule_ping!
-        end
-      end
+      all.each { |l| l.schedule_ping! unless l.pings.first_scheduled }
     end
   end
 
   def next_ping_date
-    pings.where { performed_at.eq(nil) }.first.try(:perform_at)
+    pings.first_scheduled.try(:perform_at)
   end
 
   def request
@@ -53,7 +49,7 @@ class Location < ActiveRecord::Base
   end
 
   def next_ping_to_schedule
-    pings.where { performed_at.eq(nil) }.first || pings.new
+    pings.first_scheduled || pings.new
   end
 
 end
