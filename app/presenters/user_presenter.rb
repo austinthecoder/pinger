@@ -14,7 +14,7 @@ class UserPresenter < BasePresenter
     if locations.present?
       tpl.render 'locations/table', :locations => locations
     else
-      tpl.content_tag :p, 'No URLs added.'
+      tpl.content_tag :p, 'No URLs have been added.', :class => 'empty'
     end
   end
 

@@ -25,7 +25,55 @@ table {
 .input { margin: 0 0 20px 0; }
 
 #pings {
+  table { margin-bottom: 20px; }
+}
+
+#locations {
   table {
     margin-bottom: 20px;
+
+    ul {
+      margin: 0;
+
+      li {
+        float: left;
+        margin-right: 10px;
+        list-style: none;
+      }
+      li.last { margin-right: 0; }
+    }
+
+    .edit, .remove {
+      a {
+        background-repeat: no-repeat;
+        background-position: left top;
+        display: block;
+        height: 16px;
+        width: 16px;
+
+        span { display: none; }
+      }
+    }
+    .edit a { background-image: image-url('icons/pencil.png'); }
+    .remove a { background-image: image-url('icons/bin_closed.png'); }
   }
+}
+
+#location {
+  #info {
+    table { margin-bottom: 20px; }
+  }
+}
+
+.empty {
+  border: 1px dashed #ddd;
+  color: #cfcfcf;
+  padding: 30px;
+}
+
+#footer {
+  color: #9f9f9f;
+  margin-top: 40px;
+
+  a { color: #9f9fff;}
 }

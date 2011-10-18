@@ -15,6 +15,10 @@
             %td= http_method
             %td= seconds
             %td
-              = tpl.link_to 'edit', edit_path
-              |
-              = tpl.link_to 'remove', delete_path
+              %ul
+                %li.edit
+                  = tpl.link_to edit_path, :title => 'Edit this URL' do
+                    %span edit
+                %li.remove.last
+                  = tpl.link_to delete_path, :title => 'Remove this URL' do
+                    %span remove

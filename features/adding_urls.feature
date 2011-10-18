@@ -8,7 +8,11 @@ Feature: Adding URLs
       | Seconds | 600                |
     And I select "POST" from "HTTP method"
     And I press "Add URL"
-    Then I should see "Sending a POST request to http://example.com every 600 seconds."
+    Then I should see the URL info:
+      | Title       | Example Home       |
+      | URL         | http://example.com |
+      | HTTP method | POST               |
+      | Seconds     | 600                |
 
 
 

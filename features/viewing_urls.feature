@@ -22,7 +22,11 @@ Feature: Viewing URLs
       | Yahoo! | http://yahoo.com  | POST        | 600     |
     And I go to the home page
     And I follow "Google"
-    Then I should see "GET request to http://google.com"
+    Then I should see the URL info:
+      | Title       | Google            |
+      | URL         | http://google.com |
+      | HTTP method | GET               |
+      | Seconds     | 400               |
 
 
 

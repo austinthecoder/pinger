@@ -1,5 +1,8 @@
 ---
+icons/bin.png: icons/bin-0093b8ee6297c49cede6850921c9f1d9.png
+icons/bin_closed.png: icons/bin_closed-f44c1401a59e4d455b25ddd2a7e33a8e.png
+icons/pencil.png: icons/pencil-af1d75bdc2a1c58885e6290ac96da5f1.png
 application.js: application-ee7a20ed3d781b852ea459fba60cb662.js
-application.css: application-a82a44e200646a7c41201a812241554e.css
+application.css: application-9bab7dc4aa25f9a588055dbd6d9ee959.css
 formalize/button.png: formalize/button-0a16eb04e3ff3d811d8a5b32a8b96ab4.png
 formalize/select_arrow.gif: formalize/select_arrow-964bc173492d6c5c8564d68d68c59973.gif

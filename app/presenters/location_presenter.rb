@@ -35,7 +35,7 @@ class LocationPresenter < BasePresenter
     if pings.present?
       tpl.render 'pings/table', :pings => pings
     else
-      tpl.content_tag :p, 'No pings yet.'
+      tpl.content_tag :p, 'No pings yet.', :class => 'empty'
     end
   end
 

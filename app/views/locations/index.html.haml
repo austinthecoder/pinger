@@ -1,6 +1,6 @@
-%p= link_to "Add URL", new_location_path
-
 #locations
-  = present(current_user) do
+  %h2 URLs
+  %p= link_to "Add URL", new_location_path
+  - present current_user do
     = render_locations
     = tpl.paginate locations

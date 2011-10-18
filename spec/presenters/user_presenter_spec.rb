@@ -20,7 +20,7 @@ describe UserPresenter do
 
     context "when there are no locations" do
       before { subject.stub(:locations) }
-      it { subject.render_locations.should == "<p>No URLs added.</p>" }
+      it { subject.render_locations.should =~ /No URLs have been added/ }
     end
   end
 

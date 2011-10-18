@@ -1,16 +1,24 @@
 %p= link_to 'Back', root_path
-- present location do
-  %p
-    Sending a
-    %strong= http_method
-    request to
-    %strong= url
-    every
-    %strong= seconds
-    seconds.
 
-  %p= "Next ping in #{next_ping}."
-
-  #pings
-    = render_pings
-    = tpl.paginate pings
+#location
+  - present location do
+    #info
+      %table
+        %tbody
+          %tr
+            %th Title
+            %td= title
+          %tr
+            %th URL
+            %td= url
+          %tr
+            %th HTTP method
+            %td= http_method
+          %tr
+            %th Seconds
+            %td= seconds
+    #pings
+      %h2 Pings
+      %p= "Next ping in #{next_ping}."
+      = render_pings
+      = tpl.paginate pings

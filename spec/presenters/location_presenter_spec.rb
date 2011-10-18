@@ -64,7 +64,7 @@ describe LocationPresenter do
     context "when there are no pings" do
       before { subject.stub(:pings) }
       it "returns a no-pings msg" do
-        subject.render_pings.should == "<p>No pings yet.</p>"
+        subject.render_pings.should =~ /No pings yet/
       end
     end
   end
