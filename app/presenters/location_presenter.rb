@@ -4,6 +4,14 @@ class LocationPresenter < BasePresenter
 
   delegate :id, :title, :url, :seconds, :to => :location
 
+  class << self
+    attr_writer :pings_per_page
+
+    def pings_per_page
+      @pings_per_page ||= 30
+    end
+  end
+
   def next_ping
     now = Time.now
     if location.next_ping_date && location.next_ping_date > now
@@ -18,7 +26,9 @@ class LocationPresenter < BasePresenter
   end
 
   def pings
-    @pings ||= location.pings.where { performed_at.not_eq(nil) }.order { performed_at.desc }
+    @pings ||= location.pings.performed.order do
+      performed_at.desc
+    end.page(tpl.params[:page]).per(self.class.pings_per_page)
   end
 
   def render_pings

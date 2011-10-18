@@ -42,6 +42,21 @@ Feature: Pinging
 
 
 
+  Scenario: Pings are paginated
+    When I create the URL:
+      | URL     | http://example.com |
+      | Seconds | 60                 |
+    And I refresh the page after 30 minutes
+    Then I should see 30 pings
+
+    When I refresh the page after 15 minutes
+    Then I should see 30 pings
+
+    When I follow "Next"
+    Then I should see 15 pings
+
+
+
   Scenario: Changing the seconds
     When I create the URL:
       | URL     | http://example.com |

@@ -73,12 +73,24 @@ describe LocationPresenter do
     before do
       Factory(:ping, :performed_at => 1.minute.ago)
       Factory(:ping, :location => location, :performed_at => nil)
-    end
-    it "returns the performed pings for the location, ordered performed_at desc" do
-      pings = (1..3).map do |i|
+      @pings = (1..5).map do |i|
         Factory(:ping, :location => location, :performed_at => i.minutes.ago)
       end
-      subject.pings.should == pings
+      LocationPresenter.pings_per_page = 5
+    end
+
+    it "returns the performed pings for the location, ordered performed_at desc" do
+      subject.pings.should == @pings
+    end
+
+    context "when showing 3 per page" do
+      before { LocationPresenter.pings_per_page = 3 }
+      [[1, 0..2], [2, 3..4]].each do |page, range|
+        context "when the page is #{page}" do
+          before { view.params[:page] = page.to_s }
+          its(:pings) { should == @pings[range] }
+        end
+      end
     end
   end
 

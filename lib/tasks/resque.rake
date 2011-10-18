@@ -12,7 +12,7 @@ namespace :resque do
     Resque.schedule = {
       'schedule_pings' => {
         'every' => "10s",
-        'class' => Location::PingScheduler,
+        'class' => PingScheduler,
         'args' => ['foo', 1],
         'description' => 'schedules the pings'
       }

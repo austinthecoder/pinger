@@ -11,4 +11,6 @@
 
   %p= "Next ping in #{next_ping}."
 
-  #pings= render_pings
+  #pings
+    = render_pings
+    = tpl.paginate pings

@@ -15,6 +15,10 @@ class Ping < ActiveRecord::Base
     def first_scheduled
       where { performed_at.eq(nil) }.first
     end
+
+    def performed
+      where { performed_at.not_eq(nil) }
+    end
   end
 
   def perform!

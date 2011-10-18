@@ -5,7 +5,7 @@ end
 
 def current_time=(time)
   time = time.is_a?(String) ? Time.zone.parse(time) : time
-  Location::PingScheduler.perform
+  PingScheduler.perform
 
   if payload = next_due_payload_before(time)
     Timecop.freeze(payload[:time])
