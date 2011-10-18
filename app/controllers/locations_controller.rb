@@ -4,10 +4,6 @@ class LocationsController < ApplicationController
 
   expose :location
 
-  expose :locations do
-    Location.order { created_at.desc }.order { id.desc }
-  end
-
   def create
     current_user.save_location(location)
     respond_with location

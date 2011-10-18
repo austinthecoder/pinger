@@ -9,12 +9,4 @@ module ApplicationHelper
     presenter
   end
 
-  def render_locations
-    if locations.present?
-      render 'locations/table', :locations => locations
-    else
-      content_tag :p, 'No URLs added.'
-    end
-  end
-
 end
