@@ -5,7 +5,7 @@ Feature: Pinging
     And requests to "http://example.com" are returning the status code "200"
 
   Scenario: Viewing the pings
-    When I create the URL:
+    When I add the URL:
       | URL     | http://example.com |
       | Seconds | 600                |
     And I should see "Next ping in 10 minutes."
@@ -30,7 +30,7 @@ Feature: Pinging
 
 
   Scenario: Pings are ordered newest first
-    When I create the URL:
+    When I add the URL:
       | URL     | http://example.com |
       | Seconds | 600                |
     And I refresh the page after 30 minutes
@@ -43,7 +43,7 @@ Feature: Pinging
 
 
   Scenario: Pings are paginated
-    When I create the URL:
+    When I add the URL:
       | URL     | http://example.com |
       | Seconds | 60                 |
     And I refresh the page after 30 minutes
@@ -58,7 +58,7 @@ Feature: Pinging
 
 
   Scenario: Changing the seconds
-    When I create the URL:
+    When I add the URL:
       | URL     | http://example.com |
       | Seconds | 600                |
     And I change the seconds for that URL to 60

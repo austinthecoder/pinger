@@ -1,7 +1,7 @@
 Feature: Editing URLs
 
   Scenario: Editing a URL
-    When I create the URL:
+    When I add the URL:
       | Title       | Example            |
       | URL         | http://example.com |
       | Seconds     | 100                |
@@ -22,7 +22,7 @@ Feature: Editing URLs
 
 
   Scenario: Removing a URL
-    When I create a URL
+    When I add a URL
     And I go to the home page
     And I follow "remove" within the row for that URL
     And I confirm the removal

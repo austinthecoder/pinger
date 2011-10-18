@@ -1,7 +1,7 @@
 Feature: Viewing URLs
 
   Scenario: URLs are ordered by title
-    When I create the URLs:
+    When I add the URLs:
       | Title   | URL                | HTTP method | Seconds |
       | Google  | http://google.com  | GET         | 400     |
       | Yahoo!  | http://yahoo.com   | POST        | 600     |
@@ -15,11 +15,23 @@ Feature: Viewing URLs
 
 
 
-  Scenario: Viewing previously created URLs
-    When I create the URLs:
+  Scenario: Viewing previously added URLs
+    When I add the URLs:
       | Title  | URL               | HTTP method | Seconds |
       | Google | http://google.com | GET         | 400     |
       | Yahoo! | http://yahoo.com  | POST        | 600     |
     And I go to the home page
     And I follow "Google"
     Then I should see "GET request to http://google.com"
+
+
+
+  Scenario: URLs are paginated
+    Given 3 URLs are shown per page
+
+    When I add 5 URLs
+    And I go to the home page
+    Then I should see 3 URLs
+
+    When I follow "Next"
+    Then I should see 2 URLs
