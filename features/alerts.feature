@@ -28,3 +28,9 @@ Feature: Alerts
 
     Then I should see "Can't be blank" within the "Label" field
     And I should see "Can't be blank" within the "Email" field
+
+
+
+  Scenario: Can't add an alert when there's no URLs
+    When I go to the home page
+    Then I should not see "Add alert"

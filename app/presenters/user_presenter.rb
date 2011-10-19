@@ -19,7 +19,7 @@ class UserPresenter < BasePresenter
   end
 
   def locations
-    @locations ||= Location.order { title.asc }.page(tpl.params[:page]).per(self.class.locations_per_page)
+    @locations ||= tpl.locations.page(tpl.params[:page]).per(self.class.locations_per_page)
   end
 
 end
