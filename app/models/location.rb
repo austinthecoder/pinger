@@ -16,7 +16,7 @@ class Location < ActiveRecord::Base
     }
   validates :title, :presence => true
 
-  def request
+  def perform_request
     HTTParty.send http_method, url
   end
 

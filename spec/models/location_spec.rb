@@ -39,13 +39,13 @@ describe Location do
       end
     end
 
-    describe "request" do
+    describe "perform_request" do
       it "performs a request" do
         [[:get, "http://x.net"], [:post, "http://y.com"]].each do |http_method, url|
           stub_request(http_method, url)
           subject.http_method = http_method.to_s
           subject.url = url
-          subject.request
+          subject.perform_request
           a_request(http_method, url).should have_been_made.once
         end
       end

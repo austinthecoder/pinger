@@ -26,11 +26,12 @@ class Ping < ActiveRecord::Base
     alerts.select(&:conditions_met?).each(&:deliver!)
   end
 
-  # TODO: test
   def perform!
-    self.response_status_code = location.request.code
-    update_attributes!(:performed_at => Time.now)
+    self.performed_at = Time.now
+    update_attributes!(:response_status_code => location.perform_request.code)
     deliver_applicable_alerts!
+  ensure
+    save!
   end
 
   def schedule!(perform_at)
