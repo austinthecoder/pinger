@@ -18,3 +18,13 @@ Feature: Alerts
       """
       "Example" is not returning status codes of "200".
       """
+
+
+
+  Scenario: Can't add a callback without an email address or label
+    When I go to the home page
+    And I follow "Add email callback"
+    And I press "Add email callback"
+
+    Then I should see "Can't be blank" within the "Label" field
+    And I should see "Can't be blank" within the "Email" field

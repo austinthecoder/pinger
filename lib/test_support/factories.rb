@@ -11,6 +11,8 @@ FactoryGirl.define do
   end
 
   factory :email_callback do
+    label 'My Email'
+    to 'joe@example.com'
   end
 
   factory :alert do

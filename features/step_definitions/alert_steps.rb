@@ -9,8 +9,8 @@ When /^I add an email callback that goes to me$/ do
     When I go to the home page
     And I follow "Add email callback"
     And I fill in the following:
-      | Label   | Personal           |
-      | Address | austin@example.com |
+      | Label | Personal           |
+      | Email | austin@example.com |
     And I press "Add email callback"
   }
 end

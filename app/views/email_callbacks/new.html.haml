@@ -3,11 +3,15 @@
 %h2 Add Email Callback
 
 = form_for email_callback do |f|
-  .label.input
-    %div= f.label :label
-    %div= f.text_field :label, :max_length => 255, :size => 50
-  .label.input
-    %div= f.label :to, 'Address'
-    %div= f.text_field :to, :max_length => 255, :size => 50
+  - present email_callback do
+    .label.input
+      %div= f.label :label
+      %div= f.text_field :label, :max_length => 255, :size => 50
+      = label_errors
+
+    .email.input
+      %div= f.label :to, 'Email'
+      %div= f.text_field :to, :max_length => 255, :size => 50
+      = email_errors
 
   %p= button_tag 'Add email callback'
