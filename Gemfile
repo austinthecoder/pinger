@@ -21,7 +21,7 @@ group :assets do
 end
 
 group :test do
-  gem 'rspec-rails', '2.6.1'
+  gem 'rspec-rails', '2.7.0'
   gem 'cucumber-rails', '1.1.1'
   gem 'database_cleaner', '0.6.7'
   gem 'accept_values_for', '0.4.3'

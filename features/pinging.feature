@@ -18,13 +18,13 @@ Feature: Pinging
     And I refresh the page after 5 minutes
     Then I should see "Next ping in 8 minutes."
     And I should see the pings table:
-      | Status |                              |
+      | Status |                                 |
       | 200    | Jan  1, 2011 at 12:10:00 AM UTC |
 
     And I refresh the page after 6 minutes
     Then I should see "Next ping in 2 minutes."
     And I should see the pings table:
-      | Status |                              |
+      | Status |                                 |
       | 200    | Jan  1, 2011 at 12:10:00 AM UTC |
 
 
@@ -35,7 +35,7 @@ Feature: Pinging
       | Seconds | 600                |
     And I refresh the page after 30 minutes
     Then I should see the pings table:
-      | Status |                              |
+      | Status |                                 |
       | 200    | Jan  1, 2011 at 12:30:00 AM UTC |
       | 200    | Jan  1, 2011 at 12:20:00 AM UTC |
       | 200    | Jan  1, 2011 at 12:10:00 AM UTC |

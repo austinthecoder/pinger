@@ -36,4 +36,20 @@ describe User do
       end
     end
   end
+
+  describe "save_email_callback" do
+    it "saves the email callback" do
+      email_callback = mock(EmailCallback)
+      email_callback.should_receive(:save)
+      subject.save_email_callback(email_callback)
+    end
+  end
+
+  describe "save_alert" do
+    it "saves the email callback" do
+      alert = mock(Alert)
+      alert.should_receive(:save)
+      subject.save_alert(alert)
+    end
+  end
 end

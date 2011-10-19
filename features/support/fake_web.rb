@@ -13,11 +13,11 @@ class FakeWeb
     end
 
     def stubbed_requests
-      @stubbed_requests ||= []
+      @stubbed_requests ||= {}
     end
 
     def stub_request(url, opts = {})
-      stubbed_requests << [url, opts]
+      stubbed_requests[url] = opts
     end
   end
 end

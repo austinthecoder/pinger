@@ -2,6 +2,8 @@ class Location < ActiveRecord::Base
 
   include Pingable
 
+  has_many :alerts
+
   validates :seconds,
     :presence => true,
     :numericality => {:if => lambda { seconds.present? }}
@@ -23,3 +25,5 @@ class Location < ActiveRecord::Base
   end
 
 end
+
+

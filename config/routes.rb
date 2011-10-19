@@ -8,6 +8,10 @@ Pinger::Application.routes.draw do
     end
   end
 
+  resources :email_callbacks
+
+  resources :alerts
+
   mount Resque::Server.new => 'resque'
 
 end

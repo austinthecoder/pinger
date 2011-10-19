@@ -1,6 +1,13 @@
 #locations
   %h2 URLs
-  %p= link_to "Add URL", new_location_path
+
+  %p
+    = link_to "Add URL", new_location_path
+    |
+    = link_to "Add email callback", new_email_callback_path
+    |
+    = link_to "Add alert", new_alert_path
+
   - present current_user do
     = render_locations
     = tpl.paginate locations

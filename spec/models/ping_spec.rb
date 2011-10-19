@@ -19,6 +19,27 @@ describe Ping do
     end
   end
 
+  describe "perform!" do
+    it "delivers the applicable alerts" do
+      pending
+      subject.should_receive(:deliver_applicable_alerts!)
+      subject.perform!
+    end
+  end
+
+  describe "deliver_applicable_alerts!" do
+    it "tells the alerts, that have the conditions met, to deliver" do
+      alerts = [
+        mock(Alert, :conditions_met? => true),
+        mock(Alert, :conditions_met? => false)
+      ]
+      subject.stub(:alerts) { alerts }
+      alerts[0].should_receive(:deliver!)
+      alerts[1].should_not_receive(:deliver!)
+      subject.deliver_applicable_alerts!
+    end
+  end
+
   describe "validations" do
     subject { Factory.build(:ping) }
 

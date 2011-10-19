@@ -9,4 +9,10 @@ FactoryGirl.define do
   factory :ping do
     location
   end
+
+  factory :email_callback do
+  end
+
+  factory :alert do
+  end
 end

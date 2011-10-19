@@ -69,8 +69,8 @@ describe Location do
 
     describe "schedule_ping!" do
       before do
-        subject.save!
         Timecop.freeze(Time.now)
+        subject.save!
         @next_ping = mock(Ping)
         subject.stub(:next_ping_to_schedule) { @next_ping }
         Factory(:ping, :performed_at => 1.minute.ago)

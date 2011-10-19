@@ -3,6 +3,7 @@ class Ping < ActiveRecord::Base
   @queue = :high
 
   belongs_to :location
+  has_many :alerts, :through => :location
 
   validates :location_id, :presence => true
 
@@ -21,10 +22,15 @@ class Ping < ActiveRecord::Base
     end
   end
 
+  def deliver_applicable_alerts!
+    alerts.select(&:conditions_met?).each(&:deliver!)
+  end
+
+  # TODO: test
   def perform!
     self.response_status_code = location.request.code
-  ensure
     update_attributes!(:performed_at => Time.now)
+    deliver_applicable_alerts!
   end
 
   def schedule!(perform_at)
