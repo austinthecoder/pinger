@@ -3,6 +3,5 @@
 
   %p= render_main_menu
 
-  - present current_user do
-    = render_locations
-    = tpl.paginate locations
+  = render_paginated_locations
+  = paginate paginated_locations

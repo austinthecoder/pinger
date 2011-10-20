@@ -1,5 +1,7 @@
 module ApplicationHelper
 
+  LOCATIONS_PER_PAGE = 30
+
   def present(object, klass = nil, &block)
     klass ||= "#{object.class}Presenter".constantize
     presenter = klass.new(object, self)
@@ -12,6 +14,18 @@ module ApplicationHelper
   # TODO: test, dry up
   def locations
     @locations ||= Location.order { title.asc }
+  end
+
+  def paginated_locations
+    @paginated_locations ||= locations.page(params[:page]).per(LOCATIONS_PER_PAGE)
+  end
+
+  def render_paginated_locations
+    if paginated_locations.present?
+      render 'locations/table', :locations => paginated_locations
+    else
+      content_tag :p, 'No URLs found.', :class => 'empty'
+    end
   end
 
   def render_main_menu

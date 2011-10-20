@@ -27,4 +27,4 @@ Feature: Editing URLs
     And I follow "remove" within the row for that URL
     And I confirm the removal
     And I go to the home page
-    Then I should see "No URLs have been added"
+    Then I should see "No URLs found"

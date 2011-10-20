@@ -20,7 +20,7 @@ end
 ##################################################
 
 Given /^(\d+) URLs are shown per page$/ do |num|
-  UserPresenter.locations_per_page = num.to_i
+  ApplicationHelper::LOCATIONS_PER_PAGE = num.to_i
 end
 
 ##################################################

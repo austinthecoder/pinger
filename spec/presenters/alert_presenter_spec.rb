@@ -6,18 +6,23 @@ describe AlertPresenter do
   let(:alert) { mock(Alert) }
 
   describe "location_options_for_select" do
-    context "when there are locations" do
+    context "when the template has locations" do
       before do
-        @locs = [[685, 'C'], [345, 'A'], [578, 'B']].map do |id, title|
-          Factory(:location, :id => id, :title => title)
+        view.stub(:locations) do
+          [
+            mock(Location, :id => 1, :title => 'A'),
+            mock(Location, :id => 2, :title => 'B'),
+            mock(Location, :id => 3, :title => 'C')
+          ]
         end
       end
-      it "returns an array of id and title, ordered by title" do
-        subject.location_options_for_select.should == [['A', 345], ['B', 578], ['C', 685]]
+      it "returns the locations as arrays of id and title" do
+        subject.location_options_for_select.should == [['A', 1], ['B', 2], ['C', 3]]
       end
     end
 
     context "when there are no locations" do
+      before { view.stub(:locations) { [] } }
       its(:location_options_for_select) { should be_empty }
     end
   end
