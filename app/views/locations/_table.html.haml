@@ -10,15 +10,15 @@
       - locations.each do |location|
         - present location do
           %tr{:id => "url_#{id}"}
-            %td= tpl.link_to title, path
+            %td= link_to title, path
             %td= url
             %td= http_method
             %td= seconds
             %td
               %ul
                 %li.edit
-                  = tpl.link_to edit_path, :title => 'Edit this URL' do
+                  = link_to edit_path, :title => 'Edit this URL' do
                     %span edit
                 %li.remove.last
-                  = tpl.link_to delete_path, :title => 'Remove this URL' do
+                  = link_to delete_path, :title => 'Remove this URL' do
                     %span remove

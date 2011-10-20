@@ -4,18 +4,10 @@ class LocationPresenter < BasePresenter
 
   delegate :id, :title, :url, :seconds, :to => :location
 
-  class << self
-    attr_writer :pings_per_page
-
-    def pings_per_page
-      @pings_per_page ||= 30
-    end
-  end
-
   def next_ping
     now = Time.now
     if location.next_ping_date && location.next_ping_date > now
-      tpl.distance_of_time_in_words(now, location.next_ping_date)
+      distance_of_time_in_words(now, location.next_ping_date)
     else
       'just a moment'
     end
@@ -25,38 +17,36 @@ class LocationPresenter < BasePresenter
     location.http_method.upcase
   end
 
+  # TODO: test
   def pings
-    @pings ||= location.pings.performed.order do
-      performed_at.desc
-    end.page(tpl.params[:page]).per(self.class.pings_per_page)
+    @ping ||= location.pings.performed.order { performed_at.desc }
+  end
+
+  # TODO: refactor tests
+  def paginated_pings
+    @paginated_pings ||= pings.page(params[:page]).per(CONFIG[:app][:pings_per_page])
   end
 
   def render_pings
-    if pings.present?
-      tpl.render 'pings/table', :pings => pings
+    if paginated_pings.present?
+      render 'pings/table', :pings => paginated_pings
     else
-      tpl.content_tag :p, 'No pings yet.', :class => 'empty'
+      content_tag :p, 'No pings yet.', :class => 'empty'
     end
   end
 
   %w(title url http_method seconds).each do |name|
     define_method "#{name}_errors" do
       if (errors = location.errors[name].map(&:capitalize)).present?
-        tpl.render 'shared/form_errors', :errors => errors
+        render 'shared/form_errors', :errors => errors
       end
     end
   end
 
-  def edit_path
-    tpl.edit_location_path(location)
-  end
-
-  def path
-    tpl.location_path(location)
-  end
-
-  def delete_path
-    tpl.delete_location_path(location)
+  [nil, :edit, :delete].each do |name|
+    define_method(name ? "#{name}_path" : 'path') do
+      send (name ? "#{name}_location_path" : 'location_path'), location
+    end
   end
 
 end

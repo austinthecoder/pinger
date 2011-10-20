@@ -19,12 +19,6 @@ end
 
 ##################################################
 
-Given /^(\d+) URLs are shown per page$/ do |num|
-  ApplicationHelper::LOCATIONS_PER_PAGE = num.to_i
-end
-
-##################################################
-
 When /^I add a URL$/ do
   add_url
 end

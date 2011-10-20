@@ -50,46 +50,40 @@ describe LocationPresenter do
   end
 
   describe "render_pings" do
-    context "when there are pings" do
+    context "when there are paginated pings" do
       before do
-        @pings = [mock(Ping)]
-        subject.stub(:pings) { @pings }
+        @paginated_pings = [mock(Ping)]
+        subject.stub(:paginated_pings) { @paginated_pings }
       end
       it "tells the view to render the pings table" do
-        view.should_receive(:render).with('pings/table', :pings => @pings)
+        view.should_receive(:render).with('pings/table', :pings => @paginated_pings)
         subject.render_pings
       end
     end
 
-    context "when there are no pings" do
-      before { subject.stub(:pings) }
+    context "when there are no paginated pings" do
+      before { subject.stub(:paginated_pings) }
       it "returns a no-pings msg" do
         subject.render_pings.should =~ /No pings yet/
       end
     end
   end
 
-  describe "pings" do
+  describe "paginated_pings" do
     before do
       Factory(:ping, :performed_at => 1.minute.ago)
       Factory(:ping, :location => location, :performed_at => nil)
       @pings = (1..5).map do |i|
-        Factory(:ping, :location => location, :performed_at => i.minutes.ago)
+        Factory :ping,
+          :location => location,
+          :performed_at => i.minutes.ago
       end
-      LocationPresenter.pings_per_page = 5
     end
 
-    it "returns the performed pings for the location, ordered performed_at desc" do
-      subject.pings.should == @pings
-    end
-
-    context "when showing 3 per page" do
-      before { LocationPresenter.pings_per_page = 3 }
-      [[1, 0..2], [2, 3..4]].each do |page, range|
-        context "when the page is #{page}" do
-          before { view.params[:page] = page.to_s }
-          its(:pings) { should == @pings[range] }
-        end
+    [[1, 0..2], [2, 3..4]].each do |page, range|
+      context "when the page is #{page}" do
+        before { view.params[:page] = page.to_s }
+        its(:paginated_pings) { should == @pings[range] }
       end
     end
   end

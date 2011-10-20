@@ -46,14 +46,14 @@ Feature: Pinging
     When I add the URL:
       | URL     | http://example.com |
       | Seconds | 60                 |
-    And I refresh the page after 30 minutes
-    Then I should see 30 pings
+    And I refresh the page after 3 minutes
+    Then I should see 3 pings
 
-    When I refresh the page after 15 minutes
-    Then I should see 30 pings
+    When I refresh the page after 2 minutes
+    Then I should see 3 pings
 
     When I follow "Next"
-    Then I should see 15 pings
+    Then I should see 2 pings
 
 
 

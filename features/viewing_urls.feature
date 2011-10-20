@@ -31,8 +31,6 @@ Feature: Viewing URLs
 
 
   Scenario: URLs are paginated
-    Given 3 URLs are shown per page
-
     When I add 5 URLs
     And I go to the home page
     Then I should see 3 URLs

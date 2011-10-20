@@ -5,14 +5,16 @@ class BasePresenter
     @tpl = template
   end
 
-  attr_reader :tpl
-
 private
 
   class << self
     def presents(name)
       define_method(name) { @object }
     end
+  end
+
+  def method_missing(*args, &block)
+    @tpl.send *args, &block
   end
 
 end

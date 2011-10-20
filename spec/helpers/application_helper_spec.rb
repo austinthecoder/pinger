@@ -14,11 +14,9 @@ describe ApplicationHelper do
 
       its(:paginated_locations) { should == [@a, @b, @c] }
 
-      context "when showing 3 locations per page" do
-        before do
-          described_class::LOCATIONS_PER_PAGE = 3
-          2.times { Factory(:location) }
-        end
+      context "when there's 5 locations" do
+        before { 2.times { Factory(:location) } }
+
         [[1, 3], [2, 2]].each do |page, num_locations|
           context "when the page is #{page}" do
             before { subject.params[:page] = page.to_s }
