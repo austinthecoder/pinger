@@ -7,7 +7,7 @@ class LocationPresenter < BasePresenter
   def next_ping
     now = Time.now
     if location.next_ping_date && location.next_ping_date > now
-      distance_of_time_in_words(now, location.next_ping_date)
+      distance_of_time_in_words now, location.next_ping_date
     else
       'just a moment'
     end
@@ -24,7 +24,7 @@ class LocationPresenter < BasePresenter
 
   # TODO: refactor tests
   def paginated_pings
-    @paginated_pings ||= pings.page(params[:page]).per(CONFIG[:app][:pings_per_page])
+    @paginated_pings ||= pings.page(params[:page]).per CONFIG[:app][:pings_per_page]
   end
 
   def render_pings
@@ -37,9 +37,7 @@ class LocationPresenter < BasePresenter
 
   %w(title url http_method seconds).each do |name|
     define_method "#{name}_errors" do
-      if (errors = location.errors[name].map(&:capitalize)).present?
-        render 'shared/form_errors', :errors => errors
-      end
+      render_form_errors name
     end
   end
 
