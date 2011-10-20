@@ -44,7 +44,7 @@ describe Alert do
       notif = mock Mail::Message, :deliver => nil
       AlertMailer.stub(:notification) { |a| notif if a == subject }
 
-      notif.should_receive(:deliver)
+      notif.should_receive :deliver
       subject.deliver!
     end
   end

@@ -3,7 +3,6 @@
 = form_tag present(location).path, :method => :delete do
   %p
     Are you sure you want to
-    %strong Remove this URL
-    ?
+    %strong Remove this URL?
   = button_tag 'Yes, remove it'
   = link_to 'cancel', root_path

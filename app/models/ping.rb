@@ -1,5 +1,7 @@
 class Ping < ActiveRecord::Base
 
+  extend Paginates
+
   @queue = :high
 
   belongs_to :location
@@ -14,26 +16,21 @@ class Ping < ActiveRecord::Base
 
     # TODO: test
     def first_scheduled
-      where { performed_at.eq(nil) }.first
+      where { performed_at.eq nil }.first
     end
 
     def performed
-      where { performed_at.not_eq(nil) }
-    end
-
-    # TODO: test
-    def paginate(page_nbr, per_page)
-      page(page_nbr).per per_page
+      where { performed_at.not_eq nil }
     end
   end
 
   def deliver_applicable_alerts!
-    alerts.select(&:conditions_met?).each(&:deliver!)
+    alerts.select(&:conditions_met?).each &:deliver!
   end
 
   def perform!
     self.performed_at = Time.now
-    update_attributes!(:response_status_code => location.perform_request.code)
+    update_attributes! :response_status_code => location.perform_request.code
     deliver_applicable_alerts!
   ensure
     save!
@@ -41,8 +38,8 @@ class Ping < ActiveRecord::Base
 
   def schedule!(perform_at)
     transaction do
-      update_attributes!(:perform_at => perform_at)
-      Resque.enqueue_at(perform_at, self.class, id)
+      update_attributes! :perform_at => perform_at
+      Resque.enqueue_at perform_at, self.class, id
     end
   end
 

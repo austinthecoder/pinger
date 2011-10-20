@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe LocationPresenter do
-  subject { described_class.new(location, view) }
+  subject { described_class.new location, view }
 
-  let(:location) do
+  let :location do
     Factory :location,
       :id => 346785,
       :title => 'Google',
@@ -21,7 +21,7 @@ describe LocationPresenter do
   end
 
   describe "next_ping" do
-    before { Timecop.freeze(Time.now) }
+    before { Timecop.freeze Time.now }
     after { Timecop.return }
 
     context "when the location's next ping date is in the future" do
@@ -37,7 +37,7 @@ describe LocationPresenter do
       ["nil", lambda { nil }]
     ].each do |text, method_block|
       context "when the location's next ping date is #{text}" do
-        before { location.stub(:next_ping_date, method_block) }
+        before { location.stub :next_ping_date, method_block }
         it { subject.next_ping.should == 'just a moment' }
       end
     end
@@ -49,30 +49,10 @@ describe LocationPresenter do
     end
   end
 
-  describe "render_pings" do
-    context "when there are paginated pings" do
-      before do
-        @paginated_pings = [mock(Ping)]
-        subject.stub(:paginated_pings) { @paginated_pings }
-      end
-      it "tells the view to render the pings table" do
-        view.should_receive(:render).with('pings/table', :pings => @paginated_pings)
-        subject.render_pings
-      end
-    end
-
-    context "when there are no paginated pings" do
-      before { subject.stub(:paginated_pings) }
-      it "returns a no-pings msg" do
-        subject.render_pings.should =~ /No pings yet/
-      end
-    end
-  end
-
   describe "pings" do
     before do
-      Factory(:ping, :performed_at => 1.minute.ago) # performed, not for location
-      Factory(:ping, :location => location, :performed_at => nil) # not performed, for location
+      Factory :ping, :performed_at => 1.minute.ago # performed, not for location
+      Factory :ping, :location => location, :performed_at => nil # not performed, for location
     end
 
     context "when the location has performed pings" do
@@ -93,7 +73,7 @@ describe LocationPresenter do
 
   describe "paginated_pings" do
     it "returns the pings, paginated" do
-      paginated_pings = mock(Object)
+      paginated_pings = mock Object
       subject.pings.stub(:paginate) do |page, per_page|
         paginated_pings if page == 7 && per_page == 3
       end
@@ -103,17 +83,37 @@ describe LocationPresenter do
     end
   end
 
+  describe "render_pings" do
+    context "when there are paginated pings" do
+      before do
+        @paginated_pings = [mock(Ping)]
+        subject.stub(:paginated_pings) { @paginated_pings }
+      end
+      it "tells the view to render the pings table" do
+        view.should_receive(:render).with 'pings/table', :pings => @paginated_pings
+        subject.render_pings
+      end
+    end
+
+    context "when there are no paginated pings" do
+      before { subject.stub :paginated_pings }
+      it "returns a no-pings msg" do
+        subject.render_pings.should =~ /No pings yet/
+      end
+    end
+  end
+
   %w(title url http_method seconds).each do |name|
     describe "#{name}_errors" do
       context "when the location's #{name} has errors" do
         before do
-          location.errors.add(name, 'is invalid')
-          location.errors.add(name, "can't be blank")
+          location.errors.add name, 'is invalid'
+          location.errors.add name, "can't be blank"
         end
         it "renders the form errors" do
           view.should_receive(:render).with 'shared/form_errors',
             :errors => ["Is invalid", "Can't be blank"]
-          subject.send("#{name}_errors")
+          subject.send "#{name}_errors"
         end
       end
 

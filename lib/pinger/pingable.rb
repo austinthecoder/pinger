@@ -13,8 +13,8 @@ module Pingable
   end
 
   def schedule_ping!
-    last_ping_at = pings.order { performed_at.desc }.first.try(:performed_at)
-    next_ping_to_schedule.schedule!((last_ping_at || Time.now) + seconds)
+    last_ping_at = pings.order { performed_at.desc }.first.try :performed_at
+    next_ping_to_schedule.schedule! ((last_ping_at || Time.now) + seconds)
   end
 
   def next_ping_to_schedule
@@ -22,6 +22,6 @@ module Pingable
   end
 
   def next_ping_date
-    pings.first_scheduled.try(:perform_at)
+    pings.first_scheduled.try :perform_at
   end
 end

@@ -38,7 +38,7 @@ class LocationPresenter < BasePresenter
   end
 
   [nil, :edit, :delete].each do |name|
-    define_method(name ? "#{name}_path" : 'path') do
+    define_method (name ? "#{name}_path" : 'path') do
       send (name ? "#{name}_location_path" : 'location_path'), location
     end
   end

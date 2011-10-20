@@ -1,14 +1,14 @@
 require 'spec_helper'
 
 describe AlertPresenter do
-  subject { described_class.new(alert, view) }
+  subject { described_class.new alert, view }
 
-  let(:alert) { mock(Alert) }
+  let(:alert) { mock Alert }
 
   describe "location_options_for_select" do
     context "when the template has locations" do
       before do
-        view.stub(:locations) do
+        view.stub :locations do
           [
             mock(Location, :id => 1, :title => 'A'),
             mock(Location, :id => 2, :title => 'B'),
@@ -31,7 +31,7 @@ describe AlertPresenter do
     context "when there are email callbacks" do
       before do
         @locs = [[685, 'C'], [345, 'A'], [578, 'B']].map do |id, label|
-          Factory(:email_callback, :id => id, :label => label)
+          Factory :email_callback, :id => id, :label => label
         end
       end
       it "returns an array of label and id, ordered by label" do

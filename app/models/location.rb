@@ -1,5 +1,6 @@
 class Location < ActiveRecord::Base
-
+  
+  extend Paginates
   include Pingable
 
   has_many :alerts
@@ -15,13 +16,6 @@ class Location < ActiveRecord::Base
       :if => lambda { url.present? }
     }
   validates :title, :presence => true
-
-  class << self
-    # TODO: test
-    def paginate(page_nbr, per_page)
-      page(page_nbr).per per_page
-    end
-  end
 
   def perform_request
     HTTParty.send http_method, url

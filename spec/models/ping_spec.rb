@@ -25,8 +25,8 @@ describe Ping do
 
   describe "perform!" do
     before do
-      subject.stub(:deliver_applicable_alerts!)
-      subject.location.stub(:perform_request) { mock(Object, :code => '234') }
+      subject.stub :deliver_applicable_alerts!
+      subject.location.stub(:perform_request) { mock Object, :code => '234' }
     end
 
     it "tells the location to perform the request" do
@@ -40,7 +40,7 @@ describe Ping do
     end
 
     it "persists the time" do
-      Timecop.freeze(Time.now) do
+      Timecop.freeze Time.now do
         subject.perform!
         subject.reload.performed_at.should == Time.now
       end
@@ -55,7 +55,7 @@ describe Ping do
       before { subject.location.stub(:perform_request) { raise 'error' } }
 
       it "should still persist the time" do
-        Timecop.freeze(Time.now) do
+        Timecop.freeze Time.now do
           subject.perform! rescue nil
           subject.reload.performed_at.should == Time.now
         end
@@ -70,7 +70,7 @@ describe Ping do
     context "when delivering the alerts fails" do
       before { subject.stub(:deliver_applicable_alerts!) { raise 'error' } }
       it "should still persist the time" do
-        Timecop.freeze(Time.now) do
+        Timecop.freeze Time.now do
           subject.perform! rescue nil
           subject.reload.performed_at.should == Time.now
         end

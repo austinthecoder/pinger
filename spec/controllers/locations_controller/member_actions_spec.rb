@@ -5,7 +5,7 @@ describe LocationsController, "member actions" do
 
   before do
     @params = HashWithIndifferentAccess.new
-    @location = Factory(:location)
+    @location = Factory :location
     @params[:id] = @location.id.to_s
     subject.stub(:location) { @location }
   end
@@ -13,18 +13,18 @@ describe LocationsController, "member actions" do
   describe "PUT update" do
     it "updates the attributes from the params" do
       @params[:location] = {:title => 'foo', :seconds => '2345'}
-      @location.should_receive(:attributes=).with(@params[:location])
+      @location.should_receive(:attributes=).with @params[:location]
       put :update, @params
     end
 
     it "tells the current_user to save the location" do
-      subject.current_user.should_receive(:save_location).with(@location)
+      subject.current_user.should_receive(:save_location).with @location
       put :update, @params
     end
 
     it "redirects to the show page" do
       put :update, @params
-      response.should redirect_to(location_url(@location))
+      response.should redirect_to(location_url @location)
     end
 
     context "when the location doesn't get saved" do
