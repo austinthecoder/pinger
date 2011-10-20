@@ -7,22 +7,12 @@ describe EmailCallbackPresenter do
 
   [['email', 'to'], ['label', 'label']].each do |prefix, attr_name|
     describe "#{prefix}_errors" do
-      context "when the email callback's #{attr_name} has errors" do
-        before do
-          email_callback.errors.add attr_name, 'is invalid'
-          email_callback.errors.add attr_name, "can't be blank"
-        end
-        it "renders the form errors" do
-          view.should_receive(:render).with 'shared/form_errors',
-            :errors => ["Is invalid", "Can't be blank"]
-          subject.send "#{prefix}_errors"
-        end
-      end
+      it "renders form errors for the email callback's #{attr_name}" do
+        form_errors = mock(Object)
+        subject.stub(:render_form_errors) { |a| form_errors if a == attr_name }
 
-      context "when the email callback's #{attr_name} doesn't have errors" do
-        its("#{prefix}_errors") { should be_blank }
+        subject.send("#{prefix}_errors").should == form_errors
       end
     end
   end
-
 end

@@ -105,20 +105,11 @@ describe LocationPresenter do
 
   %w(title url http_method seconds).each do |name|
     describe "#{name}_errors" do
-      context "when the location's #{name} has errors" do
-        before do
-          location.errors.add name, 'is invalid'
-          location.errors.add name, "can't be blank"
-        end
-        it "renders the form errors" do
-          view.should_receive(:render).with 'shared/form_errors',
-            :errors => ["Is invalid", "Can't be blank"]
-          subject.send "#{name}_errors"
-        end
-      end
+      it "renders form errors for the location's #{name}" do
+        form_errors = mock(Object)
+        subject.stub(:render_form_errors) { |a| form_errors if a == name }
 
-      context "when the location's #{name} doesn't have errors" do
-        its("#{name}_errors") { should be_blank }
+        subject.send("#{name}_errors").should == form_errors
       end
     end
   end

@@ -5,15 +5,13 @@ class BasePresenter
     @tpl = template
   end
 
-private
-
-  # TODO: make public and test
   def render_form_errors(attribute)
-    errors = @object.errors[attribute].map &:capitalize
-    if errors.present?
-      render 'shared/form_errors', :errors => errors
+    if (errors = @object.errors[attribute]).present?
+      render 'shared/form_errors', :errors => errors.map(&:capitalize)
     end
   end
+
+private
 
   class << self
     def presents(name)
@@ -21,6 +19,7 @@ private
     end
   end
 
+  # TODO: test
   def method_missing(*args, &block)
     @tpl.send *args, &block
   end
