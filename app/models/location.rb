@@ -1,5 +1,5 @@
 class Location < ActiveRecord::Base
-  
+
   extend Paginates
   include Pingable
 
@@ -12,7 +12,7 @@ class Location < ActiveRecord::Base
   validates :url,
     :presence => true,
     :format => {
-      :with => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/ix,
+      :with => /\A#{URI.regexp %w(http https)}\z/,
       :if => lambda { url.present? }
     }
   validates :title, :presence => true
@@ -26,5 +26,3 @@ class Location < ActiveRecord::Base
   end
 
 end
-
-

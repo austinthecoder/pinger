@@ -125,7 +125,7 @@ describe Location do
 
     it { should_not accept_values_for :seconds, nil, '', 'a' }
 
-    it { should_not accept_values_for :url, nil, '', 'x.com', 'xyz' }
+    it { should_not accept_values_for :url, nil, '', 'x.com', 'xyz', "http://x.com\nh", "h\nhttp://x.com" }
     it { should accept_values_for :url, 'http://x.com', 'https://y.net/d' }
 
     it { should_not accept_values_for :http_method, nil, '', 'x' }
