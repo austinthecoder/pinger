@@ -17,14 +17,12 @@ class LocationPresenter < BasePresenter
     location.http_method.upcase
   end
 
-  # TODO: test
   def pings
     @ping ||= location.pings.performed.order { performed_at.desc }
   end
 
-  # TODO: refactor tests
   def paginated_pings
-    @paginated_pings ||= pings.page(params[:page]).per CONFIG[:app][:pings_per_page]
+    @paginated_pings ||= pings.paginate params[:page], CONFIG[:app][:pings_per_page]
   end
 
   def render_pings
@@ -36,9 +34,7 @@ class LocationPresenter < BasePresenter
   end
 
   %w(title url http_method seconds).each do |name|
-    define_method "#{name}_errors" do
-      render_form_errors name
-    end
+    define_method("#{name}_errors") { render_form_errors name }
   end
 
   [nil, :edit, :delete].each do |name|

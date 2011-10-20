@@ -69,22 +69,37 @@ describe LocationPresenter do
     end
   end
 
-  describe "paginated_pings" do
+  describe "pings" do
     before do
-      Factory(:ping, :performed_at => 1.minute.ago)
-      Factory(:ping, :location => location, :performed_at => nil)
-      @pings = (1..5).map do |i|
-        Factory :ping,
-          :location => location,
-          :performed_at => i.minutes.ago
+      Factory(:ping, :performed_at => 1.minute.ago) # performed, not for location
+      Factory(:ping, :location => location, :performed_at => nil) # not performed, for location
+    end
+
+    context "when the location has performed pings" do
+      before do
+        @pings = [3, 4, 2, 5, 1].map do |i|
+          Factory :ping, :location => location, :performed_at => i.minutes.ago
+        end
+      end
+      it "returns those pings, ordered by date performed" do
+        subject.pings.should == [@pings[4], @pings[2], @pings[0], @pings[1], @pings[3]]
       end
     end
 
-    [[1, 0..2], [2, 3..4]].each do |page, range|
-      context "when the page is #{page}" do
-        before { view.params[:page] = page.to_s }
-        its(:paginated_pings) { should == @pings[range] }
+    context "when the location doesn't have performed pings" do
+      its(:pings) { should be_empty }
+    end
+  end
+
+  describe "paginated_pings" do
+    it "returns the pings, paginated" do
+      paginated_pings = mock(Object)
+      subject.pings.stub(:paginate) do |page, per_page|
+        paginated_pings if page == 7 && per_page == 3
       end
+      subject.params[:page] = 7
+
+      subject.paginated_pings.should == paginated_pings
     end
   end
 

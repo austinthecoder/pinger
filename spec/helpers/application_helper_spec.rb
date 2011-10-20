@@ -4,30 +4,32 @@ describe ApplicationHelper do
 
   subject { helper }
 
-  describe "paginated_locations" do
+  describe "locations" do
     context "when there are locations" do
       before do
         @c = Factory(:location, :title => 'c')
         @b = Factory(:location, :title => 'b')
         @a = Factory(:location, :title => 'a')
       end
-
-      its(:paginated_locations) { should == [@a, @b, @c] }
-
-      context "when there's 5 locations" do
-        before { 2.times { Factory(:location) } }
-
-        [[1, 3], [2, 2]].each do |page, num_locations|
-          context "when the page is #{page}" do
-            before { subject.params[:page] = page.to_s }
-            it { subject.paginated_locations.size.should == num_locations }
-          end
-        end
+      it "returns them, ordered by title" do
+        subject.locations.should == [@a, @b, @c]
       end
     end
 
     context "when there are no locations" do
-      its(:paginated_locations) { should be_empty }
+      its(:locations) { should be_empty }
+    end
+  end
+
+  describe "paginated_locations" do
+    it "returns the locations, paginated" do
+      paginated_locations = mock(Object)
+      subject.locations.stub(:paginate) do |page, per_page|
+        paginated_locations if page == 7 && per_page == 3
+      end
+      subject.params[:page] = 7
+
+      subject.paginated_locations.should == paginated_locations
     end
   end
 

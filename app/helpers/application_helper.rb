@@ -9,13 +9,12 @@ module ApplicationHelper
     presenter
   end
 
-  # TODO: test, dry up
   def locations
     @locations ||= Location.order { title.asc }
   end
 
   def paginated_locations
-    @paginated_locations ||= locations.page(params[:page]).per(CONFIG[:app][:locations_per_page])
+    @paginated_locations ||= locations.paginate params[:page], CONFIG[:app][:locations_per_page]
   end
 
   def render_paginated_locations

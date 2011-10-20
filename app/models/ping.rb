@@ -20,6 +20,11 @@ class Ping < ActiveRecord::Base
     def performed
       where { performed_at.not_eq(nil) }
     end
+
+    # TODO: test
+    def paginate(page_nbr, per_page)
+      page(page_nbr).per per_page
+    end
   end
 
   def deliver_applicable_alerts!
