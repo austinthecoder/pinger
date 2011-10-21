@@ -49,7 +49,7 @@ end
 ##################################################
 
 Then /^I should see the URLs table:$/ do |expected_table|
-  actual_table = tableish('#locations table tr', 'td,th')
+  actual_table = table_array('#locations table tr', 'td,th')
   diff_tables!(actual_table, expected_table)
 end
 
@@ -58,6 +58,6 @@ Then /^I should see (\d+) URLs$/ do |num|
 end
 
 Then /^I should see the URL info:$/ do |expected_table|
-  actual_table = tableish('#location #info table tr', 'td,th')
+  actual_table = table_array('#location #info table tr', 'td,th')
   diff_tables!(actual_table, expected_table)
 end
