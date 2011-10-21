@@ -8,10 +8,7 @@ describe Ping do
 
   it { should_not accept_values_for :location_id, nil }
 
-  describe "schedule!" do
-    before { Timecop.freeze Time.now }
-    after { Timecop.return }
-
+  describe "schedule!", :freeze_time => true do
     it "sets perform_at" do
       subject.schedule! 4.minutes.from_now
       subject.reload.perform_at.should == 4.minutes.from_now
@@ -39,11 +36,9 @@ describe Ping do
       subject.reload.response_status_code = '234'
     end
 
-    it "persists the time" do
-      Timecop.freeze Time.now do
-        subject.perform!
-        subject.reload.performed_at.should == Time.now
-      end
+    it "persists the time", :freeze_time => true do
+      subject.perform!
+      subject.reload.performed_at.should == Time.now
     end
 
     it "delivers the applicable alerts" do
@@ -54,11 +49,9 @@ describe Ping do
     context "when performing the request fails" do
       before { subject.location.stub(:perform_request) { raise 'error' } }
 
-      it "should still persist the time" do
-        Timecop.freeze Time.now do
-          subject.perform! rescue nil
-          subject.reload.performed_at.should == Time.now
-        end
+      it "should still persist the time", :freeze_time => true do
+        subject.perform! rescue nil
+        subject.reload.performed_at.should == Time.now
       end
 
       it "should not deliver alerts" do
@@ -69,11 +62,9 @@ describe Ping do
 
     context "when delivering the alerts fails" do
       before { subject.stub(:deliver_applicable_alerts!) { raise 'error' } }
-      it "should still persist the time" do
-        Timecop.freeze Time.now do
-          subject.perform! rescue nil
-          subject.reload.performed_at.should == Time.now
-        end
+      it "should still persist the time", :freeze_time => true do
+        subject.perform! rescue nil
+        subject.reload.performed_at.should == Time.now
       end
     end
   end

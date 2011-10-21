@@ -12,7 +12,8 @@
 
     .http_method.input
       %div= f.label :http_method, 'HTTP method'
-      %div= f.select :http_method, %w(GET POST)
+      / TODO: refactor out http method options into method
+      %div= f.select :http_method, Location::HTTP_METHODS.map(&:upcase)
       = http_method_errors
 
     .seconds.input

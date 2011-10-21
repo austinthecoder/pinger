@@ -2,13 +2,15 @@ class Location < ActiveRecord::Base
 
   extend Paginates
 
+  HTTP_METHODS = %w(get post)
+
   has_many :alerts
   has_many :pings
 
   validates :seconds,
     :presence => true,
     :numericality => {:if => lambda { seconds.present? }}
-  validates :http_method, :format => /(get|post)/i
+  validates :http_method, :inclusion => HTTP_METHODS
   validates :url,
     :presence => true,
     :format => {

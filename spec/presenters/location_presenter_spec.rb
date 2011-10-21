@@ -20,10 +20,7 @@ describe LocationPresenter do
     end
   end
 
-  describe "next_ping" do
-    before { Timecop.freeze Time.now }
-    after { Timecop.return }
-
+  describe "next_ping", :freeze_time => true do
     context "when the location's next ping date is in the future" do
       before { location.stub(:next_ping_date) { 3.minutes.from_now } }
       it "returns the distance of time, in words, until then" do

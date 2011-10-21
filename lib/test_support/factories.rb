@@ -1,8 +1,20 @@
 FactoryGirl.define do
+  sequence :title do
+    Faker::Lorem.words(rand(2) + 1).join ' '
+  end
+
+  sequence :http_method do
+    Location::HTTP_METHODS[rand(2)]
+  end
+
+  sequence :seconds do
+    rand(600) + 30
+  end
+
   factory :location do
-    title 'Example Home'
-    seconds 60
-    http_method 'get'
+    title
+    seconds
+    http_method
     url 'http://example.com'
   end
 
@@ -11,7 +23,7 @@ FactoryGirl.define do
   end
 
   factory :email_callback do
-    label 'My Email'
+    label { FactoryGirl.generate(:title) }
     to 'joe@example.com'
   end
 

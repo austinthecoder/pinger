@@ -31,15 +31,13 @@ describe Location, "instance methods" do
     end
   end
 
-  describe "schedule_ping!" do
+  describe "schedule_ping!", :freeze_time => true do
     before do
-      Timecop.freeze Time.now
       subject.save!
       @next_ping = mock Ping
       subject.stub(:next_ping_to_schedule) { @next_ping }
       Factory :ping, :performed_at => 1.minute.ago
     end
-    after { Timecop.return }
 
     context "when pings have been performed" do
       before do
