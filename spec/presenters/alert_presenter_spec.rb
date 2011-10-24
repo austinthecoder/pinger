@@ -3,7 +3,7 @@ require 'spec_helper'
 describe AlertPresenter do
   subject { described_class.new alert, view }
 
-  let(:alert) { mock Alert }
+  let(:alert) { mock Alert, :code_is_not => '400', :times => 23 }
 
   describe "location_options_for_select" do
     context "when the template has locations" do
@@ -41,6 +41,42 @@ describe AlertPresenter do
 
     context "when there are no email callbacks" do
       its(:email_callback_options_for_select) { should be_empty }
+    end
+  end
+
+  describe "for_url" do
+    context "when the alert has a location" do
+      before { alert.stub(:location) { mock Location, :title => 'aoigjasdnfk' } }
+      it "returns the alert's location's title" do
+        subject.for_url.should == 'aoigjasdnfk'
+      end
+    end
+
+    context "when the alert doesn't have a location" do
+      before { alert.stub :location }
+      its(:for_url) { should be_blank }
+    end
+  end
+
+  describe "alert_via" do
+    context "when the alert has an email callback" do
+      before { alert.stub(:email_callback) { mock EmailCallback, :label => 'irnuayksh' } }
+      it "returns the email callback's label" do
+        subject.alert_via.should == 'irnuayksh'
+      end
+    end
+
+    context "when the alert doesn't have an email callback" do
+      before { alert.stub :email_callback }
+      its(:alert_via) { should be_blank }
+    end
+  end
+
+  %w(code_is_not times).each do |method|
+    describe "#{method}" do
+      it "delegates to the alert" do
+        subject.send(method).should === alert.send(method)
+      end
     end
   end
 end

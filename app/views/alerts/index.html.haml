@@ -1,0 +1,16 @@
+#alerts
+  %table
+    %thead
+      %tr
+        %th For
+        %th Response status code is not
+        %th Times in a row
+        %th Alert via
+    %tbody
+      - alerts.each do |alert|
+        - present alert do
+          %tr
+            %td= for_url
+            %td= code_is_not
+            %td= times
+            %th= alert_via

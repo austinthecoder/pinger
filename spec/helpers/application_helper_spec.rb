@@ -52,14 +52,19 @@ describe ApplicationHelper do
   end
 
   describe "render_main_menu" do
+    let(:common_args) do
+      [
+        ["Add URL", new_location_path],
+        ["Add email callback", new_email_callback_path],
+        ["Alerts", alerts_path]
+      ]
+    end
+
     context "when there are locations" do
       before { subject.stub(:locations) { [mock(Location)] } }
       it "should render the main menu as piped links" do
-        subject.should_receive(:render_piped_links).with [
-          ["Add URL", new_location_path],
-          ["Add email callback", new_email_callback_path],
-          ["Add alert", new_alert_path]
-        ]
+        arg = common_args + [["Add alert", new_alert_path]]
+        subject.should_receive(:render_piped_links).with arg
         subject.render_main_menu
       end
     end
@@ -67,10 +72,7 @@ describe ApplicationHelper do
     context "when there are no locations" do
       before { subject.stub :locations }
       it "should render the main menu, without the 'Add alert' item, as piped links" do
-        subject.should_receive(:render_piped_links).with [
-          ["Add URL", new_location_path],
-          ["Add email callback", new_email_callback_path]
-        ]
+        subject.should_receive(:render_piped_links).with common_args
         subject.render_main_menu
       end
     end
@@ -85,6 +87,23 @@ describe ApplicationHelper do
       end
 
       it("is html safe") { subject.render_piped_links(@link_args).should be_html_safe }
+    end
+  end
+
+  describe "alerts" do
+    context "when there are alerts" do
+      before do
+        @c = create :alert, :location => create(:location, :title => 'c')
+        @b = create :alert, :location => create(:location, :title => 'b')
+        @a = create :alert, :location => create(:location, :title => 'a')
+      end
+      it "returns them, ordered by location's title" do
+        subject.alerts.should == [@a, @b, @c]
+      end
+    end
+
+    context "when there are no alerts" do
+      its(:alerts) { should be_empty }
     end
   end
 

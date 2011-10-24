@@ -3,5 +3,4 @@ When /^show me the page$/ do
 end
 
 When /^debug$/ do
-
 end

@@ -1,8 +1,10 @@
 Feature: Alerts
 
+  Background:
+    Given my email is "austin@example.com"
+
   Scenario: Email alert when site goes down
     Given requests to "http://example.com" are returning the status code "500"
-    And my email is "austin@example.com"
 
     When I add an email callback that goes to me
     And I add the URL:
@@ -34,3 +36,29 @@ Feature: Alerts
   Scenario: Can't add an alert when there's no URLs
     When I go to the home page
     Then I should not see "Add alert"
+
+
+
+  Scenario: Viewing alerts
+    When I add the URLs:
+      | Title   |
+      | Google  |
+      | Example |
+    And I add the email callback:
+      | Label | My Email           |
+      | Email | austin@example.com |
+    And I add the alert:
+      | For                         | Example  |
+      | Response status code is not | 200      |
+      | Times in a row              | 5        |
+      | Alert via                   | My Email |
+    And I add the alert:
+      | For                         | Google   |
+      | Response status code is not | 300      |
+      | Times in a row              | 10       |
+      | Alert via                   | My Email |
+    And I go to the alerts page
+    Then I should see the alerts:
+      | For     | Response status code is not | Times in a row | Alert via |
+      | Example | 200                         | 5              | My Email  |
+      | Google  | 300                         | 10             | My Email  |

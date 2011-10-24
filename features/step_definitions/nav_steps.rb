@@ -29,3 +29,10 @@ When /^I go to the page for that URL$/ do
     And I follow "#{location.title}"
   }
 end
+
+When /^I go to the alerts page$/ do
+  steps %{
+    When I go to the home page
+    And I follow "Alerts"
+  }
+end

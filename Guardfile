@@ -13,4 +13,5 @@ guard 'spork', opts do
   watch 'spec/spec_helper.rb'
   watch %r{^spec/support/.+\.rb$}
   watch 'test/test_helper.rb'
+  watch 'lib/test_support/factories.rb'
 end

@@ -29,7 +29,8 @@ module ApplicationHelper
   def render_main_menu
     link_args = [
       ["Add URL", new_location_path],
-      ["Add email callback", new_email_callback_path]
+      ["Add email callback", new_email_callback_path],
+      ["Alerts", alerts_path]
     ]
     link_args << ["Add alert", new_alert_path] if locations.present?
 
@@ -38,6 +39,10 @@ module ApplicationHelper
 
   def render_piped_links(link_args)
     link_args.map { |a| link_to *a }.join(' | ').html_safe
+  end
+
+  def alerts
+    @alerts ||= Alert.joins { location }.order { locations.title }
   end
 
 end
