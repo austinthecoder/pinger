@@ -7,8 +7,8 @@ describe Location do
 
     describe "schedule_pings!" do
       it "schedules a ping for all locations that don't have one scheduled" do
-        @with_sched = (1..2).map { Factory(:location).tap &:schedule_ping! }
-        @without_sched = (1..2).map { Factory :location }
+        @with_sched = (1..2).map { create(:location).tap &:schedule_ping! }
+        @without_sched = (1..2).map { create :location }
 
         subject.schedule_pings!
 
@@ -20,7 +20,7 @@ describe Location do
   end
 
   describe "validations" do
-    subject { Factory.build :location }
+    subject { build :location }
 
     it { should be_valid }
 

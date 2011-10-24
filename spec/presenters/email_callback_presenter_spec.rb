@@ -3,7 +3,7 @@ require 'spec_helper'
 describe EmailCallbackPresenter do
   subject { described_class.new email_callback, view }
 
-  let(:email_callback) { Factory.build :email_callback }
+  let(:email_callback) { build :email_callback }
 
   [['email', 'to'], ['label', 'label']].each do |prefix, attr_name|
     describe "#{prefix}_errors" do

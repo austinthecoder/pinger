@@ -5,7 +5,7 @@ describe LocationsController, "member actions" do
 
   before do
     @params = HashWithIndifferentAccess.new
-    @location = Factory :location
+    @location = create :location
     @params[:id] = @location.id.to_s
     subject.stub(:location) { @location }
   end

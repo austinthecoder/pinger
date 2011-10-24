@@ -4,7 +4,7 @@ describe User do
   subject { User.new }
 
   describe "save_location" do
-    before { @location = Factory :location }
+    before { @location = create :location }
 
     it "saves the location" do
       @location.should_receive :save

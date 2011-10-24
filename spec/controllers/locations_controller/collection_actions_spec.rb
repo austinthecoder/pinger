@@ -7,7 +7,7 @@ describe LocationsController, "collection actions" do
 
   describe "POST create" do
     before do
-      @location = Factory.build :location
+      @location = build :location
       subject.stub(:location) { @location }
     end
 

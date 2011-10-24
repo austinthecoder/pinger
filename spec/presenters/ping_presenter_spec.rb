@@ -4,7 +4,7 @@ describe PingPresenter do
   subject { described_class.new ping, view }
 
   let :ping do
-    Factory :ping,
+    create :ping,
       :response_status_code => 200,
       :performed_at => Time.parse('2011-01-15 12:14:37 UTC')
   end

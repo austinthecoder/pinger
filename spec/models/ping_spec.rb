@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Ping do
 
-  subject { Factory.build :ping }
+  subject { build :ping }
 
   it("is valid with valid attributes") { should be_valid }
 

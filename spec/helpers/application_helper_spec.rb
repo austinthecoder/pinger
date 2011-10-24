@@ -7,9 +7,9 @@ describe ApplicationHelper do
   describe "locations" do
     context "when there are locations" do
       before do
-        @c = Factory :location, :title => 'c'
-        @b = Factory :location, :title => 'b'
-        @a = Factory :location, :title => 'a'
+        @c = create :location, :title => 'c'
+        @b = create :location, :title => 'b'
+        @a = create :location, :title => 'a'
       end
       it "returns them, ordered by title" do
         subject.locations.should == [@a, @b, @c]

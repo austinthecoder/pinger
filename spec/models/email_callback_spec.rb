@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe EmailCallback do
 
-  subject { Factory.build :email_callback }
+  subject { build :email_callback }
 
   it { should be_valid }
 

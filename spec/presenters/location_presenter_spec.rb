@@ -4,7 +4,7 @@ describe LocationPresenter do
   subject { described_class.new location, view }
 
   let :location do
-    Factory :location,
+    create :location,
       :id => 346785,
       :title => 'Google',
       :seconds => 10,
@@ -48,14 +48,14 @@ describe LocationPresenter do
 
   describe "pings" do
     before do
-      Factory :ping, :performed_at => 1.minute.ago # performed, not for location
-      Factory :ping, :location => location, :performed_at => nil # not performed, for location
+      create :ping, :performed_at => 1.minute.ago # performed, not for location
+      create :ping, :location => location, :performed_at => nil # not performed, for location
     end
 
     context "when the location has performed pings" do
       before do
         @pings = [3, 4, 2, 5, 1].map do |i|
-          Factory :ping, :location => location, :performed_at => i.minutes.ago
+          create :ping, :location => location, :performed_at => i.minutes.ago
         end
       end
       it "returns those pings, ordered by date performed" do

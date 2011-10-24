@@ -31,7 +31,7 @@ describe AlertPresenter do
     context "when there are email callbacks" do
       before do
         @locs = [[685, 'C'], [345, 'A'], [578, 'B']].map do |id, label|
-          Factory :email_callback, :id => id, :label => label
+          create :email_callback, :id => id, :label => label
         end
       end
       it "returns an array of label and id, ordered by label" do

@@ -7,7 +7,7 @@ shared_examples "a paginator" do
     describe "paginate" do
       context "when there are 10 #{subject.to_s.downcase} and 3 per page" do
         before do
-          @items = 10.times.map { Factory(subject.to_s.downcase.to_sym) }
+          @items = 10.times.map { create(subject.to_s.downcase.to_sym) }
           @per_page = 3
         end
 

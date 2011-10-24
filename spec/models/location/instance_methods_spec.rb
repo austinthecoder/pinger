@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Location, "instance methods" do
-  subject { Factory.build :location, :seconds => 10.minutes }
+  subject { build :location, :seconds => 10.minutes }
 
   describe "perform_request" do
     it "performs a request" do
@@ -36,12 +36,12 @@ describe Location, "instance methods" do
       subject.save!
       @next_ping = mock Ping
       subject.stub(:next_ping_to_schedule) { @next_ping }
-      Factory :ping, :performed_at => 1.minute.ago
+      create :ping, :performed_at => 1.minute.ago
     end
 
     context "when pings have been performed" do
       before do
-        (2..3).map { |i| Factory :ping, :location => subject, :performed_at => i.minutes.ago }
+        (2..3).map { |i| create :ping, :location => subject, :performed_at => i.minutes.ago }
       end
       it "it schedules the next ping to the newest perform date + it's seconds in the future" do
         @next_ping.should_receive(:schedule!).with (2.minutes.ago + 10.minutes)
@@ -60,12 +60,12 @@ describe Location, "instance methods" do
   describe "next_ping_to_schedule" do
     before do
       subject.save!
-      Factory :ping
-      Factory :ping, :location => subject, :performed_at => 1.minute.ago
+      create :ping
+      create :ping, :location => subject, :performed_at => 1.minute.ago
     end
 
     context "when there's a scheduled ping" do
-      before { @ping = Factory :ping, :location => subject }
+      before { @ping = create :ping, :location => subject }
       its(:next_ping_to_schedule) { should == @ping }
     end
 
