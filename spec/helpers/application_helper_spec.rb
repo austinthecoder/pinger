@@ -51,42 +51,13 @@ describe ApplicationHelper do
     end
   end
 
-  describe "render_main_menu" do
-    let(:common_args) do
-      [
+  describe "main_menu" do
+    its :main_menu do
+      should == [
         ["Add URL", new_location_path],
         ["Add email callback", new_email_callback_path],
         ["Alerts", alerts_path]
       ]
-    end
-
-    context "when there are locations" do
-      before { subject.stub(:locations) { [mock(Location)] } }
-      it "should render the main menu as piped links" do
-        arg = common_args + [["Add alert", new_alert_path]]
-        subject.should_receive(:render_piped_links).with arg
-        subject.render_main_menu
-      end
-    end
-
-    context "when there are no locations" do
-      before { subject.stub :locations }
-      it "should render the main menu, without the 'Add alert' item, as piped links" do
-        subject.should_receive(:render_piped_links).with common_args
-        subject.render_main_menu
-      end
-    end
-  end
-
-  describe "render_piped_links" do
-    context "with link args" do
-      before { @link_args = [['a', '/'], ['b', '/foo']] }
-
-      it "returns links delimited by pipes" do
-        subject.render_piped_links(@link_args).should == "#{subject.link_to 'a', '/'} | #{subject.link_to 'b', '/foo'}"
-      end
-
-      it("is html safe") { subject.render_piped_links(@link_args).should be_html_safe }
     end
   end
 
@@ -104,6 +75,44 @@ describe ApplicationHelper do
 
     context "when there are no alerts" do
       its(:alerts) { should be_empty }
+    end
+  end
+
+  describe "alerts_menu" do
+    before do
+      subject.stub(:locations) { [mock(Location)] }
+      subject.stub(:email_callbacks) { [mock(EmailCallback)] }
+    end
+
+    context "when there are locations and email callbacks" do
+      its(:alerts_menu) { should == [["Add alert", new_alert_path]] }
+    end
+
+    context "when there are locations but no email callbacks" do
+      before { subject.stub :email_callbacks }
+      its(:alerts_menu) { should be_empty }
+    end
+
+    context "when there are email callbacks but no locations" do
+      before { subject.stub :locations }
+      its(:alerts_menu) { should be_empty }
+    end
+  end
+
+  describe "email_callbacks" do
+    context "when there are email callbacks" do
+      before do
+        @c = create :email_callback, :label => 'c'
+        @b = create :email_callback, :label => 'b'
+        @a = create :email_callback, :label => 'a'
+      end
+      it "returns them, ordered by label" do
+        subject.email_callbacks.should == [@a, @b, @c]
+      end
+    end
+
+    context "when there are no email callbacks" do
+      its(:email_callbacks) { should be_empty }
     end
   end
 

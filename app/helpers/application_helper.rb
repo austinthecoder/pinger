@@ -26,23 +26,28 @@ module ApplicationHelper
     end
   end
 
-  def render_main_menu
-    link_args = [
+  def main_menu
+    [
       ["Add URL", new_location_path],
       ["Add email callback", new_email_callback_path],
       ["Alerts", alerts_path]
     ]
-    link_args << ["Add alert", new_alert_path] if locations.present?
-
-    render_piped_links link_args
   end
 
-  def render_piped_links(link_args)
-    link_args.map { |a| link_to *a }.join(' | ').html_safe
+  def alerts_menu
+    [].tap do |m|
+      if locations.present? && email_callbacks.present?
+        m << ['Add alert', new_alert_path]
+      end
+    end
   end
 
   def alerts
-    @alerts ||= Alert.joins { location }.order { locations.title }
+    @alerts ||= Alert.joins { location }.order { locations.title.asc }
+  end
+
+  def email_callbacks
+    @email_callbacks ||= EmailCallback.order { label.asc }
   end
 
 end

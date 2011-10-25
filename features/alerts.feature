@@ -6,12 +6,16 @@ Feature: Alerts
   Scenario: Email alert when site goes down
     Given requests to "http://example.com" are returning the status code "500"
 
-    When I add an email callback that goes to me
+    When I add the "Work Email" email callback that goes to me
     And I add the URL:
       | Title       | Example            |
       | URL         | http://example.com |
       | Seconds     | 60                 |
-    And I add an alert to perform that callback when that URL does't return a response status code of "200" 5 times in a row
+    And I add the alert:
+      | For                         | Example    |
+      | Response status code is not | 200        |
+      | Times in a row              | 5          |
+      | Alert via                   | Work Email |
     And 4 minutes pass
     Then I should not get an email
 
@@ -24,18 +28,21 @@ Feature: Alerts
 
 
   Scenario: Can't add a callback without an email address or label
-    When I go to the home page
-    And I follow "Add email callback"
-    And I press "Add email callback"
-
+    When I try to add an email callback without filling out the form
     Then I should see "Can't be blank" within the "Label" field
     And I should see "Can't be blank" within the "Email" field
 
 
 
-  Scenario: Can't add an alert when there's no URLs
-    When I go to the home page
+  Scenario Outline: Can't add alerts without URLs or email callbacks
+    When I add <thing to add>
+    And I go to the alerts page
     Then I should not see "Add alert"
+
+    Examples:
+      | thing to add      |
+      | an email callback |
+      | a URL             |
 
 
 
@@ -44,21 +51,19 @@ Feature: Alerts
       | Title   |
       | Google  |
       | Example |
-    And I add the email callback:
-      | Label | My Email           |
-      | Email | austin@example.com |
+    And I add the "Work Email" email callback that goes to me
     And I add the alert:
-      | For                         | Example  |
-      | Response status code is not | 200      |
-      | Times in a row              | 5        |
-      | Alert via                   | My Email |
+      | For                         | Example    |
+      | Response status code is not | 200        |
+      | Times in a row              | 5          |
+      | Alert via                   | Work Email |
     And I add the alert:
-      | For                         | Google   |
-      | Response status code is not | 300      |
-      | Times in a row              | 10       |
-      | Alert via                   | My Email |
+      | For                         | Google     |
+      | Response status code is not | 300        |
+      | Times in a row              | 10         |
+      | Alert via                   | Work Email |
     And I go to the alerts page
     Then I should see the alerts:
-      | For     | Response status code is not | Times in a row | Alert via |
-      | Example | 200                         | 5              | My Email  |
-      | Google  | 300                         | 10             | My Email  |
+      | For     | Response status code is not | Times in a row | Alert via  |
+      | Example | 200                         | 5              | Work Email |
+      | Google  | 300                         | 10             | Work Email |
