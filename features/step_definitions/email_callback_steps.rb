@@ -1,13 +1,9 @@
 def add_email_callback(fields = {})
-  fields.reverse_merge!('Label' => 'Work Email', 'Email' => 'me@company.com')
-  steps %{
-    When I go to the home page
-    And I follow "Add email callback"
-    And I fill in the following:
-      | Label | #{fields['Label']} |
-      | Email | #{fields['Email']} |
-    And I press "Add email callback"
-  }
+  fields.reverse_merge! 'Label' => 'Work Email', 'Email' => 'me@company.com'
+  visit root_path
+  click_link 'Add email callback'
+  ['Label', 'Email'].each { |n| fill_in n, :with => fields[n] }
+  click_button 'Add email callback'
 end
 
 ##################################################
@@ -17,10 +13,6 @@ Given /^my email is "([^"]*)"$/ do |email|
 end
 
 ##################################################
-
-When /^I add the email callback:$/ do |table|
-  add_email_callback table.rows_hash
-end
 
 When /^I add an email callback$/ do
   add_email_callback
