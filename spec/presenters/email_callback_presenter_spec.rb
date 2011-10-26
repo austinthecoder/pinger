@@ -29,4 +29,22 @@ describe EmailCallbackPresenter do
       subject.email.should === 'x@y.com'
     end
   end
+
+  describe "edit_path" do
+    context "when the email callback is an existing record" do
+      before { email_callback.save! }
+      its(:edit_path) { should == view.edit_email_callback_path(email_callback) }
+    end
+  end
+
+  describe "form_button_text" do
+    context "when the email callback is a new record" do
+      its(:form_button_text) { should == 'Add email callback' }
+    end
+
+    context "when the email callback is persisted" do
+      before { email_callback.save! }
+      its(:form_button_text) { should == 'Save email callback' }
+    end
+  end
 end

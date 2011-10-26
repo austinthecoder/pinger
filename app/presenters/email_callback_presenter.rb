@@ -12,4 +12,12 @@ class EmailCallbackPresenter < BasePresenter
     define_method("#{prefix}_errors") { render_form_errors attr_name }
   end
 
+  def edit_path
+    edit_email_callback_path(email_callback)
+  end
+
+  def form_button_text
+    (email_callback.new_record? ? 'Add' : 'Save') + ' email callback'
+  end
+
 end

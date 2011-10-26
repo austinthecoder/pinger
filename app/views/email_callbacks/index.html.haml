@@ -8,9 +8,11 @@
       %tr
         %th Label
         %th Email
+        %th
     %tbody
       - email_callbacks.each do |email_callback|
         - present email_callback do
           %tr
             %td= label
             %td= email
+            %td= link_to 'edit', edit_path
