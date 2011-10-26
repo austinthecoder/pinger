@@ -29,7 +29,7 @@ When /^I add the URLs:$/ do |table|
 end
 
 When /^I change the seconds for that URL to (\d+)$/ do |seconds|
-  When "I go to the edit page for that URL"
+  go_to_edit_url_page
   fill_in 'Seconds', :with => seconds
   click_button 'Save URL'
 end

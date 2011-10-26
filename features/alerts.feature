@@ -27,13 +27,6 @@ Feature: Alerts
 
 
 
-  Scenario: Can't add a callback without an email address or label
-    When I try to add an email callback without filling out the form
-    Then I should see "Can't be blank" within the "Label" field
-    And I should see "Can't be blank" within the "Email" field
-
-
-
   Scenario Outline: Can't add alerts without URLs or email callbacks
     When I add <thing to add>
     And I go to the alerts page

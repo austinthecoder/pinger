@@ -16,6 +16,10 @@ def current_time=(time)
   end
 end
 
+def pass_time(minutes)
+  self.current_time = minutes.to_i.minutes.from_now
+end
+
 ##################################################
 
 Given /^the date\/time is "([^"]*)"$/ do |date_time_string|
@@ -25,5 +29,5 @@ end
 ##################################################
 
 When /^(\d+) minutes? pass(es)?$/ do |mins, x|
-  self.current_time = mins.to_i.minutes.from_now
+  pass_time mins
 end

@@ -1,0 +1,16 @@
+#email_callbacks
+  %h2 Email callbacks
+
+  %p= render 'shared/piped_links', :link_args => email_callbacks_menu
+
+  %table
+    %thead
+      %tr
+        %th Label
+        %th Email
+    %tbody
+      - email_callbacks.each do |email_callback|
+        - present email_callback do
+          %tr
+            %td= label
+            %td= email

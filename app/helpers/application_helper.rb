@@ -29,7 +29,7 @@ module ApplicationHelper
   def main_menu
     [
       ["Add URL", new_location_path],
-      ["Add email callback", new_email_callback_path],
+      ["Email callbacks", email_callbacks_path],
       ["Alerts", alerts_path]
     ]
   end
@@ -40,6 +40,10 @@ module ApplicationHelper
         m << ['Add alert', new_alert_path]
       end
     end
+  end
+
+  def email_callbacks_menu
+    [['Add email callback', new_email_callback_path]]
   end
 
   def alerts

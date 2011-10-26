@@ -55,7 +55,7 @@ describe ApplicationHelper do
     its :main_menu do
       should == [
         ["Add URL", new_location_path],
-        ["Add email callback", new_email_callback_path],
+        ["Email callbacks", email_callbacks_path],
         ["Alerts", alerts_path]
       ]
     end
@@ -96,6 +96,12 @@ describe ApplicationHelper do
     context "when there are email callbacks but no locations" do
       before { subject.stub :locations }
       its(:alerts_menu) { should be_empty }
+    end
+  end
+
+  describe "email_callbacks_menu" do
+    its :email_callbacks_menu do
+      should == [["Add email callback", new_email_callback_path]]
     end
   end
 
