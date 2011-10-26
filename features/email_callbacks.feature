@@ -19,3 +19,10 @@ Feature: Email callbacks
       | Another One    | someguy@example.com |
       | Personal Email | me@austin.com       |
       | Work Email     | austin@company.com  |
+
+
+
+  Scenario: Email callbacks can't have the same label
+    When I add the "Me" email callback
+    And I add the "Me" email callback
+    Then I should see "Has already been taken" within the "Label" field

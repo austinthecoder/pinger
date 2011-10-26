@@ -26,9 +26,15 @@ When /^I try to add an email callback without filling out the form$/ do
   add_email_callback 'Label' => '', 'Email' => ''
 end
 
+When /^I add the "([^"]*)" email callback$/ do |label|
+  add_email_callback 'Label' => label
+end
+
 When /^I add the email callbacks:$/ do |table|
   table.hashes.each { |fields| add_email_callback fields }
 end
+
+##################################################
 
 Then /^I should see the email callbacks:$/ do |expected_table|
   actual_table = table_array '#email_callbacks table tr', 'td,th'
