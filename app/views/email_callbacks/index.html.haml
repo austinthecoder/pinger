@@ -12,7 +12,14 @@
     %tbody
       - email_callbacks.each do |email_callback|
         - present email_callback do
-          %tr
+          %tr{:id => "email_callback_#{id}"}
             %td= label
             %td= email
-            %td= link_to 'edit', edit_path
+            %td
+              %ul
+                %li.edit
+                  = link_to edit_path, :title => 'Edit this email callback' do
+                    %span edit
+                %li.remove
+                  = link_to delete_path, :title => 'Remove this email callback' do
+                    %span remove

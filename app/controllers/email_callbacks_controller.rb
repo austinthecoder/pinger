@@ -15,4 +15,9 @@ class EmailCallbacksController < ApplicationController
     respond_with email_callback, :location => email_callbacks_url
   end
 
+  def destroy
+    email_callback.destroy
+    respond_with email_callback
+  end
+
 end

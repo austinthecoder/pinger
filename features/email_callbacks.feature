@@ -39,3 +39,10 @@ Feature: Email callbacks
       | Label         | Email               |
       | Changed Label | changed@example.com |
 
+
+
+  Scenario: Removing email callbacks
+    When I add an email callback
+    And I remove that email callback
+    And I go to the email callbacks page
+    Then I should not see that email callback
