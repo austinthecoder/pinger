@@ -20,4 +20,4 @@
       %div= seconds.field
       %div= seconds.errors
 
-    %p= button
+    %p= button_tag (location.new_record? ? 'Add' : 'Save') + ' URL'

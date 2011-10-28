@@ -1,8 +1,6 @@
 require 'spec_helper'
 
 describe LocationPresenter do
-  subject { described_class.new location, view }
-
   let :location do
     create :location,
       id: 346785,
@@ -12,13 +10,9 @@ describe LocationPresenter do
       http_method: 'get'
   end
 
-  %w(id seconds url title).each do |method|
-    describe "#{method}" do
-      it "delegates to the location" do
-        subject.send(method).should === location.send(method)
-      end
-    end
-  end
+  subject { described_class.new location, view }
+
+  its(:id) { should === location.id }
 
   describe "next_ping", freeze_time: true do
     context "when the location's next ping date is in the future" do
@@ -37,12 +31,6 @@ describe LocationPresenter do
         before { location.stub :next_ping_date, method_block }
         it { subject.next_ping.should == 'just a moment' }
       end
-    end
-  end
-
-  describe "http_method" do
-    it "returns the location's http method upcased" do
-      subject.http_method.should == 'GET'
     end
   end
 
@@ -100,31 +88,8 @@ describe LocationPresenter do
     end
   end
 
-  # %w(title url http_method seconds).each do |name|
-  #   describe "#{name}_errors" do
-  #     it "renders form errors for the location's #{name}" do
-  #       form_errors = mock(Object)
-  #       subject.stub(:render_form_errors) { |a| form_errors if a == name }
-  #
-  #       subject.send("#{name}_errors").should == form_errors
-  #     end
-  #   end
-  # end
-
   its(:path) { should == view.location_path(location) }
   its(:edit_path) { should == view.edit_location_path(location) }
   its(:delete_path) { should == view.delete_location_path(location) }
-
-  # TODO: test
-  def form(&block)
-    form_for location do |form_builder|
-      form_presenter = Form.new self, form_builder
-      if block.arity > 0
-        yield form_presenter
-      else
-        form_presenter.instance_eval &block
-      end
-    end
-  end
 
 end

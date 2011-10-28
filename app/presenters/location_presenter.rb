@@ -2,7 +2,7 @@ class LocationPresenter < BasePresenter
 
   presents :location
 
-  delegate :id, :title, :url, :seconds, to: :location
+  delegate :id, to: :location
 
   def next_ping
     now = Time.now
@@ -13,8 +13,20 @@ class LocationPresenter < BasePresenter
     end
   end
 
+  def title
+    @title ||= Title.new(self)
+  end
+
   def http_method
-    location.http_method.upcase
+    @http_method ||= HttpMethod.new(self)
+  end
+
+  def seconds
+    @seconds ||= Seconds.new(self)
+  end
+
+  def url
+    @url ||= Url.new(self)
   end
 
   def pings
@@ -39,14 +51,13 @@ class LocationPresenter < BasePresenter
     end
   end
 
-  def form(&block)
-    form_for location do |form_builder|
-      form_presenter = Form.new self, form_builder
-      if block.arity > 0
-        yield form_presenter
-      else
-        form_presenter.instance_eval &block
-      end
+  attr_accessor :form_builder
+
+  def form
+    form_for location do |f|
+      self.form_builder = f
+      yield
+      self.form_builder = nil
     end
   end
 
