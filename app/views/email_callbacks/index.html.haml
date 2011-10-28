@@ -3,23 +3,4 @@
 
   %p= render 'shared/piped_links', :link_args => email_callbacks_menu
 
-  %table
-    %thead
-      %tr
-        %th Label
-        %th Email
-        %th
-    %tbody
-      - email_callbacks.each do |email_callback|
-        - present email_callback do
-          %tr{:id => "email_callback_#{id}"}
-            %td= label
-            %td= email
-            %td
-              %ul
-                %li.edit
-                  = link_to edit_path, :title => 'Edit this email callback' do
-                    %span edit
-                %li.remove
-                  = link_to delete_path, :title => 'Remove this email callback' do
-                    %span remove
+  = render_email_callbacks

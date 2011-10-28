@@ -1,6 +1,11 @@
 class EmailCallback < ActiveRecord::Base
 
-  validates :to, :presence => true
-  validates :label, :presence => true, :uniqueness => true
+  validates :to,
+    :presence => true,
+    :length => {:maximum => 255}
+  validates :label,
+    :presence => true,
+    :uniqueness => true,
+    :length => {:maximum => 255}
 
 end

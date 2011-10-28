@@ -20,4 +20,8 @@ class AlertPresenter < BasePresenter
     alert.email_callback.try(:label)
   end
 
+  %w(code_is_not times).each do |name|
+    define_method("#{name}_errors") { render_form_errors name }
+  end
+
 end

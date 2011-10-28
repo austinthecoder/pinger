@@ -58,6 +58,14 @@ module ApplicationHelper
     end
   end
 
+  def render_email_callbacks
+    if email_callbacks.present?
+      render 'email_callbacks/table', :email_callbacks => email_callbacks
+    else
+      content_tag :p, 'No email callbacks found.', :class => 'empty'
+    end
+  end
+
   def email_callbacks
     @email_callbacks ||= EmailCallback.order { label.asc }
   end

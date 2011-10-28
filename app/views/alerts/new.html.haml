@@ -4,16 +4,21 @@
 
 = form_for alert do |f|
   - present alert do
-    .label.input
+    .location.input
       %div= f.label :location_id, 'For'
       %div= f.select :location_id, location_options_for_select
-    .label.input
+
+    .code_is_not.input
       %div= f.label :code_is_not, 'Response status code is not'
       %div= f.text_field :code_is_not, :max_length => 255, :size => 20
-    .label.input
+      = code_is_not_errors
+
+    .times.input
       %div= f.label :times, 'Times in a row'
       %div= f.text_field :times, :max_length => 255, :size => 20
-    .label.input
+      = times_errors
+
+    .alert_via.input
       %div= f.label :email_callback_id, 'Alert via'
       %div= f.select :email_callback_id, email_callback_options_for_select
 

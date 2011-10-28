@@ -6,9 +6,11 @@ describe EmailCallback do
 
   it { should be_valid }
 
-  it { should_not accept_values_for(:to, nil, '') }
+  it { should accept_values_for(:to, ('a' * 255)) }
+  it { should_not accept_values_for(:to, nil, '', ('a' * 256)) }
 
-  it { should_not accept_values_for(:label, nil, '') }
+  it { should accept_values_for(:label, ('a' * 255)) }
+  it { should_not accept_values_for(:label, nil, '', ('a' * 256)) }
 
   it "requires unique label" do
     ec = create :email_callback

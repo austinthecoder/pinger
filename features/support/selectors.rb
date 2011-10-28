@@ -12,7 +12,15 @@ module HtmlSelectorsHelpers
       "html > body"
 
     when /the "([^"]*)" field/
-      ".#{$1.downcase}.input"
+      css_class = case $1
+      when 'Response status code is not'
+        'code_is_not'
+      when 'Times in a row'
+        'times'
+      else
+        $1.downcase.gsub(/\s/, '_')
+      end
+      ".#{css_class}.input"
 
     when 'the row for that URL'
       "#url_#{Location.last.id}"

@@ -28,5 +28,7 @@ FactoryGirl.define do
   end
 
   factory :alert do
+    times { rand(10) + 1 }
+    code_is_not { (rand(300) + 200).to_s }
   end
 end

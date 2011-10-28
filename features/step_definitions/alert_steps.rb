@@ -16,6 +16,10 @@ When /^I add the alert:$/ do |table|
   add_alert table.rows_hash
 end
 
+When /^I try to add an alert without filling out the form$/ do
+  add_alert 'Response status code is not' => '', 'Times in a row' => ''
+end
+
 ##################################################
 
 Then /^I should not get an email$/ do

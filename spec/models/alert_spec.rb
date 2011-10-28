@@ -49,4 +49,14 @@ describe Alert do
     end
   end
 
+  describe "validations" do
+    subject { build :alert }
+
+    it { should accept_values_for(:times, 1) }
+    it { should_not accept_values_for(:times, nil, 0, '', 'a') }
+
+    it { should accept_values_for(:code_is_not, '200') }
+    it { should_not accept_values_for(:code_is_not, nil, '') }
+  end
+
 end

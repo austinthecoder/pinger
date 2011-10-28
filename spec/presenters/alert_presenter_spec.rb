@@ -79,4 +79,15 @@ describe AlertPresenter do
       end
     end
   end
+
+  %w(code_is_not times).each do |name|
+    describe "#{name}_errors" do
+      it "renders form errors for the alerts's #{name}" do
+        form_errors = mock(Object)
+        subject.stub(:render_form_errors) { |a| form_errors if a == name }
+
+        subject.send("#{name}_errors").should == form_errors
+      end
+    end
+  end
 end

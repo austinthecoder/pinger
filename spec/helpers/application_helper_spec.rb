@@ -72,6 +72,29 @@ describe ApplicationHelper do
     end
   end
 
+  describe "render_email_callbacks" do
+    context "when there are email callbacks" do
+      before do
+        @rendered_email_callbacks = mock(Object)
+        email_callbacks = [mock(EmailCallback)]
+        subject.stub(:email_callbacks) { email_callbacks }
+        view.stub(:render) do |*args|
+          if args == ['email_callbacks/table', {:email_callbacks => email_callbacks}]
+            @rendered_email_callbacks
+          end
+        end
+      end
+      it "renders the email callbacks table" do
+        subject.render_email_callbacks.should == @rendered_email_callbacks
+      end
+    end
+
+    context "when there are no email callbacks" do
+      before { subject.stub :email_callbacks }
+      it { subject.render_email_callbacks.should =~ /No email callbacks found/ }
+    end
+  end
+
   describe "main_menu" do
     its :main_menu do
       should == [
