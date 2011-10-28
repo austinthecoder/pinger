@@ -2,7 +2,7 @@ class LocationPresenter < BasePresenter
 
   presents :location
 
-  delegate :id, :title, :url, :seconds, :to => :location
+  delegate :id, :title, :url, :seconds, to: :location
 
   def next_ping
     now = Time.now
@@ -27,9 +27,9 @@ class LocationPresenter < BasePresenter
 
   def render_pings
     if paginated_pings.present?
-      render 'pings/table', :pings => paginated_pings
+      render 'pings/table', pings: paginated_pings
     else
-      content_tag :p, 'No pings yet.', :class => 'empty'
+      content_tag :p, 'No pings yet.', class: 'empty'
     end
   end
 

@@ -2,7 +2,7 @@ def add_email_callback(fields = {})
   fields.reverse_merge! 'Label' => 'Work Email', 'Email' => 'me@company.com'
   go_to_email_callbacks_page
   click_link 'Add email callback'
-  ['Label', 'Email'].each { |n| fill_in n, :with => fields[n] }
+  ['Label', 'Email'].each { |n| fill_in n, with: fields[n] }
   click_button 'Add email callback'
 end
 
@@ -10,7 +10,7 @@ def edit_email_callback(email_callback, fields = {})
   go_to_email_callbacks_page
   click_link 'edit'
   ['Label', 'Email'].each do |n|
-    fill_in(n, :with => fields[n]) if fields[n]
+    fill_in(n, with: fields[n]) if fields[n]
   end
   click_button 'Save email callback'
 end

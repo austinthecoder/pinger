@@ -2,12 +2,12 @@
   - present email_callback do
     .label.input
       %div= f.label :label
-      %div= f.text_field :label, :max_length => 255, :size => 50
+      %div= f.text_field :label, max_length: 255, size: 50
       = label_errors
 
     .email.input
       %div= f.label :to, 'Email'
-      %div= f.text_field :to, :max_length => 255, :size => 50
+      %div= f.text_field :to, max_length: 255, size: 50
       = email_errors
 
     %p= button_tag form_button_text

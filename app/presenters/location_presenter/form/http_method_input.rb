@@ -15,7 +15,7 @@ class LocationPresenter
       def errors
         errors = location.errors[:http_method]
         if errors.present?
-          render 'shared/form_errors', :errors => errors.map(&:capitalize)
+          render 'shared/form_errors', errors: errors.map(&:capitalize)
         end
       end
 

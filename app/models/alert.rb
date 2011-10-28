@@ -4,12 +4,12 @@ class Alert < ActiveRecord::Base
   belongs_to :email_callback
 
   validates :times,
-    :presence => true,
-    :numericality => {
-      :greater_than => 0,
-      :if => lambda { times.present? }
+    presence: true,
+    numericality: {
+      greater_than: 0,
+      if: lambda { times.present? }
     }
-  validates :code_is_not, :presence => true
+  validates :code_is_not, presence: true
 
   def conditions_met?
     pings = location.pings.order { performed_at.desc }.limit times

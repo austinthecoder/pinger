@@ -3,7 +3,7 @@ require 'spec_helper'
 describe EmailCallbacksController do
 
   describe "POST create" do
-    before { controller.stub(:respond_with) { controller.render :text => '' } }
+    before { controller.stub(:respond_with) { controller.render text: '' } }
 
     it "tells the user to save the email callback" do
       controller.current_user.should_receive(:save_email_callback).with controller.email_callback
@@ -12,7 +12,7 @@ describe EmailCallbacksController do
 
     it "tells the controller to respond with the email callback" do
       controller.should_receive(:respond_with).with controller.email_callback,
-        :location => email_callbacks_url
+        location: email_callbacks_url
       post :create
     end
   end
@@ -27,7 +27,7 @@ describe EmailCallbacksController do
 
     describe "PUT update" do
       it "updates the attributes from the params" do
-        @params[:email_callback] = {:label => 'foo', :to => 'x@y.com'}
+        @params[:email_callback] = {label: 'foo', to: 'x@y.com'}
         @email_callback.should_receive(:attributes=).with @params[:email_callback]
         put :update, @params
       end
@@ -43,7 +43,7 @@ describe EmailCallbacksController do
       end
 
       context "when the email callback doesn't get saved" do
-        before { @params[:email_callback] = {:label => ''} }
+        before { @params[:email_callback] = {label: ''} }
         it "renders the edit template" do
           put :update, @params
           response.should render_template(:edit)

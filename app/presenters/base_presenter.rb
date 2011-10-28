@@ -7,7 +7,7 @@ class BasePresenter
 
   def render_form_errors(attribute)
     if (errors = @object.errors[attribute]).present?
-      render 'shared/form_errors', :errors => errors.map(&:capitalize)
+      render 'shared/form_errors', errors: errors.map(&:capitalize)
     end
   end
 

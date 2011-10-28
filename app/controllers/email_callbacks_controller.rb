@@ -6,13 +6,13 @@ class EmailCallbacksController < ApplicationController
 
   def create
     current_user.save_email_callback email_callback
-    respond_with email_callback, :location => email_callbacks_url
+    respond_with email_callback, location: email_callbacks_url
   end
 
   def update
     email_callback.attributes = params[:email_callback]
     current_user.save_email_callback email_callback
-    respond_with email_callback, :location => email_callbacks_url
+    respond_with email_callback, location: email_callbacks_url
   end
 
   def destroy

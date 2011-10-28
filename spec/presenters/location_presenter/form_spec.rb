@@ -31,9 +31,9 @@ describe LocationPresenter::Form do
 
   let :form_builder do
     mock Object,
-      :label => :label,
-      :text_field => :text_field,
-      :select => :select
+      label: :label,
+      text_field: :text_field,
+      select: :select
   end
 
   subject do

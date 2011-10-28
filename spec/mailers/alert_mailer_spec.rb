@@ -7,9 +7,9 @@ describe AlertMailer do
 
     let :alert do
       mock Alert,
-        :location => mock(Location, :title => 'Google Homepage'),
-        :email_callback => mock(EmailCallback, :to => 'me@example.com'),
-        :code_is_not => '201'
+        location: mock(Location, title: 'Google Homepage'),
+        email_callback: mock(EmailCallback, to: 'me@example.com'),
+        code_is_not: '201'
     end
 
     its(:subject) { should == '"Google Homepage" alert' }

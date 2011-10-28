@@ -1,6 +1,6 @@
 Pinger::Application.routes.draw do
 
-  root :to => "locations#index"
+  root to: "locations#index"
 
   resources :locations do
     member do

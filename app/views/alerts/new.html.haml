@@ -10,12 +10,12 @@
 
     .code_is_not.input
       %div= f.label :code_is_not, 'Response status code is not'
-      %div= f.text_field :code_is_not, :max_length => 255, :size => 20
+      %div= f.text_field :code_is_not, max_length: 255, size: 20
       = code_is_not_errors
 
     .times.input
       %div= f.label :times, 'Times in a row'
-      %div= f.text_field :times, :max_length => 255, :size => 20
+      %div= f.text_field :times, max_length: 255, size: 20
       = times_errors
 
     .alert_via.input

@@ -16,7 +16,7 @@ class FormPresenter
 
   private
 
-    delegate :render, :text_field, :select, :location, :to => :form_presenter
+    delegate :render, :text_field, :select, :location, to: :form_presenter
 
   end
 end

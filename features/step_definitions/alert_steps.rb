@@ -3,10 +3,10 @@ def add_alert(fields = {})
   click_link 'Alerts'
   click_link 'Add alert'
   ['Response status code is not', 'Times in a row'].each do |n|
-    fill_in n, :with => fields[n]
+    fill_in n, with: fields[n]
   end
-  select(fields['For'], :from => 'For') if fields['For']
-  select(fields['Alert via'], :from => 'Alert via') if fields['Alert via']
+  select(fields['For'], from: 'For') if fields['For']
+  select(fields['Alert via'], from: 'Alert via') if fields['Alert via']
   click_button 'Add alert'
 end
 

@@ -7,9 +7,9 @@ describe ApplicationHelper do
   describe "locations" do
     context "when there are locations" do
       before do
-        @c = create :location, :title => 'c'
-        @b = create :location, :title => 'b'
-        @a = create :location, :title => 'a'
+        @c = create :location, title: 'c'
+        @b = create :location, title: 'b'
+        @a = create :location, title: 'a'
       end
       it "returns them, ordered by title" do
         subject.locations.should == [@a, @b, @c]
@@ -40,7 +40,7 @@ describe ApplicationHelper do
         subject.stub(:paginated_locations) { @locs }
       end
       it "renders the locations table" do
-        subject.should_receive(:render).with 'locations/table', :locations => @locs
+        subject.should_receive(:render).with 'locations/table', locations: @locs
         subject.render_paginated_locations
       end
     end
@@ -58,7 +58,7 @@ describe ApplicationHelper do
         alerts = [mock(Alert)]
         subject.stub(:alerts) { alerts }
         view.stub(:render) do |*args|
-          @rendered_alerts if args == ['alerts/table', {:alerts => alerts}]
+          @rendered_alerts if args == ['alerts/table', {alerts: alerts}]
         end
       end
       it "renders the alerts table" do
@@ -79,7 +79,7 @@ describe ApplicationHelper do
         email_callbacks = [mock(EmailCallback)]
         subject.stub(:email_callbacks) { email_callbacks }
         view.stub(:render) do |*args|
-          if args == ['email_callbacks/table', {:email_callbacks => email_callbacks}]
+          if args == ['email_callbacks/table', {email_callbacks: email_callbacks}]
             @rendered_email_callbacks
           end
         end
@@ -108,9 +108,9 @@ describe ApplicationHelper do
   describe "alerts" do
     context "when there are alerts" do
       before do
-        @c = create :alert, :location => create(:location, :title => 'c')
-        @b = create :alert, :location => create(:location, :title => 'b')
-        @a = create :alert, :location => create(:location, :title => 'a')
+        @c = create :alert, location: create(:location, title: 'c')
+        @b = create :alert, location: create(:location, title: 'b')
+        @a = create :alert, location: create(:location, title: 'a')
       end
       it "returns them, ordered by location's title" do
         subject.alerts.should == [@a, @b, @c]
@@ -152,9 +152,9 @@ describe ApplicationHelper do
   describe "email_callbacks" do
     context "when there are email callbacks" do
       before do
-        @c = create :email_callback, :label => 'c'
-        @b = create :email_callback, :label => 'b'
-        @a = create :email_callback, :label => 'a'
+        @c = create :email_callback, label: 'c'
+        @b = create :email_callback, label: 'b'
+        @a = create :email_callback, label: 'a'
       end
       it "returns them, ordered by label" do
         subject.email_callbacks.should == [@a, @b, @c]

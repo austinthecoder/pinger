@@ -5,9 +5,9 @@ class Ping < ActiveRecord::Base
   @queue = :high
 
   belongs_to :location
-  has_many :alerts, :through => :location
+  has_many :alerts, through: :location
 
-  validates :location_id, :presence => true
+  validates :location_id, presence: true
 
   class << self
     def perform(ping_id)
@@ -30,7 +30,7 @@ class Ping < ActiveRecord::Base
 
   def perform!
     self.performed_at = Time.now
-    update_attributes! :response_status_code => location.perform_request.code
+    update_attributes! response_status_code: location.perform_request.code
     deliver_applicable_alerts!
   ensure
     save!
@@ -38,7 +38,7 @@ class Ping < ActiveRecord::Base
 
   def schedule!(perform_at)
     transaction do
-      update_attributes! :perform_at => perform_at
+      update_attributes! perform_at: perform_at
       Resque.enqueue_at perform_at, self.class, id
     end
   end

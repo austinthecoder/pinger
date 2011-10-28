@@ -6,7 +6,7 @@ class AlertsController < ApplicationController
 
   def create
     current_user.save_alert alert
-    respond_with alert, :location => alerts_url
+    respond_with alert, location: alerts_url
   end
 
 end

@@ -8,13 +8,13 @@ class LocationPresenter
       end
 
       def field
-        text_field :url, :max_length => 255, :size => 80
+        text_field :url, max_length: 255, size: 80
       end
 
       def errors
         errors = location.errors[:url]
         if errors.present?
-          render 'shared/form_errors', :errors => errors.map(&:capitalize)
+          render 'shared/form_errors', errors: errors.map(&:capitalize)
         end
       end
 

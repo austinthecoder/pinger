@@ -8,16 +8,16 @@ class Location < ActiveRecord::Base
   has_many :pings
 
   validates :seconds,
-    :presence => true,
-    :numericality => {:if => lambda { seconds.present? }}
-  validates :http_method, :inclusion => HTTP_METHODS
+    presence: true,
+    numericality: {if: lambda { seconds.present? }}
+  validates :http_method, inclusion: HTTP_METHODS
   validates :url,
-    :presence => true,
-    :format => {
-      :with => /\A#{URI.regexp %w(http https)}\z/,
-      :if => lambda { url.present? }
+    presence: true,
+    format: {
+      with: /\A#{URI.regexp %w(http https)}\z/,
+      if: lambda { url.present? }
     }
-  validates :title, :presence => true
+  validates :title, presence: true
 
   class << self
     # if there's no scheduled pings, schedule one

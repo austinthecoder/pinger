@@ -20,9 +20,9 @@ module ApplicationHelper
 
   def render_paginated_locations
     if paginated_locations.present?
-      render 'locations/table', :locations => paginated_locations
+      render 'locations/table', locations: paginated_locations
     else
-      content_tag :p, 'No URLs found.', :class => 'empty'
+      content_tag :p, 'No URLs found.', class: 'empty'
     end
   end
 
@@ -52,17 +52,17 @@ module ApplicationHelper
 
   def render_alerts
     if alerts.present?
-      render 'alerts/table', :alerts => alerts
+      render 'alerts/table', alerts: alerts
     else
-      content_tag :p, 'No alerts found.', :class => 'empty'
+      content_tag :p, 'No alerts found.', class: 'empty'
     end
   end
 
   def render_email_callbacks
     if email_callbacks.present?
-      render 'email_callbacks/table', :email_callbacks => email_callbacks
+      render 'email_callbacks/table', email_callbacks: email_callbacks
     else
-      content_tag :p, 'No email callbacks found.', :class => 'empty'
+      content_tag :p, 'No email callbacks found.', class: 'empty'
     end
   end
 

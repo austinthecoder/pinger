@@ -8,7 +8,7 @@ describe Ping do
 
   it { should_not accept_values_for :location_id, nil }
 
-  describe "schedule!", :freeze_time => true do
+  describe "schedule!", freeze_time: true do
     it "sets perform_at" do
       subject.schedule! 4.minutes.from_now
       subject.reload.perform_at.should == 4.minutes.from_now
@@ -23,7 +23,7 @@ describe Ping do
   describe "perform!" do
     before do
       subject.stub :deliver_applicable_alerts!
-      subject.location.stub(:perform_request) { mock Object, :code => '234' }
+      subject.location.stub(:perform_request) { mock Object, code: '234' }
     end
 
     it "tells the location to perform the request" do
@@ -36,7 +36,7 @@ describe Ping do
       subject.reload.response_status_code = '234'
     end
 
-    it "persists the time", :freeze_time => true do
+    it "persists the time", freeze_time: true do
       subject.perform!
       subject.reload.performed_at.should == Time.now
     end
@@ -49,7 +49,7 @@ describe Ping do
     context "when performing the request fails" do
       before { subject.location.stub(:perform_request) { raise 'error' } }
 
-      it "should still persist the time", :freeze_time => true do
+      it "should still persist the time", freeze_time: true do
         subject.perform! rescue nil
         subject.reload.performed_at.should == Time.now
       end
@@ -62,7 +62,7 @@ describe Ping do
 
     context "when delivering the alerts fails" do
       before { subject.stub(:deliver_applicable_alerts!) { raise 'error' } }
-      it "should still persist the time", :freeze_time => true do
+      it "should still persist the time", freeze_time: true do
         subject.perform! rescue nil
         subject.reload.performed_at.should == Time.now
       end

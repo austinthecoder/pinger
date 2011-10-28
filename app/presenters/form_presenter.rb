@@ -2,7 +2,7 @@ class FormPresenter
 
   class << self
     def field(name, opts = {})
-      opts.reverse_merge! :class => "#{self}::#{name.to_s.camelize}Input".constantize
+      opts.reverse_merge! class: "#{self}::#{name.to_s.camelize}Input".constantize
       define_method name do
         fields[name] ||= opts[:class].new(self)
       end
@@ -15,10 +15,10 @@ class FormPresenter
   end
 
   delegate :label, :text_field, :select,
-    :to => :form_builder
+    to: :form_builder
 
   delegate :render, :button_tag,
-    :to => :object_presenter
+    to: :object_presenter
 
   def fields
     @fields ||= {}

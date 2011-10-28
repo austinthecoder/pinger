@@ -7,10 +7,10 @@ describe BasePresenter do
 
   describe "render_form_errors" do
     before do
-      obj.stub(:errors) { {:foo => ["is bad", 'is wrong']} }
+      obj.stub(:errors) { {foo: ["is bad", 'is wrong']} }
       @form_errors = mock(Object)
       subject.stub(:render) do |*args|
-        if args == ['shared/form_errors', {:errors => ["Is bad", 'Is wrong']}]
+        if args == ['shared/form_errors', {errors: ["Is bad", 'Is wrong']}]
           @form_errors
         end
       end

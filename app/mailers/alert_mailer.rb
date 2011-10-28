@@ -12,8 +12,8 @@ class AlertMailer < ActionMailer::Base
     @correct_status_code = alert.code_is_not
 
     mail(
-      :to => alert.email_callback.to,
-      :subject => t('email_callback_mailer.notification.subject', :location_title => @location_title)
+      to: alert.email_callback.to,
+      subject: t('email_callback_mailer.notification.subject', location_title: @location_title)
     )
   end
 

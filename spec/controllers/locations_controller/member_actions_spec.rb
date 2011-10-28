@@ -12,7 +12,7 @@ describe LocationsController, "member actions" do
 
   describe "PUT update" do
     it "updates the attributes from the params" do
-      @params[:location] = {:title => 'foo', :seconds => '2345'}
+      @params[:location] = {title: 'foo', seconds: '2345'}
       @location.should_receive(:attributes=).with @params[:location]
       put :update, @params
     end
@@ -28,7 +28,7 @@ describe LocationsController, "member actions" do
     end
 
     context "when the location doesn't get saved" do
-      before { @params[:location] = {:title => ''} }
+      before { @params[:location] = {title: ''} }
       it "renders the edit template" do
         put :update, @params
         response.should render_template(:edit)

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Location, "instance methods" do
-  subject { build :location, :seconds => 10.minutes }
+  subject { build :location, seconds: 10.minutes }
 
   describe "perform_request" do
     it "performs a request" do
@@ -31,17 +31,17 @@ describe Location, "instance methods" do
     end
   end
 
-  describe "schedule_ping!", :freeze_time => true do
+  describe "schedule_ping!", freeze_time: true do
     before do
       subject.save!
       @next_ping = mock Ping
       subject.stub(:next_ping_to_schedule) { @next_ping }
-      create :ping, :performed_at => 1.minute.ago
+      create :ping, performed_at: 1.minute.ago
     end
 
     context "when pings have been performed" do
       before do
-        (2..3).map { |i| create :ping, :location => subject, :performed_at => i.minutes.ago }
+        (2..3).map { |i| create :ping, location: subject, performed_at: i.minutes.ago }
       end
       it "it schedules the next ping to the newest perform date + it's seconds in the future" do
         @next_ping.should_receive(:schedule!).with (2.minutes.ago + 10.minutes)
@@ -61,11 +61,11 @@ describe Location, "instance methods" do
     before do
       subject.save!
       create :ping
-      create :ping, :location => subject, :performed_at => 1.minute.ago
+      create :ping, location: subject, performed_at: 1.minute.ago
     end
 
     context "when there's a scheduled ping" do
-      before { @ping = create :ping, :location => subject }
+      before { @ping = create :ping, location: subject }
       its(:next_ping_to_schedule) { should == @ping }
     end
 
@@ -83,7 +83,7 @@ describe Location, "instance methods" do
     context "when there's a scheduled ping" do
       before do
         subject.save!
-        @ping = subject.pings.create! :perform_at => 4.minutes.from_now
+        @ping = subject.pings.create! perform_at: 4.minutes.from_now
       end
 
       it "returns the date the ping is scheduled for" do

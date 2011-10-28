@@ -4,7 +4,7 @@ describe EmailCallbackPresenter do
   subject { described_class.new email_callback, view }
 
   let :email_callback do
-    build :email_callback, :id => 349578, :label => 'abc', :to => 'x@y.com'
+    build :email_callback, id: 349578, label: 'abc', to: 'x@y.com'
   end
 
   [['email', 'to'], ['label', 'label']].each do |prefix, attr_name|

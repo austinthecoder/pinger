@@ -5,8 +5,8 @@ describe PingPresenter do
 
   let :ping do
     create :ping,
-      :response_status_code => 200,
-      :performed_at => Time.parse('2011-01-15 12:14:37 UTC')
+      response_status_code: 200,
+      performed_at: Time.parse('2011-01-15 12:14:37 UTC')
   end
 
   describe "response_status_code" do

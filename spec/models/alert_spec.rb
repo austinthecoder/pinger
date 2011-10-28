@@ -4,10 +4,10 @@ describe Alert do
 
   subject do
     build :alert,
-      :email_callback => email_callback,
-      :location => create(:location),
-      :times => 3,
-      :code_is_not => '200'
+      email_callback: email_callback,
+      location: create(:location),
+      times: 3,
+      code_is_not: '200'
   end
 
   let(:email_callback) { build :email_callback }
@@ -17,8 +17,8 @@ describe Alert do
       before do
         3.times do |i|
           create :ping,
-            :location => subject.location,
-            :response_status_code => (subject.code_is_not + '1')
+            location: subject.location,
+            response_status_code: (subject.code_is_not + '1')
         end
       end
       it { should be_conditions_met }
@@ -28,12 +28,12 @@ describe Alert do
       before do
         2.times do |i|
           create :ping,
-            :location => subject.location,
-            :response_status_code => (subject.code_is_not + '1')
+            location: subject.location,
+            response_status_code: (subject.code_is_not + '1')
         end
         create :ping,
-          :location => subject.location,
-          :response_status_code => subject.code_is_not
+          location: subject.location,
+          response_status_code: subject.code_is_not
       end
       it { should_not be_conditions_met }
     end
@@ -41,7 +41,7 @@ describe Alert do
 
   describe "deliver!" do
     it "tells a notification email to deliver" do
-      notif = mock Mail::Message, :deliver => nil
+      notif = mock Mail::Message, deliver: nil
       AlertMailer.stub(:notification) { |a| notif if a == subject }
 
       notif.should_receive :deliver

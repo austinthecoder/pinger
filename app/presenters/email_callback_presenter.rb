@@ -2,7 +2,7 @@ class EmailCallbackPresenter < BasePresenter
 
   presents :email_callback
 
-  delegate :id, :label, :to => :email_callback
+  delegate :id, :label, to: :email_callback
 
   def email
     email_callback.to

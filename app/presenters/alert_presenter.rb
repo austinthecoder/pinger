@@ -2,7 +2,7 @@ class AlertPresenter < BasePresenter
 
   presents :alert
 
-  delegate :code_is_not, :times, :to => :alert
+  delegate :code_is_not, :times, to: :alert
 
   def location_options_for_select
     locations.map { |l| [l.title, l.id] }

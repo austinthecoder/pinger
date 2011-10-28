@@ -3,16 +3,16 @@ require 'spec_helper'
 describe AlertPresenter do
   subject { described_class.new alert, view }
 
-  let(:alert) { mock Alert, :code_is_not => '400', :times => 23 }
+  let(:alert) { mock Alert, code_is_not: '400', times: 23 }
 
   describe "location_options_for_select" do
     context "when the template has locations" do
       before do
         view.stub :locations do
           [
-            mock(Location, :id => 1, :title => 'A'),
-            mock(Location, :id => 2, :title => 'B'),
-            mock(Location, :id => 3, :title => 'C')
+            mock(Location, id: 1, title: 'A'),
+            mock(Location, id: 2, title: 'B'),
+            mock(Location, id: 3, title: 'C')
           ]
         end
       end
@@ -31,7 +31,7 @@ describe AlertPresenter do
     context "when there are email callbacks" do
       before do
         @locs = [[685, 'C'], [345, 'A'], [578, 'B']].map do |id, label|
-          create :email_callback, :id => id, :label => label
+          create :email_callback, id: id, label: label
         end
       end
       it "returns an array of label and id, ordered by label" do
@@ -46,7 +46,7 @@ describe AlertPresenter do
 
   describe "for_url" do
     context "when the alert has a location" do
-      before { alert.stub(:location) { mock Location, :title => 'aoigjasdnfk' } }
+      before { alert.stub(:location) { mock Location, title: 'aoigjasdnfk' } }
       it "returns the alert's location's title" do
         subject.for_url.should == 'aoigjasdnfk'
       end
@@ -60,7 +60,7 @@ describe AlertPresenter do
 
   describe "alert_via" do
     context "when the alert has an email callback" do
-      before { alert.stub(:email_callback) { mock EmailCallback, :label => 'irnuayksh' } }
+      before { alert.stub(:email_callback) { mock EmailCallback, label: 'irnuayksh' } }
       it "returns the email callback's label" do
         subject.alert_via.should == 'irnuayksh'
       end

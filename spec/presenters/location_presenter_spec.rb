@@ -5,11 +5,11 @@ describe LocationPresenter do
 
   let :location do
     create :location,
-      :id => 346785,
-      :title => 'Google',
-      :seconds => 10,
-      :url => 'http://x.com',
-      :http_method => 'get'
+      id: 346785,
+      title: 'Google',
+      seconds: 10,
+      url: 'http://x.com',
+      http_method: 'get'
   end
 
   %w(id seconds url title).each do |method|
@@ -20,7 +20,7 @@ describe LocationPresenter do
     end
   end
 
-  describe "next_ping", :freeze_time => true do
+  describe "next_ping", freeze_time: true do
     context "when the location's next ping date is in the future" do
       before { location.stub(:next_ping_date) { 3.minutes.from_now } }
       it "returns the distance of time, in words, until then" do
@@ -48,14 +48,14 @@ describe LocationPresenter do
 
   describe "pings" do
     before do
-      create :ping, :performed_at => 1.minute.ago # performed, not for location
-      create :ping, :location => location, :performed_at => nil # not performed, for location
+      create :ping, performed_at: 1.minute.ago # performed, not for location
+      create :ping, location: location, performed_at: nil # not performed, for location
     end
 
     context "when the location has performed pings" do
       before do
         @pings = [3, 4, 2, 5, 1].map do |i|
-          create :ping, :location => location, :performed_at => i.minutes.ago
+          create :ping, location: location, performed_at: i.minutes.ago
         end
       end
       it "returns those pings, ordered by date performed" do
@@ -87,7 +87,7 @@ describe LocationPresenter do
         subject.stub(:paginated_pings) { @paginated_pings }
       end
       it "tells the view to render the pings table" do
-        view.should_receive(:render).with 'pings/table', :pings => @paginated_pings
+        view.should_receive(:render).with 'pings/table', pings: @paginated_pings
         subject.render_pings
       end
     end

@@ -6,10 +6,10 @@ def add_url(fields = {})
   )
   When "I go to the page where I can add a URL"
   ['Title', 'URL', 'Seconds'].each do |n|
-    fill_in n, :with => fields[n]
+    fill_in n, with: fields[n]
   end
   if fields['HTTP method']
-    select fields['HTTP method'], :from => 'HTTP method'
+    select fields['HTTP method'], from: 'HTTP method'
   end
   click_button 'Add URL'
 end
@@ -30,7 +30,7 @@ end
 
 When /^I change the seconds for that URL to (\d+)$/ do |seconds|
   go_to_edit_url_page
-  fill_in 'Seconds', :with => seconds
+  fill_in 'Seconds', with: seconds
   click_button 'Save URL'
 end
 

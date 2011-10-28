@@ -4,7 +4,7 @@ end
 
 When /^I fill in the following:$/ do |fields|
   fields.rows_hash.each do |field, value|
-    fill_in field, :with => value
+    fill_in field, with: value
   end
 end
 
@@ -22,7 +22,7 @@ When /^I refresh the page after (\d+) minutes?$/ do |mins|
 end
 
 When /^I select "([^"]*)" from "([^"]*)"$/ do |value, field|
-  select value, :from => field
+  select value, from: field
 end
 
 # Single-line step scoper

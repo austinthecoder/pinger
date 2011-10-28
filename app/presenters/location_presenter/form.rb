@@ -7,7 +7,7 @@ class LocationPresenter
     field :seconds
 
     # TODO: test
-    delegate :location, :to => :location_presenter
+    delegate :location, to: :location_presenter
 
     # TODO: test
     def button
