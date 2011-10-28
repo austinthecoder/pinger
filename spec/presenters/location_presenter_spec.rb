@@ -100,18 +100,31 @@ describe LocationPresenter do
     end
   end
 
-  %w(title url http_method seconds).each do |name|
-    describe "#{name}_errors" do
-      it "renders form errors for the location's #{name}" do
-        form_errors = mock(Object)
-        subject.stub(:render_form_errors) { |a| form_errors if a == name }
-
-        subject.send("#{name}_errors").should == form_errors
-      end
-    end
-  end
+  # %w(title url http_method seconds).each do |name|
+  #   describe "#{name}_errors" do
+  #     it "renders form errors for the location's #{name}" do
+  #       form_errors = mock(Object)
+  #       subject.stub(:render_form_errors) { |a| form_errors if a == name }
+  #
+  #       subject.send("#{name}_errors").should == form_errors
+  #     end
+  #   end
+  # end
 
   its(:path) { should == view.location_path(location) }
   its(:edit_path) { should == view.edit_location_path(location) }
   its(:delete_path) { should == view.delete_location_path(location) }
+
+  # TODO: test
+  def form(&block)
+    form_for location do |form_builder|
+      form_presenter = Form.new self, form_builder
+      if block.arity > 0
+        yield form_presenter
+      else
+        form_presenter.instance_eval &block
+      end
+    end
+  end
+
 end

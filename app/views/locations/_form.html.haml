@@ -1,24 +1,23 @@
-= form_for location do |f|
-  - present location do
+- present location do
+  = form do
     .title.input
-      %div= f.label :title
-      %div= f.text_field :title, :max_length => 255, :size => 50
-      = title_errors
+      %div= title.label
+      %div= title.field
+      %div= title.errors
 
     .url.input
-      %div= f.label :url, 'URL'
-      %div= f.text_field :url, :max_length => 255, :size => 80
-      = url_errors
+      %div= url.label
+      %div= url.field
+      %div= url.errors
 
     .http_method.input
-      %div= f.label :http_method, 'HTTP method'
-      / TODO: refactor out http method options into method
-      %div= f.select :http_method, Location::HTTP_METHODS.map(&:upcase)
-      = http_method_errors
+      %div= http_method.label
+      %div= http_method.field
+      %div= http_method.errors
 
     .seconds.input
-      %div= f.label :seconds
-      %div= f.text_field :seconds, :max_length => 255, :size => 20
-      = seconds_errors
+      %div= seconds.label
+      %div= seconds.field
+      %div= seconds.errors
 
-  %p= button_tag (location.new_record? ? 'Add' : 'Save') + ' URL'
+    %p= button

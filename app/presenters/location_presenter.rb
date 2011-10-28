@@ -33,13 +33,20 @@ class LocationPresenter < BasePresenter
     end
   end
 
-  %w(title url http_method seconds).each do |name|
-    define_method("#{name}_errors") { render_form_errors name }
-  end
-
   [nil, :edit, :delete].each do |name|
     define_method (name ? "#{name}_path" : 'path') do
       send (name ? "#{name}_location_path" : 'location_path'), location
+    end
+  end
+
+  def form(&block)
+    form_for location do |form_builder|
+      form_presenter = Form.new self, form_builder
+      if block.arity > 0
+        yield form_presenter
+      else
+        form_presenter.instance_eval &block
+      end
     end
   end
 
