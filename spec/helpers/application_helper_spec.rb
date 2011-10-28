@@ -51,6 +51,27 @@ describe ApplicationHelper do
     end
   end
 
+  describe "render_alerts" do
+    context "when there are alerts" do
+      before do
+        @rendered_alerts = mock(Object)
+        alerts = [mock(Alert)]
+        subject.stub(:alerts) { alerts }
+        view.stub(:render) do |*args|
+          @rendered_alerts if args == ['alerts/table', {:alerts => alerts}]
+        end
+      end
+      it "renders the alerts table" do
+        subject.render_alerts.should == @rendered_alerts
+      end
+    end
+
+    context "when there are no alerts" do
+      before { subject.stub :alerts }
+      it { subject.render_alerts.should =~ /No alerts found/ }
+    end
+  end
+
   describe "main_menu" do
     its :main_menu do
       should == [

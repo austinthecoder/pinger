@@ -50,6 +50,14 @@ module ApplicationHelper
     @alerts ||= Alert.joins { location }.order { locations.title.asc }
   end
 
+  def render_alerts
+    if alerts.present?
+      render 'alerts/table', :alerts => alerts
+    else
+      content_tag :p, 'No alerts found.', :class => 'empty'
+    end
+  end
+
   def email_callbacks
     @email_callbacks ||= EmailCallback.order { label.asc }
   end

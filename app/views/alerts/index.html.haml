@@ -3,18 +3,4 @@
 
   %p= render 'shared/piped_links', :link_args => alerts_menu
 
-  %table
-    %thead
-      %tr
-        %th For
-        %th Response status code is not
-        %th Times in a row
-        %th Alert via
-    %tbody
-      - alerts.each do |alert|
-        - present alert do
-          %tr
-            %td= for_url
-            %td= code_is_not
-            %td= times
-            %th= alert_via
+  = render_alerts
