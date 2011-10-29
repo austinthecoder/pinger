@@ -9,7 +9,7 @@
     - alerts.each do |alert|
       - present alert do
         %tr
-          %td= for_url
+          %td= location
           %td= code_is_not
           %td= times
-          %th= alert_via
+          %th= email_callback

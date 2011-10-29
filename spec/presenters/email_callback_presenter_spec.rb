@@ -1,11 +1,12 @@
 require 'spec_helper'
 
 describe EmailCallbackPresenter do
-  subject { described_class.new email_callback, view }
 
   let :email_callback do
     build :email_callback, id: 349578, label: 'abc', to: 'x@y.com'
   end
+
+  subject { described_class.new email_callback, view }
 
   [['email', 'to'], ['label', 'label']].each do |prefix, attr_name|
     describe "#{prefix}_errors" do
@@ -18,17 +19,9 @@ describe EmailCallbackPresenter do
     end
   end
 
-  describe "label" do
-    it "returns the email callback's label" do
-      subject.label.should === 'abc'
-    end
-  end
+  it { subject.label.should == EmailCallbackPresenter::Label.new(subject) }
 
-  describe "email" do
-    it "returns the email callback's to" do
-      subject.email.should === 'x@y.com'
-    end
-  end
+  it { subject.email.should == EmailCallbackPresenter::Email.new(subject) }
 
   describe "id" do
     it "returns the email callback's id" do

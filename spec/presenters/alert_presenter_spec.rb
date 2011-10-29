@@ -44,50 +44,11 @@ describe AlertPresenter do
     end
   end
 
-  describe "for_url" do
-    context "when the alert has a location" do
-      before { alert.stub(:location) { mock Location, title: 'aoigjasdnfk' } }
-      it "returns the alert's location's title" do
-        subject.for_url.should == 'aoigjasdnfk'
-      end
-    end
+  it { subject.location.should == described_class::Location.new(subject) }
 
-    context "when the alert doesn't have a location" do
-      before { alert.stub :location }
-      its(:for_url) { should be_blank }
-    end
-  end
+  it { subject.code_is_not.should == described_class::CodeIsNot.new(subject) }
 
-  describe "alert_via" do
-    context "when the alert has an email callback" do
-      before { alert.stub(:email_callback) { mock EmailCallback, label: 'irnuayksh' } }
-      it "returns the email callback's label" do
-        subject.alert_via.should == 'irnuayksh'
-      end
-    end
+  it { subject.times.should == described_class::Times.new(subject) }
 
-    context "when the alert doesn't have an email callback" do
-      before { alert.stub :email_callback }
-      its(:alert_via) { should be_blank }
-    end
-  end
-
-  %w(code_is_not times).each do |method|
-    describe "#{method}" do
-      it "delegates to the alert" do
-        subject.send(method).should === alert.send(method)
-      end
-    end
-  end
-
-  %w(code_is_not times).each do |name|
-    describe "#{name}_errors" do
-      it "renders form errors for the alerts's #{name}" do
-        form_errors = mock(Object)
-        subject.stub(:render_form_errors) { |a| form_errors if a == name }
-
-        subject.send("#{name}_errors").should == form_errors
-      end
-    end
-  end
+  it { subject.email_callback.should == described_class::EmailCallbackAttribute.new(subject) }
 end

@@ -1,5 +1,7 @@
+require 'location_presenter/attribute'
+
 class LocationPresenter
-  class HttpMethod < Attribute
+  class HttpMethod < LocationPresenter::Attribute
 
     def label
       form_builder.label :http_method, 'HTTP method'

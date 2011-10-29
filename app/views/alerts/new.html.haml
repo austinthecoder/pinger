@@ -2,24 +2,26 @@
 
 %h2 Add Alert
 
-= form_for alert do |f|
-  - present alert do
+- present alert do
+  = form do
     .location.input
-      %div= f.label :location_id, 'For'
-      %div= f.select :location_id, location_options_for_select
+      %div= location.label
+      %div= location.field
+      %div= location.errors
 
     .code_is_not.input
-      %div= f.label :code_is_not, 'Response status code is not'
-      %div= f.text_field :code_is_not, max_length: 255, size: 20
-      = code_is_not_errors
+      %div= code_is_not.label
+      %div= code_is_not.field
+      %div= code_is_not.errors
 
     .times.input
-      %div= f.label :times, 'Times in a row'
-      %div= f.text_field :times, max_length: 255, size: 20
-      = times_errors
+      %div= times.label
+      %div= times.field
+      %div= times.errors
 
     .alert_via.input
-      %div= f.label :email_callback_id, 'Alert via'
-      %div= f.select :email_callback_id, email_callback_options_for_select
+      %div= email_callback.label
+      %div= email_callback.field
+      %div= email_callback.errors
 
-  %p= button_tag 'Add alert'
+    %p= button_tag 'Add alert'

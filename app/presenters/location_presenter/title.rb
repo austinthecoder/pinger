@@ -1,5 +1,7 @@
+require 'location_presenter/attribute'
+
 class LocationPresenter
-  class Title < Attribute
+  class Title < LocationPresenter::Attribute
 
     def label
       form_builder.label :title

@@ -1,4 +1,4 @@
-class PingPresenter < BasePresenter
+class PingPresenter < Poser::Presenter
 
   presents :ping
 

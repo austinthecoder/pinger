@@ -1,9 +1,13 @@
 require 'spec_helper'
 
-describe BasePresenter do
-  subject { described_class.new obj, view }
+describe Poser::Presenter do
+  include ActionView::TestCase::Behavior
 
   let(:obj) { mock Object }
+
+  subject { described_class.new obj, view }
+
+  it { subject.should be_a(Comparable) }
 
   describe "render_form_errors" do
     before do

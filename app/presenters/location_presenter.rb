@@ -1,4 +1,4 @@
-class LocationPresenter < BasePresenter
+class LocationPresenter < Poser::Presenter
 
   presents :location
 
@@ -51,8 +51,10 @@ class LocationPresenter < BasePresenter
     end
   end
 
+  # TODO: test
   attr_accessor :form_builder
 
+  # TODO: test
   def form
     form_for location do |f|
       self.form_builder = f
@@ -62,3 +64,8 @@ class LocationPresenter < BasePresenter
   end
 
 end
+
+require 'location_presenter/http_method'
+require 'location_presenter/seconds'
+require 'location_presenter/title'
+require 'location_presenter/url'

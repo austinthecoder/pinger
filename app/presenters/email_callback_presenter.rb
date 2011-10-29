@@ -1,11 +1,15 @@
-class EmailCallbackPresenter < BasePresenter
+class EmailCallbackPresenter < Poser::Presenter
 
   presents :email_callback
 
-  delegate :id, :label, to: :email_callback
+  delegate :id, to: :email_callback
 
   def email
-    email_callback.to
+    @email ||= Email.new(self)
+  end
+
+  def label
+    @label ||= Label.new(self)
   end
 
   [['email', 'to'], ['label', 'label']].each do |prefix, attr_name|
@@ -24,4 +28,19 @@ class EmailCallbackPresenter < BasePresenter
     (email_callback.new_record? ? 'Add' : 'Save') + ' email callback'
   end
 
+  # TODO: test
+  attr_accessor :form_builder
+
+  # TODO: test
+  def form
+    form_for email_callback do |f|
+      self.form_builder = f
+      yield
+      self.form_builder = nil
+    end
+  end
+
 end
+
+require 'email_callback_presenter/email'
+require 'email_callback_presenter/label'

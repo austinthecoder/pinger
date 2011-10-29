@@ -1,13 +1,13 @@
-= form_for email_callback do |f|
-  - present email_callback do
+- present email_callback do
+  = form do
     .label.input
-      %div= f.label :label
-      %div= f.text_field :label, max_length: 255, size: 50
-      = label_errors
+      %div= label.label
+      %div= label.field
+      %div= label.errors
 
     .email.input
-      %div= f.label :to, 'Email'
-      %div= f.text_field :to, max_length: 255, size: 50
-      = email_errors
+      %div= email.label
+      %div= email.field
+      %div= email.errors
 
     %p= button_tag form_button_text

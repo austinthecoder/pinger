@@ -1,5 +1,7 @@
+require 'location_presenter/attribute'
+
 class LocationPresenter
-  class Seconds < Attribute
+  class Seconds < LocationPresenter::Attribute
 
     def label
       form_builder.label :seconds
