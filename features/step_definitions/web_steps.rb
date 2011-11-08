@@ -26,8 +26,8 @@ When /^I select "([^"]*)" from "([^"]*)"$/ do |value, field|
 end
 
 # Single-line step scoper
-When /^(.*) within (.*[^:])$/ do |step, parent|
-  with_scope(parent) { When step }
+When /^(.*) within (.*[^:])$/ do |thestep, parent|
+  with_scope(parent) { step thestep }
 end
 
 When /^I confirm the removal$/ do

@@ -4,7 +4,7 @@ def add_url(fields = {})
     'URL' => 'http://example.com',
     'Seconds' => 234235
   )
-  When "I go to the page where I can add a URL"
+  step "I go to the page where I can add a URL"
   ['Title', 'URL', 'Seconds'].each do |n|
     fill_in n, with: fields[n]
   end
