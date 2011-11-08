@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Ping do
+describe Ping, "instance methods" do
 
   subject { build :ping }
 
@@ -16,7 +16,7 @@ describe Ping do
 
     it "schedules the ping to be performed" do
       subject.schedule! 5.minutes.from_now
-      Ping.should have_scheduled_at 5.minutes.from_now, subject.id
+      described_class.should have_scheduled_at 5.minutes.from_now, subject.id
     end
   end
 
