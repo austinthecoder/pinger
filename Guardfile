@@ -1,7 +1,7 @@
 opts = {
   cucumber_env: {'RAILS_ENV' => 'test'},
   rspec_env: {'RAILS_ENV' => 'test'},
-  wait: 40
+  wait: 60
 }
 guard 'spork', opts do
   watch 'config/application.rb'

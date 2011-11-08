@@ -73,6 +73,17 @@ module TableHelpers
     end
   end
 
+  def _parse_spans(cell)
+    if cell.is_a?(Nokogiri::XML::Node)
+      [
+        cell.attributes['rowspan'].to_s.to_i || 1,
+        cell.attributes['colspan'].to_s.to_i || 1
+      ]
+    else
+      [1, 1]
+    end
+  end
+
 end
 
 World(TableHelpers)
