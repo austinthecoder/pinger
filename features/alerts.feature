@@ -3,6 +3,8 @@ Feature: Alerts
   Background:
     Given my email is "austin@example.com"
 
+##################################################
+
   Scenario: Email alert when site goes down
     Given requests to "http://example.com" are returning the status code "500"
 
@@ -25,7 +27,7 @@ Feature: Alerts
       "Example" is not returning status codes of "200".
       """
 
-
+##################################################
 
   Scenario Outline: Can't add alerts without URLs or email callbacks
     When I add <thing to add>
@@ -37,7 +39,7 @@ Feature: Alerts
       | an email callback |
       | a URL             |
 
-
+##################################################
 
   Scenario: Can't add a alerts with some fields being blank
     When I add an email callback
@@ -47,7 +49,7 @@ Feature: Alerts
     And I should see "Can't be blank" within the "Times in a row" field
 
 
-
+##################################################
 
   Scenario: Viewing alerts
     When I add the URLs:

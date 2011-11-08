@@ -1,7 +1,7 @@
 require 'alert_presenter/attribute'
 
 class AlertPresenter
-  class Location < AlertPresenter::Attribute
+  class LocationAttribute < AlertPresenter::Attribute
 
     delegate :location_options_for_select, to: :presenter
 

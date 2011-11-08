@@ -1,9 +1,10 @@
 require 'spec_helper'
 
-describe AlertPresenter::Location do
+describe AlertPresenter::LocationAttribute do
 
   let :alert_presenter do
-    mock AlertPresenter, alert: mock(Alert, :location => mock(Location, :title => 'title'))
+    mock AlertPresenter,
+      alert: mock(Alert, :location => mock(Location, :title => 'title'))
   end
 
   subject { described_class.new alert_presenter }

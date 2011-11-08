@@ -122,27 +122,6 @@ describe ApplicationHelper do
     end
   end
 
-  describe "alerts_menu" do
-    before do
-      subject.stub(:locations) { [mock(Location)] }
-      subject.stub(:email_callbacks) { [mock(EmailCallback)] }
-    end
-
-    context "when there are locations and email callbacks" do
-      its(:alerts_menu) { should == [["Add alert", new_alert_path]] }
-    end
-
-    context "when there are locations but no email callbacks" do
-      before { subject.stub :email_callbacks }
-      its(:alerts_menu) { should be_empty }
-    end
-
-    context "when there are email callbacks but no locations" do
-      before { subject.stub :locations }
-      its(:alerts_menu) { should be_empty }
-    end
-  end
-
   describe "email_callbacks_menu" do
     its :email_callbacks_menu do
       should == [["Add email callback", new_email_callback_path]]

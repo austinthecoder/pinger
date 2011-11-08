@@ -6,6 +6,8 @@ Pinger::Application.routes.draw do
     member do
       get :delete
     end
+
+    resources :alerts
   end
 
   resources :email_callbacks do

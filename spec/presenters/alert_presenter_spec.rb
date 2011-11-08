@@ -44,7 +44,7 @@ describe AlertPresenter do
     end
   end
 
-  it { subject.location.should == described_class::Location.new(subject) }
+  it { subject.location.should == described_class::LocationAttribute.new(subject) }
 
   it { subject.code_is_not.should == described_class::CodeIsNot.new(subject) }
 

@@ -10,11 +10,11 @@ class Ping < ActiveRecord::Base
   validates :location_id, presence: true
 
   class << self
+    # TODO: test
     def perform(ping_id)
       find(ping_id).perform!
     end
 
-    # TODO: test
     def first_scheduled
       where { performed_at.eq nil }.first
     end

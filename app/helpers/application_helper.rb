@@ -34,14 +34,6 @@ module ApplicationHelper
     ]
   end
 
-  def alerts_menu
-    [].tap do |m|
-      if locations.present? && email_callbacks.present?
-        m << ['Add alert', new_alert_path]
-      end
-    end
-  end
-
   def email_callbacks_menu
     [['Add email callback', new_email_callback_path]]
   end

@@ -10,6 +10,7 @@ class Alert < ActiveRecord::Base
       if: lambda { times.present? }
     }
   validates :code_is_not, presence: true
+  validates :email_callback_id, presence: true
 
   def conditions_met?
     pings = location.pings.order { performed_at.desc }.limit times

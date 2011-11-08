@@ -1,11 +1,10 @@
 def add_alert(fields = {})
   visit root_path
-  click_link 'Alerts'
+  click_link fields['For'] || Location.last.title
   click_link 'Add alert'
   ['Response status code is not', 'Times in a row'].each do |n|
     fill_in n, with: fields[n]
   end
-  select(fields['For'], from: 'For') if fields['For']
   select(fields['Alert via'], from: 'Alert via') if fields['Alert via']
   click_button 'Add alert'
 end

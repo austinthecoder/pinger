@@ -3,7 +3,7 @@ class AlertPresenter < Poser::Presenter
   presents :alert
 
   def location
-    @location ||= Location.new(self)
+    @location ||= LocationAttribute.new(self)
   end
 
   def code_is_not
@@ -40,7 +40,7 @@ class AlertPresenter < Poser::Presenter
 
 end
 
-require 'alert_presenter/location'
+require 'alert_presenter/location_attribute'
 require 'alert_presenter/code_is_not'
 require 'alert_presenter/times'
 require 'alert_presenter/email_callback_attribute'

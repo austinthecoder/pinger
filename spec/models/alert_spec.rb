@@ -1,51 +1,54 @@
 require 'spec_helper'
+require 'mail'
 
 describe Alert do
 
-  subject do
-    build :alert,
-      email_callback: email_callback,
-      location: create(:location),
-      times: 3,
-      code_is_not: '200'
-  end
-
-  let(:email_callback) { build :email_callback }
-
-  describe "conditions_met?" do
-    context "when the location's last N pings have the wrong code, where N is the times" do
-      before do
-        3.times do |i|
-          create :ping,
-            location: subject.location,
-            response_status_code: (subject.code_is_not + '1')
-        end
-      end
-      it { should be_conditions_met }
+  describe "instance methods" do
+    subject do
+      build :alert,
+        email_callback: email_callback,
+        location: create(:location),
+        times: 3,
+        code_is_not: '200'
     end
 
-    context "when at least 1 of the location's last N pings have the correct code, where N is the times" do
-      before do
-        2.times do |i|
+    let(:email_callback) { build :email_callback }
+
+    describe "conditions_met?" do
+      context "when the location's last N pings have the wrong code, where N is the times" do
+        before do
+          3.times do |i|
+            create :ping,
+              location: subject.location,
+              response_status_code: (subject.code_is_not + '1')
+          end
+        end
+        it { should be_conditions_met }
+      end
+
+      context "when at least 1 of the location's last N pings have the correct code, where N is the times" do
+        before do
+          2.times do |i|
+            create :ping,
+              location: subject.location,
+              response_status_code: (subject.code_is_not + '1')
+          end
           create :ping,
             location: subject.location,
-            response_status_code: (subject.code_is_not + '1')
+            response_status_code: subject.code_is_not
         end
-        create :ping,
-          location: subject.location,
-          response_status_code: subject.code_is_not
+        it { should_not be_conditions_met }
       end
-      it { should_not be_conditions_met }
     end
-  end
 
-  describe "deliver!" do
-    it "tells a notification email to deliver" do
-      notif = mock Mail::Message, deliver: nil
-      AlertMailer.stub(:notification) { |a| notif if a == subject }
+    describe "deliver!" do
+      it "tells a notification email to deliver" do
+        notif = mock Mail::Message, deliver: nil
+        AlertMailer.stub(:notification) { |a| notif if a == subject }
 
-      notif.should_receive :deliver
-      subject.deliver!
+        notif.should_receive :deliver
+        subject.deliver!
+      end
     end
   end
 
@@ -57,6 +60,9 @@ describe Alert do
 
     it { should accept_values_for(:code_is_not, '200') }
     it { should_not accept_values_for(:code_is_not, nil, '') }
+
+    it { should_not accept_values_for(:email_callback_id, nil, '') }
+    it { should accept_values_for(:email_callback_id, 349587) }
   end
 
 end
