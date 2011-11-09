@@ -2,6 +2,7 @@
 .rspec
 .rvmrc
 config/database.yml
+config/resque_config.yml
 log/*.log
 tmp/
 .sass-cache/
