@@ -29,7 +29,7 @@ Running this application requires 3 running processes: a web server, worker, and
 * Make sure all 3 apps have the same DATABASE_URL environment variable
 * Make sure the web app runs the web process only, the worker app runs the worker process only and the scheduler app runs the scheduler process only
 
-If you're having troubles or find a bug with these instruction, please add a github issue.
+If you're having troubles or find a bug with these instructions, please add a github issue.
 
 ## Technologies
 
@@ -42,4 +42,4 @@ Pinger is built on, and makes use of:
 
 ## Notes
 
-Although Pinger is at a fairly stable version, it is very much a work-in-progress application. Contributions are very welcome.
+Although Pinger is pretty stable, it's very much a work-in-progress. Contributions are welcome.
