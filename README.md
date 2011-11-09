@@ -1,8 +1,6 @@
 # Pinger
 
-## What is it?
-
-Pinger is a web application that let's you schedule HTTP requests and setup alerts based on the responses.
+A web application that let's you schedule HTTP requests and setup alerts based on the responses.
 
 ## Why would I use it?
 
