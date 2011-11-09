@@ -10,6 +10,8 @@ Pinger is a good open source alternative for website monitoring. Set up an alert
 
 ## Running on Heroku
 
+These instructions assume you have a good understanding of Heroku.
+
 * Create an app on Heroku on the cedar stack
 * Setup Redis
   * Add the Redis To Go add-on
@@ -17,7 +19,17 @@ Pinger is a good open source alternative for website monitoring. Set up an alert
   * Fill in the values provided by the add-on
 * Setup Resque
   * In the config directory, copy `resque_config.yml.example` to `resque_config.yml`
-  * The `web_user` and `web_pass` is the login credentials for viewing your queues at the http://yourapp.herokuapp.com/resque
+  * The `web_user` and `web_pass` are the login credentials for viewing your queues at the yourapp.herokuapp.com/resque
+* Deploy to Heroku
+
+Running this application requires 3 running processes: a web server, worker, and scheduler. This can get quite expensive on Heroku, as they charge $0.05/hour per process. To run this app for free, try this:
+
+* Create 3 Heroku apps, one for each process. For example: pinger-web, pinger-worker and pinger-scheduler
+* Only install the Redis To Go add-on on the worker app
+* Make sure all 3 apps have the same DATABASE_URL environment variable
+* Make sure the web app runs the web process only, the worker app runs the worker process only and the scheduler app runs the scheduler process only
+
+If you're having troubles or find a bug with these instruction, please add a github issue.
 
 ## Technologies
 
