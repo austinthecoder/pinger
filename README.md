@@ -10,7 +10,7 @@ Pinger is a good open source alternative for website monitoring. Set up an alert
 
 ## Running on Heroku
 
-These instructions assume you have a good understanding of Heroku.
+These instructions assume you have a good understanding of Heroku. If you're having troubles or find a bug with any of these steps, please [add a GitHub issue](https://github.com/soccer022483/pinger/issues).
 
 * Create an app on Heroku on the cedar stack
 * Setup Redis
@@ -28,8 +28,6 @@ Running this application requires 3 running processes: a web server, worker, and
 * Only install the Redis To Go add-on on the worker app
 * Make sure all 3 apps have the same DATABASE_URL environment variable
 * Make sure the web app runs the web process only, the worker app runs the worker process only and the scheduler app runs the scheduler process only
-
-If you're having troubles or find a bug with these instructions, please add a github issue.
 
 ## Technologies
 
