@@ -1,9 +1,9 @@
 require 'resque_scheduler'
 
 Resque.redis = Redis.new(
-  host: CONFIG[:resque][:host],
-  port: CONFIG[:resque][:port],
-  password: CONFIG[:resque][:password],
+  host: CONFIG[:redis][:host],
+  port: CONFIG[:redis][:port],
+  password: CONFIG[:redis][:password],
   thread_safe: true
 )
 

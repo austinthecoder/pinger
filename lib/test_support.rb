@@ -9,7 +9,7 @@ module TestSupport
       redis_options = {
         "daemonize" => 'yes',
         "pidfile" => REDIS_PID,
-        "port" => CONFIG[:resque][:port],
+        "port" => CONFIG[:redis][:port],
         "timeout" => 300,
         "save 900" => 1,
         "save 300" => 1,

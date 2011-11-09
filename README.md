@@ -10,6 +10,14 @@ Pinger is a good open source alternative for website monitoring. Set up an alert
 
 ## Running on Heroku
 
+* Create an app on Heroku on the cedar stack
+* Setup Redis
+  * Add the Redis To Go add-on
+  * In the config directory, copy `redis_config.yml.example` to `redis_config.yml`
+  * Fill in the values provided by the add-on
+* Setup Resque
+  * In the config directory, copy `resque_config.yml.example` to `resque_config.yml`
+  * The `web_user` and `web_pass` is the login credentials for viewing your queues at the http://yourapp.herokuapp.com/resque
 
 ## Technologies
 

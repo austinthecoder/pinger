@@ -3,6 +3,7 @@
 .rvmrc
 config/database.yml
 config/resque_config.yml
+config/redis_config.yml
 log/*.log
 tmp/
 .sass-cache/
