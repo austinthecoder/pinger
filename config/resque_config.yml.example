@@ -11,9 +11,9 @@ test:
   web_pass: x
 
 production:
-  host: 'herring.redistogo.com'
-  username: 'redistogo'
-  password: '4edf5d726c519fbd2f1007cf3e5cc751'
-  port: 9079
-  web_user: <changeme>
-  web_pass: <changeme>
+  host: CHANGEME
+  username: CHANGEME
+  password: CHANGEME
+  port: CHANGEME
+  web_user: CHANGEME
+  web_pass: CHANGEME
