@@ -7,6 +7,6 @@ Resque.redis = Redis.new(
   thread_safe: true
 )
 
-# Resque::Server.use(Rack::Auth::Basic) do |user, password|
-#   user == "soccer022483" && password == "soccer83"
-# end
+Resque::Server.use Rack::Auth::Basic do |user, password|
+  user == CONFIG[:resque][:web_user] && password == CONFIG[:resque][:web_pass]
+end
