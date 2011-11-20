@@ -8,4 +8,8 @@ class EmailCallback < ActiveRecord::Base
     uniqueness: true,
     length: {maximum: 255}
 
+  def to_presenter(view)
+    EmailCallbackPresenter.new self, view
+  end
+
 end

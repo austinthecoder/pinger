@@ -8,8 +8,10 @@ class User
     email_callback.save
   end
 
-  def save_alert(alert)
-    alert.save
+  def build_alert_from_params(params = {})
+    attrs = params[:alert] || {}
+    attrs[:location_id] = params[:location_id] if params[:location_id].present?
+    Alert.build attrs
   end
 
 end

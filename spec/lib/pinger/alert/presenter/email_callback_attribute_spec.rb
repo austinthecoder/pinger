@@ -1,17 +1,16 @@
 require 'spec_helper'
 
-describe AlertPresenter::LocationAttribute do
+describe Alert::Presenter::EmailCallbackAttribute do
 
   let :alert_presenter do
-    mock AlertPresenter,
-      alert: mock(Alert, :location => mock(Location, :title => 'title'))
+    mock Alert::Presenter, alert: mock(Alert)
   end
 
   subject { described_class.new alert_presenter }
 
-  it { should be_a(AlertPresenter::Attribute) }
+  it { should be_a(Alert::Presenter::Attribute) }
 
-  [:location_options_for_select].each do |method|
+  [:email_callback_options_for_select].each do |method|
     it "delegates #{method} to the alert presenter" do
       result = mock Object
       args = [mock(Object), mock(Object)]
@@ -19,7 +18,5 @@ describe AlertPresenter::LocationAttribute do
       subject.send(method, *args).should == result
     end
   end
-
-  its(:to_s) { should == "title" }
 
 end

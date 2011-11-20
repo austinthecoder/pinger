@@ -45,11 +45,24 @@ describe User do
     end
   end
 
-  describe "save_alert" do
-    it "saves the email callback" do
-      alert = mock Alert
-      alert.should_receive :save
-      subject.save_alert alert
+  describe "build_alert_from_params" do
+    [
+      [{:location_id => '234'}, {:location_id => '234'}],
+      [{:location_id => ''}, {}],
+      [{:location_id => nil}, {}],
+      [{}, {}],
+      [{:alert => {:foo => 'bar'}}, {:foo => 'bar'}],
+      [{:alert => {:foo => 'bar'}, :location_id => 'foo'}, {:foo => 'bar', :location_id => 'foo'}]
+    ].each do |params, attrs|
+      context "when the params is #{params.inspect}" do
+        before do
+          @alert = mock(Alert)
+          @params = params
+          Alert.stub(:build) { |args| @alert if args == attrs }
+        end
+
+        it { subject.build_alert_from_params(@params).should == @alert }
+      end
     end
   end
 end

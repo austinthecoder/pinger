@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'mail'
 
-describe Alert do
+describe Alert::Record do
 
   describe "instance methods" do
     subject do

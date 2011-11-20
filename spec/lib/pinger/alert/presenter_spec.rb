@@ -1,6 +1,9 @@
 require 'spec_helper'
 
-describe AlertPresenter do
+describe Alert::Presenter do
+  include ActionView::TestCase::Behavior
+  include RSpec::Rails::Matchers::RenderTemplate
+
   subject { described_class.new alert, view }
 
   let(:alert) { mock Alert, code_is_not: '400', times: 23 }
@@ -46,9 +49,9 @@ describe AlertPresenter do
 
   it { subject.location.should == described_class::LocationAttribute.new(subject) }
 
-  it { subject.code_is_not.should == described_class::CodeIsNot.new(subject) }
+  it { subject.code_is_not.should == described_class::CodeIsNotAttribute.new(subject) }
 
-  it { subject.times.should == described_class::Times.new(subject) }
+  it { subject.times.should == described_class::TimesAttribute.new(subject) }
 
   it { subject.email_callback.should == described_class::EmailCallbackAttribute.new(subject) }
 end

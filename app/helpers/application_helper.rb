@@ -2,8 +2,11 @@ module ApplicationHelper
 
   # TODO: test
   def present(object, klass = nil, &block)
-    klass ||= "#{object.class}Presenter".constantize
-    presenter = klass.new object, self
+    presenter = if !klass && object.respond_to?(:to_presenter)
+      object.to_presenter(self)
+    else
+      "#{object.class}Presenter".constantize.new object, self
+    end
     if block_given?
       block.arity > 0 ? yield(presenter) : presenter.instance_eval(&block)
     end
