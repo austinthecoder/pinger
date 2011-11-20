@@ -27,11 +27,11 @@ class Alert
     end
 
     def deliver!
-      AlertMailer.notification(self).deliver
+      Mailer.notification(self).deliver
     end
 
     def to_presenter(view)
-      Alert::Presenter.new self, view
+      Presenter.new self, view
     end
 
   end

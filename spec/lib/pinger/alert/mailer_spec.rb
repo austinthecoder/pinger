@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe AlertMailer do
+describe Alert::Mailer do
 
   describe "notification" do
     subject { described_class.notification(alert) }

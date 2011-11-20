@@ -44,7 +44,7 @@ describe Alert::Record do
     describe "deliver!" do
       it "tells a notification email to deliver" do
         notif = mock Mail::Message, deliver: nil
-        AlertMailer.stub(:notification) { |a| notif if a == subject }
+        Alert::Mailer.stub(:notification) { |a| notif if a == subject }
 
         notif.should_receive :deliver
         subject.deliver!
