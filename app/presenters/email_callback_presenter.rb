@@ -5,11 +5,11 @@ class EmailCallbackPresenter < Poser::Presenter
   delegate :id, to: :email_callback
 
   def email
-    @email ||= Email.new(self)
+    @email ||= EmailAttribute.new(self)
   end
 
   def label
-    @label ||= Label.new(self)
+    @label ||= LabelAttribute.new(self)
   end
 
   [['email', 'to'], ['label', 'label']].each do |prefix, attr_name|
@@ -42,5 +42,5 @@ class EmailCallbackPresenter < Poser::Presenter
 
 end
 
-require 'email_callback_presenter/email'
-require 'email_callback_presenter/label'
+require 'email_callback_presenter/email_attribute'
+require 'email_callback_presenter/label_attribute'

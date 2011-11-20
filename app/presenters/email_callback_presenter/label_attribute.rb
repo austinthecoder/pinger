@@ -1,7 +1,7 @@
 require 'email_callback_presenter/attribute'
 
 class EmailCallbackPresenter
-  class Label < EmailCallbackPresenter::Attribute
+  class LabelAttribute < EmailCallbackPresenter::Attribute
 
     def label
       form_builder.label :label

@@ -19,9 +19,9 @@ describe EmailCallbackPresenter do
     end
   end
 
-  it { subject.label.should == EmailCallbackPresenter::Label.new(subject) }
+  it { subject.label.should == EmailCallbackPresenter::LabelAttribute.new(subject) }
 
-  it { subject.email.should == EmailCallbackPresenter::Email.new(subject) }
+  it { subject.email.should == EmailCallbackPresenter::EmailAttribute.new(subject) }
 
   describe "id" do
     it "returns the email callback's id" do

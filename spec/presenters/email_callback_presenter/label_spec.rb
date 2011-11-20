@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe EmailCallbackPresenter::Label do
+describe EmailCallbackPresenter::LabelAttribute do
 
   let :email_callback_presenter do
     mock EmailCallbackPresenter, email_callback: mock(EmailCallback, label: 'label')

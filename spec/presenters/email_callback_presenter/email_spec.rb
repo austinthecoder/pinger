@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe EmailCallbackPresenter::Email do
+describe EmailCallbackPresenter::EmailAttribute do
 
   let :email_callback_presenter do
     mock EmailCallbackPresenter, email_callback: mock(EmailCallback, to: 'x@y.com')
