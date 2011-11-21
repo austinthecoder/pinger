@@ -43,4 +43,8 @@ class Ping < ActiveRecord::Base
     end
   end
 
+  def to_presenter(view)
+    Presenter.new self, view
+  end
+
 end

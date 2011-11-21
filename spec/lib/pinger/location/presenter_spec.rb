@@ -1,6 +1,9 @@
 require 'spec_helper'
 
-describe LocationPresenter do
+describe Location::Presenter do
+  include ActionView::TestCase::Behavior
+  include RSpec::Rails::Matchers::RenderTemplate
+
   let :location do
     create :location,
       id: 346785,

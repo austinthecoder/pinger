@@ -9,7 +9,9 @@ class EmailCallback < ActiveRecord::Base
     length: {maximum: 255}
 
   def to_presenter(view)
-    EmailCallbackPresenter.new self, view
+    EmailCallback::Presenter.new self, view
   end
 
 end
+
+require 'email_callback/presenter'

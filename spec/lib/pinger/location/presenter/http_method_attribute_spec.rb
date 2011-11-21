@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe LocationPresenter::HttpMethod do
+describe Location::Presenter::HttpMethodAttribute do
 
   let :location_presenter do
-    mock LocationPresenter, :location => mock(Location, :http_method => 'SFJLSFJ')
+    mock Location::Presenter, :location => mock(Location, :http_method => 'SFJLSFJ')
   end
 
   subject { described_class.new location_presenter }

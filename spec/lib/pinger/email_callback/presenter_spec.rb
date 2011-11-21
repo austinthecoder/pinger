@@ -1,6 +1,8 @@
 require 'spec_helper'
 
-describe EmailCallbackPresenter do
+describe EmailCallback::Presenter do
+  include ActionView::TestCase::Behavior
+  include RSpec::Rails::Matchers::RenderTemplate
 
   let :email_callback do
     build :email_callback, id: 349578, label: 'abc', to: 'x@y.com'
@@ -19,9 +21,9 @@ describe EmailCallbackPresenter do
     end
   end
 
-  it { subject.label.should == EmailCallbackPresenter::LabelAttribute.new(subject) }
+  it { subject.label.should == EmailCallback::Presenter::LabelAttribute.new(subject) }
 
-  it { subject.email.should == EmailCallbackPresenter::EmailAttribute.new(subject) }
+  it { subject.email.should == EmailCallback::Presenter::EmailAttribute.new(subject) }
 
   describe "id" do
     it "returns the email callback's id" do

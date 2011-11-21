@@ -1,6 +1,9 @@
 require 'spec_helper'
 
-describe PingPresenter do
+describe Ping::Presenter do
+  include ActionView::TestCase::Behavior
+  include RSpec::Rails::Matchers::RenderTemplate
+
   subject { described_class.new ping, view }
 
   let :ping do

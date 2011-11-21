@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe EmailCallbackPresenter::Attribute do
+describe EmailCallback::Presenter::Attribute do
 
   let :email_callback_presenter do
-    mock EmailCallbackPresenter, email_callback: mock(EmailCallback)
+    mock EmailCallback::Presenter, email_callback: mock(EmailCallback)
   end
 
   subject { described_class.new email_callback_presenter }

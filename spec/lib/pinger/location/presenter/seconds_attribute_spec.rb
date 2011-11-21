@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe LocationPresenter::Seconds do
+describe Location::Presenter::SecondsAttribute do
 
   let :location_presenter do
-    mock LocationPresenter, :location => mock(Location, :seconds => 34857)
+    mock Location::Presenter, :location => mock(Location, :seconds => 34857)
   end
 
   subject { described_class.new location_presenter }
