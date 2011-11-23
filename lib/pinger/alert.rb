@@ -1,16 +1,31 @@
-require 'alert/record'
+class Alert < ActiveRecord::Base
 
-class Alert
+  belongs_to :location
+  belongs_to :email_callback
 
-  class << self
-    def build(attrs)
-      Record.new attrs
-    end
+  validates :times,
+    presence: true,
+    numericality: {
+      greater_than: 0,
+      if: lambda { times.present? }
+    }
+  validates :code_is_not, presence: true
+  validates :email_callback_id, presence: true
 
-    delegate :joins, :scoped, :unscoped, :table_name,
-      :to => Record
+  def conditions_met?
+    pings = location.pings.order { performed_at.desc }.limit times
+    pings.size == times && pings.all? { |p| p.response_status_code != code_is_not }
+  end
+
+  def deliver!
+    Mailer.notification(self).deliver
+  end
+
+  def to_presenter(view)
+    Presenter.new self, view
   end
 
 end
 
+require 'alert/mailer'
 require 'alert/presenter'

@@ -11,7 +11,7 @@ class AlertsController < ApplicationController
 
   # TODO: test
   def alert
-    @alert ||= current_user.build_alert_from_params(params)
+    @alert ||= current_user.build_alert(params)
   end
 
 end

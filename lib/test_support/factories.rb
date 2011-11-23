@@ -27,7 +27,7 @@ FactoryGirl.define do
     to 'joe@example.com'
   end
 
-  factory :alert, :class => 'Alert::Record' do
+  factory :alert do
     email_callback
     times { rand(10) + 1 }
     code_is_not { (rand(300) + 200).to_s }

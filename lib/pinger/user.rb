@@ -8,10 +8,10 @@ class User
     email_callback.save
   end
 
-  def build_alert_from_params(params = {})
+  def build_alert(params = {})
     attrs = params[:alert] || {}
     attrs[:location_id] = params[:location_id] if params[:location_id].present?
-    Alert.build attrs
+    Alert.new attrs
   end
 
 end

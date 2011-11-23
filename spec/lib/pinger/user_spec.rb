@@ -58,10 +58,10 @@ describe User do
         before do
           @alert = mock(Alert)
           @params = params
-          Alert.stub(:build) { |args| @alert if args == attrs }
+          Alert.stub(:new) { |args| @alert if args == attrs }
         end
 
-        it { subject.build_alert_from_params(@params).should == @alert }
+        it { subject.build_alert(@params).should == @alert }
       end
     end
   end
