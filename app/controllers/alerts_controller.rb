@@ -9,9 +9,15 @@ class AlertsController < ApplicationController
     respond_with alert, location: alerts_url
   end
 
+##################################################
+
   # TODO: test
   def alert
-    @alert ||= current_user.build_alert(params)
+    @alert ||= begin
+      attrs = params[:alert] || {}
+      attrs[:location_id] = params[:location_id] if params[:location_id].present?
+      Alert.new attrs
+    end
   end
 
 end

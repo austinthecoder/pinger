@@ -17,8 +17,8 @@ describe LocationsController, "member actions" do
       put :update, @params
     end
 
-    it "tells the current_user to save the location" do
-      subject.current_user.should_receive(:save_location).with @location
+    it "tells the location to save and schedule a ping" do
+      subject.location.should_receive(:save_and_schedule_ping!)
       put :update, @params
     end
 

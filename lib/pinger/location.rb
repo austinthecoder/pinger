@@ -34,6 +34,11 @@ class Location < ActiveRecord::Base
     self[:http_method] = value ? value.to_s.downcase : nil
   end
 
+  # TODO: test
+  def save_and_schedule_ping!
+    transaction { schedule_ping! if save }
+  end
+
   def schedule_ping!
     last_ping_at = pings.order { performed_at.desc }.first.try :performed_at
     next_ping_to_schedule.schedule! ((last_ping_at || Time.now) + seconds)

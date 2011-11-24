@@ -5,8 +5,8 @@ describe EmailCallbacksController do
   describe "POST create" do
     before { controller.stub(:respond_with) { controller.render text: '' } }
 
-    it "tells the user to save the email callback" do
-      controller.current_user.should_receive(:save_email_callback).with controller.email_callback
+    it "tells the email callback to save" do
+      controller.email_callback.should_receive(:save)
       post :create
     end
 
@@ -32,8 +32,8 @@ describe EmailCallbacksController do
         put :update, @params
       end
 
-      it "tells the current_user to save the email callback" do
-        subject.current_user.should_receive(:save_email_callback).with @email_callback
+      it "tells the email callback to save" do
+        subject.email_callback.should_receive(:save)
         put :update, @params
       end
 
