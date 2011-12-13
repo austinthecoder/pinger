@@ -29,6 +29,32 @@ Feature: Alerts
 
 ##################################################
 
+  Scenario: Twitter alert when site goes down
+    Given requests to "http://example.com" are returning the status code "500"
+    And my Twitter username is "twituser"
+    And my last Twitter update was "Hello, world"
+
+    When I link my Twitter account
+    And I add the URL:
+      | Title       | Example            |
+      | URL         | http://example.com |
+      | Seconds     | 60                 |
+    And I add the alert:
+      | For                         | Example           |
+      | Response status code is not | 200               |
+      | Times in a row              | 5                 |
+      | Alert via                   | Twitter: twituser |
+    And 4 minutes pass
+    Then my last Twitter update should be "Hello, world"
+
+    When 1 minute passes
+    Then my last Twitter update should be:
+      """
+      "Example" is not returning status codes of "200"
+      """
+
+##################################################
+
   Scenario Outline: Can't add alerts without URLs or email callbacks
     When I add <thing to add>
     And I go to the alerts page
