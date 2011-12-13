@@ -1,3 +1,11 @@
+development:
+  web_user: 'x'
+  web_pass: 'x'
+
+test:
+  web_user: 'x'
+  web_pass: 'x'
+
 production:
-  web_user: CHANGE
-  web_pass: CHANGE
+  web_user: 'user'
+  web_pass: 'pass'

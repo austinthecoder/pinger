@@ -1,5 +1,13 @@
+development:
+  host: 'localhost'
+  port: 6379
+
+test:
+  host: 'localhost'
+  port: 6379
+
 production:
-  host: CHANGE
-  port: CHANGE
-  username: CHANGE
-  password: CHANGE
+  host: 'herring.redistogo.com'
+  username: 'redistogo'
+  password: '<pw>'
+  port: 9079
