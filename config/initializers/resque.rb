@@ -1,4 +1,5 @@
 require 'resque_scheduler'
+require 'resque/server'
 
 Resque.redis = Redis.new(
   host: CONFIG[:redis][:host],
