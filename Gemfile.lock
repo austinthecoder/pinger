@@ -1,8 +1,3 @@
-GIT
-  remote: git://github.com/defunkt/resque.git
-  revision: c884cbb1ce7f588af70d0c321821567402f5a6de
-  specs:
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -240,7 +235,7 @@ DEPENDENCIES
   launchy (~> 2.0.5)
   pg (= 0.11.0)
   rails (= 3.1.1)
-  resque!
+  resque (= 1.20.0)
   resque-scheduler (= 1.9.9)
   resque_spec (~> 0.7.0)
   rspec-rails (~> 2.7.0)
