@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Alert::Presenter::CodeIsNotAttribute do
 
   let :alert_presenter do
-    mock Alert::Presenter, alert: mock(Alert)
+    double 'Alert::Presenter', alert: double('Alert')
   end
 
   subject { described_class.new alert_presenter }

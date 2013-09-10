@@ -43,7 +43,7 @@ describe Alert do
 
     describe "deliver!" do
       it "tells a notification email to deliver" do
-        notif = mock Mail::Message, deliver: nil
+        notif = double 'message', deliver: nil
         Alert::Mailer.stub(:notification) { |a| notif if a == subject }
 
         notif.should_receive :deliver

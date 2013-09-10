@@ -34,7 +34,7 @@ describe Location, "instance methods" do
   describe "schedule_ping!", freeze_time: true do
     before do
       subject.save!
-      @next_ping = mock Ping
+      @next_ping = double 'Ping'
       subject.stub(:next_ping_to_schedule) { @next_ping }
       create :ping, performed_at: 1.minute.ago
     end

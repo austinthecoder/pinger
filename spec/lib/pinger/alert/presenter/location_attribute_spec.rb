@@ -3,8 +3,8 @@ require 'spec_helper'
 describe Alert::Presenter::LocationAttribute do
 
   let :alert_presenter do
-    mock Alert::Presenter,
-      alert: mock(Alert, :location => mock(Location, :title => 'title'))
+    double 'Alert::Presenter',
+      alert: double('Alert', :location => double('Location', :title => 'title'))
   end
 
   subject { described_class.new alert_presenter }
@@ -13,8 +13,8 @@ describe Alert::Presenter::LocationAttribute do
 
   [:location_options_for_select].each do |method|
     it "delegates #{method} to the alert presenter" do
-      result = mock Object
-      args = [mock(Object), mock(Object)]
+      result = double 'Object'
+      args = [double('Object'), double('Object')]
       alert_presenter.should_receive(method).with(*args).and_return(result)
       subject.send(method, *args).should == result
     end

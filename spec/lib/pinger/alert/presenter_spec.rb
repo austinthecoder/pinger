@@ -6,16 +6,16 @@ describe Alert::Presenter do
 
   subject { described_class.new alert, view }
 
-  let(:alert) { mock Alert, code_is_not: '400', times: 23 }
+  let(:alert) { double 'alert', code_is_not: '400', times: 23 }
 
   describe "location_options_for_select" do
     context "when the template has locations" do
       before do
         view.stub :locations do
           [
-            mock(Location, id: 1, title: 'A'),
-            mock(Location, id: 2, title: 'B'),
-            mock(Location, id: 3, title: 'C')
+            double('location', id: 1, title: 'A'),
+            double('location', id: 2, title: 'B'),
+            double('location', id: 3, title: 'C')
           ]
         end
       end

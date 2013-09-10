@@ -3,7 +3,7 @@ require 'spec_helper'
 describe EmailCallback::Presenter::EmailAttribute do
 
   let :email_callback_presenter do
-    mock EmailCallback::Presenter, email_callback: mock(EmailCallback, to: 'x@y.com')
+    double 'EmailCallback::Presenter', email_callback: double('EmailCallback', to: 'x@y.com')
   end
 
   subject { described_class.new email_callback_presenter }

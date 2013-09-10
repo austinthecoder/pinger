@@ -13,7 +13,7 @@ describe EmailCallback::Presenter do
   [['email', 'to'], ['label', 'label']].each do |prefix, attr_name|
     describe "#{prefix}_errors" do
       it "renders form errors for the email callback's #{attr_name}" do
-        form_errors = mock(Object)
+        form_errors = double('Object')
         subject.stub(:render_form_errors) { |a| form_errors if a == attr_name }
 
         subject.send("#{prefix}_errors").should == form_errors

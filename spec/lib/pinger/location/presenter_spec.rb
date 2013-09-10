@@ -61,7 +61,7 @@ describe Location::Presenter do
 
   describe "paginated_pings" do
     it "returns the pings, paginated" do
-      paginated_pings = mock Object
+      paginated_pings = double 'Object'
       subject.pings.stub(:paginate) do |page, per_page|
         paginated_pings if page == 7 && per_page == 3
       end
@@ -74,7 +74,7 @@ describe Location::Presenter do
   describe "render_pings" do
     context "when there are paginated pings" do
       before do
-        @paginated_pings = [mock(Ping)]
+        @paginated_pings = [double('Ping')]
         subject.stub(:paginated_pings) { @paginated_pings }
       end
       it "tells the view to render the pings table" do

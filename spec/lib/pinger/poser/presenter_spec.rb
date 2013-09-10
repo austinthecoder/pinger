@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Poser::Presenter do
   include ActionView::TestCase::Behavior
 
-  let(:obj) { mock Object }
+  let(:obj) { double 'Object' }
 
   subject { described_class.new obj, view }
 
@@ -12,7 +12,7 @@ describe Poser::Presenter do
   describe "render_form_errors" do
     before do
       obj.stub(:errors) { {foo: ["is bad", 'is wrong']} }
-      @form_errors = mock(Object)
+      @form_errors = double('Object')
       subject.stub(:render) do |*args|
         if args == ['shared/form_errors', {errors: ["Is bad", 'Is wrong']}]
           @form_errors

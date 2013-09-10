@@ -35,7 +35,7 @@ describe AlertsController do
       ].each do |params, attrs|
         context "when the params is #{params.inspect}" do
           before do
-            @alert = mock(Alert)
+            @alert = double('alert')
             subject.stub(:params) { params }
             Alert.stub(:new) { |args| @alert if args == attrs }
           end

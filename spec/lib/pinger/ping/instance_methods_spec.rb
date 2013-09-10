@@ -23,7 +23,7 @@ describe Ping, "instance methods" do
   describe "perform!" do
     before do
       subject.stub :deliver_applicable_alerts!
-      subject.location.stub(:perform_request) { mock Object, code: '234' }
+      subject.location.stub(:perform_request) { double 'Object', code: '234' }
     end
 
     it "tells the location to perform the request" do
@@ -72,8 +72,8 @@ describe Ping, "instance methods" do
   describe "deliver_applicable_alerts!" do
     it "tells the alerts, that have the conditions met, to deliver" do
       alerts = [
-        mock(Alert, :conditions_met? => true),
-        mock(Alert, :conditions_met? => false)
+        double('Alert', :conditions_met? => true),
+        double('Alert', :conditions_met? => false)
       ]
       subject.stub(:alerts) { alerts }
       alerts[0].should_receive :deliver!

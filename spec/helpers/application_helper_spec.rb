@@ -23,7 +23,7 @@ describe ApplicationHelper do
 
   describe "paginated_locations" do
     it "returns the locations, paginated" do
-      paginated_locations = mock Object
+      paginated_locations = double 'object'
       subject.locations.stub(:paginate) do |page, per_page|
         paginated_locations if page == 7 && per_page == 3
       end
@@ -36,7 +36,7 @@ describe ApplicationHelper do
   describe "render_paginated_locations" do
     context "when there are paginated locations" do
       before do
-        @locs = [mock(Location)]
+        @locs = [double('location')]
         subject.stub(:paginated_locations) { @locs }
       end
       it "renders the locations table" do
@@ -54,8 +54,8 @@ describe ApplicationHelper do
   describe "render_alerts" do
     context "when there are alerts" do
       before do
-        @rendered_alerts = mock(Object)
-        alerts = [mock(Alert)]
+        @rendered_alerts = double('object')
+        alerts = [double('alert')]
         subject.stub(:alerts) { alerts }
         view.stub(:render) do |*args|
           @rendered_alerts if args == ['alerts/table', {alerts: alerts}]
@@ -75,8 +75,8 @@ describe ApplicationHelper do
   describe "render_email_callbacks" do
     context "when there are email callbacks" do
       before do
-        @rendered_email_callbacks = mock(Object)
-        email_callbacks = [mock(EmailCallback)]
+        @rendered_email_callbacks = double('object')
+        email_callbacks = [double('email_callback')]
         subject.stub(:email_callbacks) { email_callbacks }
         view.stub(:render) do |*args|
           if args == ['email_callbacks/table', {email_callbacks: email_callbacks}]

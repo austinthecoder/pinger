@@ -6,9 +6,9 @@ describe Alert::Mailer do
     subject { described_class.notification(alert) }
 
     let :alert do
-      mock Alert,
-        location: mock(Location, title: 'Google Homepage'),
-        email_callback: mock(EmailCallback, to: 'me@example.com'),
+      double 'alert',
+        location: double('location', title: 'Google Homepage'),
+        email_callback: double('email_callback', to: 'me@example.com'),
         code_is_not: '201'
     end
 
