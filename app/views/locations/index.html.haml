@@ -8,5 +8,9 @@
     |
     = link_to "Alerts", alerts_path
 
-  = render_paginated_locations
+  - if paginated_locations.present?
+    = render 'locations/table', :locations => paginated_locations
+  - else
+    %p.empty No URLs found.
+
   = paginate paginated_locations

@@ -33,68 +33,6 @@ describe ApplicationHelper do
     end
   end
 
-  describe "render_paginated_locations" do
-    context "when there are paginated locations" do
-      before do
-        @locs = [double('location')]
-        subject.stub(:paginated_locations) { @locs }
-      end
-      it "renders the locations table" do
-        subject.should_receive(:render).with 'locations/table', locations: @locs
-        subject.render_paginated_locations
-      end
-    end
-
-    context "when there are no paginated locations" do
-      before { subject.stub :paginated_locations }
-      it { subject.render_paginated_locations.should =~ /No URLs found/ }
-    end
-  end
-
-  describe "render_alerts" do
-    context "when there are alerts" do
-      before do
-        @rendered_alerts = double('object')
-        alerts = [double('alert')]
-        subject.stub(:alerts) { alerts }
-        view.stub(:render) do |*args|
-          @rendered_alerts if args == ['alerts/table', {alerts: alerts}]
-        end
-      end
-      it "renders the alerts table" do
-        subject.render_alerts.should == @rendered_alerts
-      end
-    end
-
-    context "when there are no alerts" do
-      before { subject.stub :alerts }
-      it { subject.render_alerts.should =~ /No alerts found/ }
-    end
-  end
-
-  describe "render_email_callbacks" do
-    context "when there are email callbacks" do
-      before do
-        @rendered_email_callbacks = double('object')
-        email_callbacks = [double('email_callback')]
-        subject.stub(:email_callbacks) { email_callbacks }
-        view.stub(:render) do |*args|
-          if args == ['email_callbacks/table', {email_callbacks: email_callbacks}]
-            @rendered_email_callbacks
-          end
-        end
-      end
-      it "renders the email callbacks table" do
-        subject.render_email_callbacks.should == @rendered_email_callbacks
-      end
-    end
-
-    context "when there are no email callbacks" do
-      before { subject.stub :email_callbacks }
-      it { subject.render_email_callbacks.should =~ /No email callbacks found/ }
-    end
-  end
-
   describe "alerts" do
     context "when there are alerts" do
       before do

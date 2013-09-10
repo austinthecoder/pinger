@@ -3,4 +3,7 @@
 
   %p= link_to 'Add email callback', new_email_callback_path
 
-  = render_email_callbacks
+  - if email_callbacks.present?
+    = render 'email_callbacks/table', :email_callbacks => email_callbacks
+  - else
+    %p.empty No email callbacks found.

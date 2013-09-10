@@ -20,32 +20,8 @@ module ApplicationHelper
     @paginated_locations ||= locations.paginate params[:page], CONFIG[:app][:locations_per_page]
   end
 
-  def render_paginated_locations
-    if paginated_locations.present?
-      render 'locations/table', locations: paginated_locations
-    else
-      content_tag :p, 'No URLs found.', class: 'empty'
-    end
-  end
-
   def alerts
     @alerts ||= Alert.joins { location }.order { locations.title.asc }
-  end
-
-  def render_alerts
-    if alerts.present?
-      render 'alerts/table', alerts: alerts
-    else
-      content_tag :p, 'No alerts found.', class: 'empty'
-    end
-  end
-
-  def render_email_callbacks
-    if email_callbacks.present?
-      render 'email_callbacks/table', email_callbacks: email_callbacks
-    else
-      content_tag :p, 'No email callbacks found.', class: 'empty'
-    end
   end
 
   def email_callbacks

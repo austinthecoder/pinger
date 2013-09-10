@@ -1,4 +1,7 @@
 #alerts
   %h2 Alerts
 
-  = render_alerts
+  - if alerts.present?
+    = render 'alerts/table', :alerts => alerts
+  - else
+    %p.empty No alerts found.
