@@ -1,8 +1,8 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.1'
+gem 'rails', '3.2.14'
 gem 'pg', '0.11.0'
-gem 'haml-rails', '0.3.4'
+gem 'haml-rails', '0.3.5'
 gem 'jquery-rails', '1.0.16'
 gem 'httparty', '0.8.1'
 gem 'squeel', '0.9.3'
@@ -14,8 +14,8 @@ gem 'kaminari', '0.12.4'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails', '~> 3.1.4'
-  gem 'coffee-rails', '~> 3.1.1'
+  gem 'sass-rails', '~> 3.2.6'
+  gem 'coffee-rails', '~> 3.2.2'
   gem 'uglifier', '>= 1.0.3'
 end
 
