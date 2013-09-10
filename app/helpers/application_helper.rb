@@ -1,5 +1,4 @@
 module ApplicationHelper
-
   # TODO: test
   def present(object, klass = nil, &block)
     presenter = if !klass && object.respond_to?(:to_presenter)
@@ -52,5 +51,4 @@ module ApplicationHelper
   def email_callbacks
     @email_callbacks ||= EmailCallback.order { label.asc }
   end
-
 end

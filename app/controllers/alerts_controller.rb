@@ -1,5 +1,4 @@
 class AlertsController < ApplicationController
-
   respond_to :html
 
   helper_method :alert
@@ -9,8 +8,6 @@ class AlertsController < ApplicationController
     respond_with alert, location: alerts_url
   end
 
-##################################################
-
   # TODO: test
   def alert
     @alert ||= begin
@@ -19,5 +16,4 @@ class AlertsController < ApplicationController
       Alert.new attrs
     end
   end
-
 end

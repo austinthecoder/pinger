@@ -1,5 +1,4 @@
 class EmailCallbacksController < ApplicationController
-
   respond_to :html
 
   helper_method :email_callback
@@ -20,8 +19,6 @@ class EmailCallbacksController < ApplicationController
     respond_with email_callback
   end
 
-##################################################
-
   # TODO: test
   def email_callback
     @email_callback ||= begin
@@ -32,5 +29,4 @@ class EmailCallbacksController < ApplicationController
       end
     end
   end
-
 end
