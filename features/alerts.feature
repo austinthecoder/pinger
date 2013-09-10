@@ -71,8 +71,8 @@ Feature: Alerts
     When I add an email callback
     And I add a URL
     And I try to add an alert without filling out the form
-    Then I should see "Can't be blank" within the "Response status code is not" field
-    And I should see "Can't be blank" within the "Times in a row" field
+    Then I should see "Code is not can't be blank"
+    And I should see "Times can't be blank"
 
 
 ##################################################

@@ -6,15 +6,15 @@
       %th
   %tbody
     - email_callbacks.each do |email_callback|
-      - present email_callback do
-        %tr{id: "email_callback_#{id}"}
-          %td= label
-          %td= email
-          %td
-            %ul
-              %li.edit
-                = link_to edit_path, title: 'Edit this email callback' do
-                  %span edit
-              %li.remove
-                = link_to delete_path, title: 'Remove this email callback' do
-                  %span remove
+      - email_callback = present email_callback
+      %tr{id: "email_callback_#{email_callback.id}"}
+        %td= email_callback.label
+        %td= email_callback.to
+        %td
+          %ul
+            %li.edit
+              = link_to email_callback.edit_path, title: 'Edit this email callback' do
+                %span edit
+            %li.remove
+              = link_to email_callback.delete_path, title: 'Remove this email callback' do
+                %span remove

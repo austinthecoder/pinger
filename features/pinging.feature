@@ -8,25 +8,20 @@ Feature: Pinging
     When I add the URL:
       | URL     | http://example.com |
       | Seconds | 600                |
-    And I should see "Next ping in 10 minutes."
-    And I should see "No pings yet"
+    Then I should see a ping is scheduled for 10 minutes from now
+    And I should that no pings have been performed
 
-    And I refresh the page after 7 minutes
-    Then I should see "Next ping in 3 minutes."
-    And I should see "No pings yet"
+    When I refresh the page after 7 minutes
+    Then I should see a ping is scheduled for 3 minutes from now
+    And I should that no pings have been performed
 
-    And I refresh the page after 5 minutes
-    Then I should see "Next ping in 8 minutes."
-    And I should see the pings table:
-      | Status |                                 |
-      | 200    | Jan  1, 2011 at 12:10:00 AM UTC |
+    When I refresh the page after 5 minutes
+    Then I should see a ping is scheduled for 8 minutes from now
+    And I should see 1 ping was performed 2 minutes ago
 
-    And I refresh the page after 6 minutes
-    Then I should see "Next ping in 2 minutes."
-    And I should see the pings table:
-      | Status |                                 |
-      | 200    | Jan  1, 2011 at 12:10:00 AM UTC |
-
+    When I refresh the page after 6 minutes
+    Then I should see a ping is scheduled for 2 minutes from now
+    And I should see 1 ping was performed 8 minutes ago
 
 
   Scenario: Pings are ordered newest first
@@ -34,12 +29,9 @@ Feature: Pinging
       | URL     | http://example.com |
       | Seconds | 600                |
     And I refresh the page after 30 minutes
-    Then I should see the pings table:
-      | Status |                                 |
-      | 200    | Jan  1, 2011 at 12:30:00 AM UTC |
-      | 200    | Jan  1, 2011 at 12:20:00 AM UTC |
-      | 200    | Jan  1, 2011 at 12:10:00 AM UTC |
-
+    Then I should 3 pings were performed
+    And I should see the newest ping was just performed
+    And I should see the oldest ping was performed 20 minutes ago
 
 
   Scenario: Pings are paginated
@@ -54,18 +46,3 @@ Feature: Pinging
 
     When I follow "Next"
     Then I should see 2 pings
-
-
-
-  Scenario: Changing the seconds
-    When I add the URL:
-      | URL     | http://example.com |
-      | Seconds | 600                |
-    And I change the seconds for that URL to 60
-    And I go to the page for that URL
-    Then I should see "Next ping in 1 minute"
-
-    And I refresh the page after 1 minute
-    Then I should see the pings table:
-      | Status |                                 |
-      | 200    | Jan  1, 2011 at 12:01:00 AM UTC |

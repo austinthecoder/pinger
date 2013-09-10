@@ -2,6 +2,12 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  activerecord:
+    attributes:
+      location:
+        url: "URL"
+      email_callback:
+        to: 'Email'
   email_callback_mailer:
     notification:
       subject: '"%{location_title}" alert'

@@ -1,3 +1,7 @@
+Given /^I am on this site$/ do
+  visit '/'
+end
+
 When /^I follow "([^"]*)"$/ do |link|
   click_link link
 end

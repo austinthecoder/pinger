@@ -1,0 +1,13 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: mtgdm_development
+  username: austin
+  password: 
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: mtgdm_test
+  username: austin
+  password: 

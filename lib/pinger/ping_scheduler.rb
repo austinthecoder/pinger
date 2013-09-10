@@ -4,7 +4,7 @@ class PingScheduler
   class << self
     # TODO: test
     def perform(*args)
-      Location.schedule_pings!
+      Location.all.reject { |l| l.pings.scheduled.any? }.each &:schedule_ping!
     end
   end
 end

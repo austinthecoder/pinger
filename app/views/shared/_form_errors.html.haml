@@ -1,3 +1,4 @@
-%ul
-  - errors.each do |error|
-    %li= error
+- if errors.any?
+  %ul
+    - errors.each do |msg|
+      %li= msg

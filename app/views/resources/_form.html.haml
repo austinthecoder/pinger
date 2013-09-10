@@ -1,0 +1,23 @@
+= form_for location do |f|
+  - if location.errors.any?
+    %ul
+      - location.errors.full_messages.each do |m|
+        %li= m
+
+  .title.input
+    %div= f.label :title
+    %div= f.text_field :title, max_length: 255, size: 50
+
+  .url.input
+    %div= f.label :url, 'URL'
+    %div= f.text_field :url, max_length: 255, size: 80
+
+  .http_method.input
+    %div= f.label :http_method, 'HTTP method'
+    %div= f.select :http_method, Location::HTTP_METHODS.map(&:upcase)
+
+  .seconds.input
+    %div= f.label :seconds
+    %div= f.text_field :seconds, max_length: 255, size: 20
+
+  %p= button_tag (location.persisted? ? 'Save' : 'Add') + ' resource'

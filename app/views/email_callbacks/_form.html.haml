@@ -1,13 +1,15 @@
-- present email_callback do
-  = form do
-    .label.input
-      %div= label.label
-      %div= label.field
-      %div= label.errors
+= form_for email_callback do |f|
+  = render 'shared/form_errors', :errors => email_callback.errors.full_messages
 
-    .email.input
-      %div= email.label
-      %div= email.field
-      %div= email.errors
+  .label.input
+    %div= f.label :label
+    %div= f.text_field :label, max_length: 255, size: 50
 
-    %p= button_tag form_button_text
+  .email.input
+    %div= f.label :to, 'Email'
+    %div= f.text_field :to, max_length: 255, size: 50
+
+  %p
+    %button
+      = email_callback.new_record? ? 'Add' : 'Save'
+      email callback

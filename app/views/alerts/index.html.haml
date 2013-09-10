@@ -1,4 +1,20 @@
 #alerts
   %h2 Alerts
 
-  = render_alerts
+  - if alerts.present?
+    %table
+      %thead
+        %tr
+          %th For
+          %th Response status code is not
+          %th Times in a row
+          %th Alert via
+      %tbody
+        - alerts.each do |alert|
+          %tr
+            %td= alert.location
+            %td= alert.code_is_not
+            %td= alert.times
+            %td= alert.email_callback
+  - else
+    %p.empty No alerts found.

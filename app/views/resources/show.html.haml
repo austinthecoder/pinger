@@ -1,0 +1,54 @@
+%p
+  = link_to 'Back', root_path
+  |
+  = link_to 'Add alert', location.new_alert_path
+
+#location
+  #info
+    %table
+      %tbody
+        %tr
+          %th Title
+          %td.title= location.title
+        %tr
+          %th URL
+          %td.url= location.url
+        %tr
+          %th HTTP method
+          %td.http_method= location.http_method
+        %tr
+          %th Seconds
+          %td.seconds= location.seconds
+  #pings
+    %h2 Pings
+
+    #next
+      %p
+        Next ping scheduled_for:
+        %br
+        - if location.scheduled_ping
+          - date = location.scheduled_ping.date_scheduled
+          %strong= date
+          &nbsp&nbsp;
+          %em= distance_of_time_in_words Time.zone.now, date
+        - else
+          %em Awaiting scheduling&hellip;
+
+    - if paginated_pings.present?
+      %table
+        %thead
+          %tr
+            %th HTTP Status
+            %th Performed
+            %th
+        %tbody
+          - paginated_pings.each do |ping|
+            %tr{:class => 'ping'}
+              %td= ping.response_status_code
+              %td= ping.date_performed
+              %td
+    - else
+      %p
+        %em No pings yet.
+
+    = paginate paginated_pings

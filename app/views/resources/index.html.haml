@@ -1,0 +1,32 @@
+#resources
+  %h2 Resources
+
+  %p= render 'shared/piped_links', :link_args => main_menu
+
+  - if paginated_resources.any?
+    %table
+      %thead
+        %tr
+          %th Title
+          %th URL
+          %th HTTP method
+          %th Seconds
+          %th
+        %tbody
+          - paginated_resources.each do |resource|
+            %tr{:id => dom_id(resource)}
+              %td.title= link_to resource.title, resource.path
+              %td= resource.url
+              %td= resource.http_method
+              %td= resource.seconds
+              %td
+                %ul
+                  %li.edit
+                    = link_to resource.edit_path, :title => 'Edit this Resource' do
+                      %span edit
+                  %li.remove.last
+                    = link_to resource.delete_path, :title => 'Remove this Resource' do
+                      %span remove
+  - else
+    %p{:class => 'empty'} No resources found.
+  = paginate paginated_resources

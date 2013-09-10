@@ -3,4 +3,25 @@
 
   %p= render 'shared/piped_links', link_args: email_callbacks_menu
 
-  = render_email_callbacks
+  - if email_callbacks.present?
+    %table
+      %thead
+        %tr
+          %th Label
+          %th Email
+          %th
+      %tbody
+        - email_callbacks.each do |ec|
+          %tr{:class => 'email_callback', :id => dom_id(ec)}
+            %td.label= ec.label
+            %td.email= ec.to
+            %td
+              %ul
+                %li.edit
+                  = link_to ec.edit_path, :title => 'Edit this email callback' do
+                    %span edit
+                %li.remove
+                  = link_to ec.delete_path, :title => 'Remove this email callback' do
+                    %span remove
+  - else
+    %p.empty No email callbacks found.

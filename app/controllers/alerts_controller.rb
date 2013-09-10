@@ -16,7 +16,7 @@ class AlertsController < ApplicationController
     @alert ||= begin
       attrs = params[:alert] || {}
       attrs[:location_id] = params[:location_id] if params[:location_id].present?
-      Alert.new attrs
+      account.new_alert attrs
     end
   end
 

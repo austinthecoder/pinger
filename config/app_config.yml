@@ -1,11 +1,8 @@
 development:
-  pings_per_page: 30
-  locations_per_page: 30
+  records_per_page: 30
 
 test:
-  pings_per_page: 3
-  locations_per_page: 3
+  records_per_page: 3
 
 production:
-  pings_per_page: 30
-  locations_per_page: 30
+  records_per_page: 30

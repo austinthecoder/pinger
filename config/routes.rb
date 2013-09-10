@@ -1,13 +1,13 @@
 Pinger::Application.routes.draw do
 
-  root to: "locations#index"
+  root :to => 'resources#index'
 
-  resources :locations do
-    member do
-      get :delete
-    end
+  resources :resources, :only => %w[new] do
+  #   member do
+  #     get :delete
+  #   end
 
-    resources :alerts
+  #   resources :alerts
   end
 
   resources :email_callbacks do

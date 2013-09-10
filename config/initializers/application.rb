@@ -1,0 +1,1 @@
+THE_ACCOUNT = Account.new
