@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.2.14'
 gem 'pg', '0.16.0'
-gem 'haml-rails', '0.3.5'
+gem 'haml-rails', '~> 0.4'
 gem 'httparty', '0.11.0'
 gem 'squeel', '1.1.1'
 gem 'resque', '1.24.1'
@@ -10,13 +10,8 @@ gem 'resque-scheduler', '2.0.1'
 gem 'kaminari', '0.14.1'
 # gem 'twitter', '2.0.1'
 
-# Gems used only for assets and not required
-# in production environments by default.
 group :assets do
-  gem 'jquery-rails', '~> 3.0.4'
-  gem 'sass-rails', '~> 3.2.6'
-  gem 'coffee-rails', '~> 3.2.2'
-  gem 'uglifier', '>= 1.0.3'
+  gem 'sass-rails', '~> 3.1'
 end
 
 group :test do
