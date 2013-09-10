@@ -28,14 +28,8 @@ group :test do
   gem 'webmock', '~> 1.7.5', require: false
   gem 'artifice', '~> 0.6'
   gem 'timecop', '~> 0.3.5'
-  gem 'spork', '~> 0.9.0.rc9'
   gem 'launchy', '~> 2.0.5'
   gem 'resque_spec', '~> 0.7.0'
   gem 'factory_girl_rails', '~> 1.3.0'
   gem 'faker', '~> 1.0.1'
-  gem 'guard-spork', '~> 0.3.1'
-end
-
-group :development do
-  gem 'guard', '>= 0.8.8'
 end
