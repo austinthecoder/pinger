@@ -31,7 +31,7 @@ describe Location::Presenter do
       ["nil", lambda { nil }]
     ].each do |text, method_block|
       context "when the location's next ping date is #{text}" do
-        before { location.stub :next_ping_date, method_block }
+        before { location.stub :next_ping_date, &method_block }
         it { subject.next_ping.should == 'just a moment' }
       end
     end

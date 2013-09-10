@@ -5,7 +5,7 @@ shared_examples "a paginator" do
     subject { described_class }
 
     describe "paginate" do
-      context "when there are 10 #{subject.to_s.downcase} and 3 per page" do
+      context "when there are 10 #{described_class.to_s.downcase} and 3 per page" do
         before do
           @items = 10.times.map { create(subject.to_s.downcase.to_sym) }
           @per_page = 3
@@ -18,7 +18,7 @@ shared_examples "a paginator" do
           [4, 10, 10]
         ].each do |page, start_nbr, end_nbr|
           context "when the page is #{page}" do
-            it "returns #{subject.to_s.downcase}s #{start_nbr} through #{end_nbr}" do
+            it "returns #{described_class.to_s.downcase}s #{start_nbr} through #{end_nbr}" do
               subject.paginate(page, @per_page).should == @items[(start_nbr - 1)..(end_nbr - 1)]
             end
           end
