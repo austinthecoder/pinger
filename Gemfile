@@ -10,7 +10,7 @@ gem 'squeel', '0.9.3'
 gem 'resque', git: 'git://github.com/defunkt/resque.git' # waiting for 1.19.1
 gem 'resque-scheduler', '1.9.9'
 gem 'kaminari', '0.12.4'
-gem 'twitter', '2.0.1'
+# gem 'twitter', '2.0.1'
 
 # Gems used only for assets and not required
 # in production environments by default.
