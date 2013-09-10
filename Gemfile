@@ -8,7 +8,7 @@ gem 'httparty', '0.8.1'
 gem 'squeel', '0.9.3'
 gem 'resque', '1.24.1'
 gem 'resque-scheduler', '2.0.1'
-gem 'kaminari', '0.12.4'
+gem 'kaminari', '0.14.1'
 # gem 'twitter', '2.0.1'
 
 # Gems used only for assets and not required
