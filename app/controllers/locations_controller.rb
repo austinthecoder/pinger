@@ -1,5 +1,4 @@
 class LocationsController < ApplicationController
-
   respond_to :html
 
   helper_method :location
@@ -20,8 +19,6 @@ class LocationsController < ApplicationController
     respond_with location
   end
 
-##################################################
-
   # TODO: test
   def location
     @location ||= begin
@@ -32,5 +29,4 @@ class LocationsController < ApplicationController
       end
     end
   end
-
 end

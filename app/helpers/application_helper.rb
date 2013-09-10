@@ -29,18 +29,6 @@ module ApplicationHelper
     end
   end
 
-  def main_menu
-    [
-      ["Add URL", new_location_path],
-      ["Email callbacks", email_callbacks_path],
-      ["Alerts", alerts_path]
-    ]
-  end
-
-  def email_callbacks_menu
-    [['Add email callback', new_email_callback_path]]
-  end
-
   def alerts
     @alerts ||= Alert.joins { location }.order { locations.title.asc }
   end

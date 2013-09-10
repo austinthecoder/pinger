@@ -1,6 +1,6 @@
 #email_callbacks
   %h2 Email callbacks
 
-  %p= render 'shared/piped_links', link_args: email_callbacks_menu
+  %p= link_to 'Add email callback', new_email_callback_path
 
   = render_email_callbacks

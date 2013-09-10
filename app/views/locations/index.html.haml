@@ -1,7 +1,12 @@
 #locations
   %h2 URLs
 
-  %p= render 'shared/piped_links', link_args: main_menu
+  %p
+    = link_to "Add URL", new_location_path
+    |
+    = link_to "Email callbacks", email_callbacks_path
+    |
+    = link_to "Alerts", alerts_path
 
   = render_paginated_locations
   = paginate paginated_locations

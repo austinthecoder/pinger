@@ -95,16 +95,6 @@ describe ApplicationHelper do
     end
   end
 
-  describe "main_menu" do
-    its :main_menu do
-      should == [
-        ["Add URL", new_location_path],
-        ["Email callbacks", email_callbacks_path],
-        ["Alerts", alerts_path]
-      ]
-    end
-  end
-
   describe "alerts" do
     context "when there are alerts" do
       before do
@@ -119,12 +109,6 @@ describe ApplicationHelper do
 
     context "when there are no alerts" do
       its(:alerts) { should be_empty }
-    end
-  end
-
-  describe "email_callbacks_menu" do
-    its :email_callbacks_menu do
-      should == [["Add email callback", new_email_callback_path]]
     end
   end
 
