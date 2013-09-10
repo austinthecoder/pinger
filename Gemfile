@@ -1,11 +1,10 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.2.14'
-gem 'pg', '0.11.0'
+gem 'pg', '0.16.0'
 gem 'haml-rails', '0.3.5'
-gem 'jquery-rails', '1.0.16'
-gem 'httparty', '0.8.1'
-gem 'squeel', '0.9.3'
+gem 'httparty', '0.11.0'
+gem 'squeel', '1.1.1'
 gem 'resque', '1.24.1'
 gem 'resque-scheduler', '2.0.1'
 gem 'kaminari', '0.14.1'
@@ -14,6 +13,7 @@ gem 'kaminari', '0.14.1'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
+  gem 'jquery-rails', '~> 3.0.4'
   gem 'sass-rails', '~> 3.2.6'
   gem 'coffee-rails', '~> 3.2.2'
   gem 'uglifier', '>= 1.0.3'
@@ -24,11 +24,11 @@ group :test do
   gem 'cucumber-rails', '~> 1.2.0', :require => false
   gem 'database_cleaner', '~> 0.6.7'
   gem 'accept_values_for', '~> 0.4.3'
-  gem 'webmock', '~> 1.7.5', require: false
+  gem 'webmock', '~> 1.13.0'
   gem 'artifice', '~> 0.6'
   gem 'timecop', '~> 0.3.5'
   gem 'launchy', '~> 2.0.5'
-  gem 'resque_spec', '~> 0.7.0'
+  gem 'resque_spec', '~> 0.14.2'
   gem 'factory_girl_rails', '~> 1.3.0'
   gem 'faker', '~> 1.0.1'
 end

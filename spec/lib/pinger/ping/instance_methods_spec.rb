@@ -16,7 +16,7 @@ describe Ping, "instance methods" do
 
     it "schedules the ping to be performed" do
       subject.schedule! 5.minutes.from_now
-      described_class.should have_scheduled_at 5.minutes.from_now, subject.id
+      described_class.should have_scheduled(subject.id).at(5.minutes.from_now)
     end
   end
 
