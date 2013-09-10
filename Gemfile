@@ -4,7 +4,6 @@ gem 'rails', '3.1.1'
 gem 'pg', '0.11.0'
 gem 'haml-rails', '0.3.4'
 gem 'jquery-rails', '1.0.16'
-gem 'formalize-rails', '0.0.5'
 gem 'httparty', '0.8.1'
 gem 'squeel', '0.9.3'
 gem 'resque', git: 'git://github.com/defunkt/resque.git' # waiting for 1.19.1
