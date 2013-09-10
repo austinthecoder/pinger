@@ -21,7 +21,7 @@ end
 
 group :test do
   gem 'rspec-rails', '~> 2.14'
-  gem 'cucumber-rails', '~> 1.2.0'
+  gem 'cucumber-rails', '~> 1.2.0', :require => false
   gem 'database_cleaner', '~> 0.6.7'
   gem 'accept_values_for', '~> 0.4.3'
   gem 'webmock', '~> 1.7.5', require: false
