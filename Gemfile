@@ -37,8 +37,5 @@ group :test do
 end
 
 group :development do
-  gem 'heroku', '>= 2.10.0'
-  gem 'foreman', '>= 0.25.0'
   gem 'guard', '>= 0.8.8'
-  gem 'rb-fsevent', '>= 0.4.3.1', require: false
 end
