@@ -10,7 +10,8 @@ describe Alert::Presenter do
 
   describe "location_options_for_select" do
     context "when the template has locations" do
-      before do
+      it "returns the locations as arrays of id and title" do
+        pending
         view.stub :locations do
           [
             double('location', id: 1, title: 'A'),
@@ -18,8 +19,6 @@ describe Alert::Presenter do
             double('location', id: 3, title: 'C')
           ]
         end
-      end
-      it "returns the locations as arrays of id and title" do
         subject.location_options_for_select.should == [['A', 1], ['B', 2], ['C', 3]]
       end
     end

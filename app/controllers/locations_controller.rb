@@ -3,6 +3,12 @@ class LocationsController < ApplicationController
 
   helper_method :location
 
+  def index
+    @locations = Location.order { title.asc }.paginate(params[:page], CONFIG[:app][:locations_per_page])
+  end
+  attr_reader :locations
+  helper_method :locations
+
   def create
     location.save_and_schedule_ping!
     respond_with location

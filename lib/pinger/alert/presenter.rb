@@ -20,7 +20,8 @@ class Alert
     end
 
     def location_options_for_select
-      locations.map { |l| [l.title, l.id] }
+      # TODO: DRY this up with Locations#index
+      Location.order { title.asc }.map { |l| [l.title, l.id] }
     end
 
     def email_callback_options_for_select

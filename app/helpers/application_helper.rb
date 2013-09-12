@@ -12,14 +12,6 @@ module ApplicationHelper
     presenter
   end
 
-  def locations
-    @locations ||= Location.order { title.asc }
-  end
-
-  def paginated_locations
-    @paginated_locations ||= locations.paginate params[:page], CONFIG[:app][:locations_per_page]
-  end
-
   def alerts
     @alerts ||= Alert.joins { location }.order { locations.title.asc }
   end

@@ -8,9 +8,28 @@
     |
     = link_to "Alerts", alerts_path
 
-  - if paginated_locations.present?
-    = render 'locations/table', :locations => paginated_locations
+  - if locations.present?
+    %table.table
+      %thead
+        %tr
+          %th Title
+          %th URL
+          %th HTTP method
+          %th Seconds
+          %th
+        %tbody
+          - locations.each do |location|
+            - present location do
+              %tr{id: "url_#{id}"}
+                %td= link_to title, path
+                %td= url
+                %td= http_method
+                %td= seconds
+                %td
+                  = link_to 'edit', edit_path, title: 'Edit this URL'
+                  |
+                  = link_to 'remove', delete_path, title: 'Remove this URL'
   - else
     %p.empty No URLs found.
 
-  = paginate paginated_locations
+  = paginate locations

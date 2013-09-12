@@ -2,13 +2,16 @@
 %html
   %head
     %title Pinger
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
     = stylesheet_link_tag "application"
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
-    %h1= link_to 'Pinger', root_path
-    = yield
-    #footer
+    .container
+      %h1= link_to 'Pinger', root_path
+
+      = yield
+
       %p
         Built by
         = link_to 'Deka Labs', 'http://dekalabs.com'
