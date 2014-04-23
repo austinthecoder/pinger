@@ -1,23 +1,26 @@
-- present location do
-  = form do
-    .title.input
-      %div= title.label
-      %div= title.field
-      %div= title.errors
+= form_for location, :role => 'form' do |f|
+  .form-group
+    = f.label :title
+    = f.text_field :title, :max_length => 255, :size => 50, :class => 'form-control'
+    - if (errors = location.errors[:title]).present?
+      = render 'shared/form_errors', :errors => errors.map(&:capitalize)
 
-    .url.input
-      %div= url.label
-      %div= url.field
-      %div= url.errors
+  .form-group
+    = f.label :url, 'URL'
+    = f.text_field :url, :max_length => 255, :size => 80, :class => 'form-control'
+    - if (errors = location.errors[:url]).present?
+      = render 'shared/form_errors', :errors => errors.map(&:capitalize)
 
-    .http_method.input
-      %div= http_method.label
-      %div= http_method.field
-      %div= http_method.errors
+  .form-group
+    = f.label :http_method, 'HTTP method'
+    = f.select :http_method, Location::HTTP_METHODS.map(&:upcase), {}, :class => 'form-control'
+    - if (errors = location.errors[:http_method]).present?
+      = render 'shared/form_errors', :errors => errors.map(&:capitalize)
 
-    .seconds.input
-      %div= seconds.label
-      %div= seconds.field
-      %div= seconds.errors
+  .form-group
+    = f.label :seconds
+    = f.text_field :seconds, :max_length => 255, :size => 20, :class => 'form-control'
+    - if (errors = location.errors[:seconds]).present?
+      = render 'shared/form_errors', :errors => errors.map(&:capitalize)
 
-    %p= button_tag (location.new_record? ? 'Add' : 'Save') + ' URL'
+  = f.button "#{location.persisted? ? 'Save' : 'Add'} URL", :class => 'btn btn-default'

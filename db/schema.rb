@@ -11,9 +11,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20111018215254) do
+ActiveRecord::Schema.define(:version => 20131004050705) do
 
-  create_table "alerts", force: true do |t|
+  create_table "alerts", :force => true do |t|
     t.integer  "location_id"
     t.integer  "email_callback_id"
     t.string   "code_is_not"
@@ -22,32 +22,31 @@ ActiveRecord::Schema.define(version: 20111018215254) do
     t.datetime "updated_at"
   end
 
-  add_index "alerts", ["email_callback_id"], name: "index_alerts_on_email_callback_id"
-  add_index "alerts", ["location_id"], name: "index_alerts_on_location_id"
+  add_index "alerts", ["email_callback_id"], :name => "index_alerts_on_email_callback_id"
+  add_index "alerts", ["location_id"], :name => "index_alerts_on_location_id"
 
-  create_table "email_callbacks", force: true do |t|
+  create_table "email_callbacks", :force => true do |t|
     t.string   "to"
     t.string   "label"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "locations", force: true do |t|
+  create_table "locations", :force => true do |t|
     t.string   "url"
     t.string   "http_method"
     t.integer  "seconds"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "title",       null: false
+    t.string   "title",       :null => false
   end
 
-  create_table "pings", force: true do |t|
+  create_table "pings", :force => true do |t|
     t.integer  "location_id"
     t.datetime "performed_at"
     t.string   "response_status_code"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.datetime "perform_at"
   end
 
 end

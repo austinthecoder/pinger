@@ -78,21 +78,4 @@ describe Location, "instance methods" do
       end
     end
   end
-
-  describe "next_ping_date" do
-    context "when there's a scheduled ping" do
-      before do
-        subject.save!
-        @ping = subject.pings.create! perform_at: 4.minutes.from_now
-      end
-
-      it "returns the date the ping is scheduled for" do
-        subject.next_ping_date.to_i.should == @ping.perform_at.to_i
-      end
-    end
-
-    context "when a ping hasn't been scheduled" do
-      it { subject.next_ping_date.should be_nil }
-    end
-  end
 end

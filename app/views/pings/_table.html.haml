@@ -5,7 +5,6 @@
       %th
   %tbody
     - pings.each do |ping|
-      - present ping do
-        %tr
-          %td= response_status_code
-          %td= date
+      %tr.ping
+        %td= ping.response_status_code
+        %td= ping.performed_at.strftime "%b %e, %Y at %l:%M:%S %p %Z"

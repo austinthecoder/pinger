@@ -1,5 +1,4 @@
 Pinger::Application.routes.draw do
-
   root to: "locations#index"
 
   resources :locations do
@@ -18,6 +17,7 @@ Pinger::Application.routes.draw do
 
   resources :alerts
 
-  mount Resque::Server.new => 'resque'
-
+  namespace 'admin' do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 end

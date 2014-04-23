@@ -1,38 +1,50 @@
 class LocationsController < ApplicationController
   respond_to :html
 
-  helper_method :location
+  before_filter :assign_location, :only => [:show, :edit, :update, :delete, :destroy]
+  before_filter :assign_new_location, :only => [:new, :create]
+
+  attr_reader :locations, :location, :paginated_pings
+
+  helper_method :locations, :location, :paginated_pings
 
   def index
-    @locations = Location.order { title.asc }.paginate(params[:page], CONFIG[:app][:locations_per_page])
+    @locations = user.paginated_locations_ordered_by_title(:page => params[:page])
   end
-  attr_reader :locations
-  helper_method :locations
+
+  def show
+    @paginated_pings = @location.paginated_performed_pings(:page => params[:page])
+  end
 
   def create
-    location.save_and_schedule_ping!
-    respond_with location
+    if @location.save
+      redirect_to location_url(@location)
+    else
+      render :new
+    end
   end
 
   def update
-    location.attributes = params[:location]
-    location.save_and_schedule_ping!
-    respond_with location
+    @location.attributes = params[:location]
+    if @location.save
+      redirect_to location_url(@location)
+    else
+      render :edit
+    end
   end
 
   def destroy
-    location.destroy
-    respond_with location
+    @location.destroy
+    redirect_to locations_url
   end
 
-  # TODO: test
-  def location
-    @location ||= begin
-      if params[:id]
-        Location.find params[:id]
-      else
-        Location.new params[:location]
-      end
-    end
+  private
+
+  def assign_location
+    @location = user.find_location_by_param(params[:id]) or render_not_found
+  end
+
+  def assign_new_location
+    @location = user.new_location params[:location]
   end
 end

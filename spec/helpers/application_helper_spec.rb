@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe ApplicationHelper do
-
   subject { helper }
 
   describe "alerts" do
@@ -37,5 +36,4 @@ describe ApplicationHelper do
       its(:email_callbacks) { should be_empty }
     end
   end
-
 end

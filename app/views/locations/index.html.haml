@@ -19,16 +19,15 @@
           %th
         %tbody
           - locations.each do |location|
-            - present location do
-              %tr{id: "url_#{id}"}
-                %td= link_to title, path
-                %td= url
-                %td= http_method
-                %td= seconds
-                %td
-                  = link_to 'edit', edit_path, title: 'Edit this URL'
-                  |
-                  = link_to 'remove', delete_path, title: 'Remove this URL'
+            %tr{id: "url_#{location.id}"}
+              %td= link_to location.title, location_path(location)
+              %td= location.url
+              %td= location.http_method.upcase
+              %td= location.seconds
+              %td
+                = link_to 'edit', edit_location_path(location), title: 'Edit this URL'
+                |
+                = link_to 'remove', delete_location_path(location), title: 'Remove this URL'
   - else
     %p.empty No URLs found.
 

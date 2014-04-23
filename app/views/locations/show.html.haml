@@ -4,24 +4,33 @@
   = link_to 'Add alert', new_location_alert_path(location)
 
 #location
-  - present location do
-    #info
-      %table
-        %tbody
-          %tr
-            %th Title
-            %td= title
-          %tr
-            %th URL
-            %td= url
-          %tr
-            %th HTTP method
-            %td= http_method
-          %tr
-            %th Seconds
-            %td= seconds
+  #info
+    %table
+      %tbody
+        %tr
+          %th Title
+          %td= location.title
+        %tr
+          %th URL
+          %td= location.url
+        %tr
+          %th HTTP method
+          %td= location.http_method.upcase
+        %tr
+          %th Seconds
+          %td= location.seconds
     #pings
       %h2 Pings
-      %p= "Next ping in #{next_ping}."
-      = render_pings
+      %p
+        Next ping in
+        - if location.next_ping_time && location.next_ping_time > (now = Time.now)
+          #{distance_of_time_in_words now, location.next_ping_time}.
+        - else
+          just a moment.
+
+      - if paginated_pings.present?
+        = render 'pings/table', pings: paginated_pings
+      - else
+        %p.empty No pings yet.
+
       = paginate paginated_pings
